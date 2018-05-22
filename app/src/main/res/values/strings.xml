@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Grand Group</string>
+    <string name="forgot_password">Forgot Password?</string>
+
+
+    <string name="userFirstName">first_name</string>
+    <string name="userLastName">last_name</string>
+    <string name="userEmail">user_email</string>
+    <string name="userPassword">user_password</string>
+    <string name="profilePic">thumb_image </string>
+    <string name="isAdmin">is_admin</string>
+
+
+    <string name="shiftEndDateStr">shift_end_date_str</string>
+    <string name="shiftUser">shift_user</string>
+    <string name="shiftAssign">shift_assigned_by_id</string>
+    <string name="shiftDetail">shift_detail</string>
+    <string name="shiftName">shift_name </string>
+    <string name="shiftStartDate">shift_start_date_str</string>
+
+
+    <string name="time">time </string>
+    <string name="message">message</string>
+
+
+    <string name="no_events">No Events for Selected Date</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="contract_provider">Contractor/Service Provider</string>
+    <string name="member_visitor">Member of the Public/Visitor</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="select_date_time">Select Date / Time</string>
+
+    <string name="complete_note">Complete this section <u>Only if the affected person is a member of the Public</u>:</string>
+    <string name="ensure_note">Please ensure that the following is included with all incident reports\n\nPhotos(not just screen shots of footage)\n\nCCTV footage - 30 minutes before and prior to the incident\n\nthird party Incident reports\n\nwitness statements</string>
+
+</resources>

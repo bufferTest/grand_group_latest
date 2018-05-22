@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string-array name="like_array">
+            <item>Rare</item>
+            <item>Slight</item>
+            <item>Possible</item>
+            <item>Likely</item>
+            <item>almost Certain</item>
+        </string-array>
+
+    <string-array name="consequence_array">
+        <item>Insignificant</item>
+        <item>Minor</item>
+        <item>Moderate</item>
+        <item>Major</item>
+        <item>Severe</item>
+    </string-array>
+
+    <string-array name="control_effectiveness_array">
+        <item>Poor</item>
+        <item>Fair</item>
+        <item>Good</item>
+        <item>Effective</item>
+    </string-array>
+</resources>
