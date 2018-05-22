@@ -853,7 +853,7 @@ public class IncidentReportsActivity extends BaseActivity {
      //   object.put("weather_option", etAffected.getText().toString());
      //   object.put("occourance_date",  etO.getText().toString());
      //   object.put("incedent_option",  .getText().toString());
-        object.put("incedent_location",  etL.getText().toString());
+     //   object.put("incedent_location",  etL.getText().toString());
         object.put("person_post_code",  etAffected.getText().toString());
         object.put("injury_type",  etAffected.getText().toString());
         object.put("photo_option",  etAffected.getText().toString());
