@@ -135,6 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                             userProfileBean.setUserLastName(parseUser.getString(getString(R.string.userLastName)));
                             userProfileBean.setUserEmail(parseUser.getString(getString(R.string.userEmail)));
                             userProfileBean.setUserPassword(parseUser.getString(getString(R.string.userPassword)));
+                            userProfileBean.setUserName(parseUser.getString(getString(R.string.userName)));
                             userProfileBean.setAdmin(parseUser.getBoolean(getString(R.string.isAdmin)));
                             ParseFile postImage = parseUser.getParseFile(getString(R.string.profilePic));
                             if (postImage != null)

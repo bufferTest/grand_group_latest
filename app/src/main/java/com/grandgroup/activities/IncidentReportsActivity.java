@@ -417,7 +417,7 @@ public class IncidentReportsActivity extends BaseActivity {
     private void setInitialData() {
         mContext = IncidentReportsActivity.this;
         ButterKnife.bind(mContext);
-        tvTitle.setText("Incident Reports");
+        tvTitle.setText("Incident Report");
         if (getIntent().getSerializableExtra("incidentModel") != null) {
             btnEmail.setVisibility(View.GONE);
             btnSave.setVisibility(View.GONE);
@@ -793,7 +793,6 @@ public class IncidentReportsActivity extends BaseActivity {
                 startActivityForResult(new Intent(mContext, SignatureActivity.class), SIGNATRUE_REQUEST_AMB);
                 mContext.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 break;
-
         }
     }
 
@@ -806,7 +805,7 @@ public class IncidentReportsActivity extends BaseActivity {
                 byte[] byteArray = data.getByteArrayExtra("byteArray");
                 signatureBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
                 ivImage.setImageBitmap(signatureBitmap);
-                }
+            }
             else if (requestCode == SIGNATRUE_REQUEST_AMB) {
                 byte[] byteArray = data.getByteArrayExtra("byteArray");
                 ambPerSign = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
@@ -850,71 +849,84 @@ public class IncidentReportsActivity extends BaseActivity {
     private void saveDataOnParse() {
         CallProgressWheel.showLoadingDialog(mContext);
         ParseObject object = new ParseObject("IncidentReport");
-     //   object.put("weather_option", etAffected.getText().toString());
-     //   object.put("occourance_date",  etO.getText().toString());
-     //   object.put("incedent_option",  .getText().toString());
-     //   object.put("incedent_location",  etL.getText().toString());
-        object.put("person_post_code",  etAffected.getText().toString());
-        object.put("injury_type",  etAffected.getText().toString());
-        object.put("photo_option",  etAffected.getText().toString());
-        object.put("third_party_detail",  etAffected.getText().toString());
-        object.put("cease_option",  etAffected.getText().toString());
-        object.put("medical_center",  etAffected.getText().toString());
-        object.put("weather_conditions",  etAffected.getText().toString());
-        object.put("breakdown_agency",  etAffected.getText().toString());
-        object.put("person_sur_name",  etAffected.getText().toString());
-        object.put("person_first_name",  etAffected.getText().toString());
-        object.put("same_occourance",  etAffected.getText().toString());
-        object.put("third_party_option",  etAffected.getText().toString());
-        object.put("first_aid_option",  etAffected.getText().toString());
-        object.put("person_state",  etAffected.getText().toString());
-        object.put("person_gender_option",  etAffected.getText().toString());
-        object.put("eyewear_type",  etAffected.getText().toString());
-        object.put("witness_statement",  etAffected.getText().toString());
-        object.put("person_drug_option",  etAffected.getText().toString());
-        object.put("other_mechanism",  etAffected.getText().toString());
-        object.put("person_address",  etAffected.getText().toString());
-        object.put("damage_type",  etAffected.getText().toString());
-        object.put("date_attended",  etAffected.getText().toString());
-        object.put("additional_comments",  etAffected.getText().toString());
-        object.put("footwaer_type",  etAffected.getText().toString());
-        object.put("incident_report_person_signature",  etAffected.getText().toString()); //file
-        object.put("incident_report_date",  etAffected.getText().toString());
-        object.put("vehicle_damage_detail",  etAffected.getText().toString());
-        object.put("effected_person_detail",  etAffected.getText().toString());
-        object.put("attendee_name",  etAffected.getText().toString());
-        object.put("incident_report_date",  etAffected.getText().toString());
-        object.put("injury_machanism",  etAffected.getText().toString());
-        object.put("cctv_option",  etAffected.getText().toString()); // number
-        object.put("other_breakdown_agency",  etAffected.getText().toString());
-        object.put("body_location",  etAffected.getText().toString());
-        object.put("carring_type",  etAffected.getText().toString());
-        object.put("incident_report_person",  etAffected.getText().toString());
-        object.put("warning_sign_option",  etAffected.getText().toString());
-        object.put("affected_person_option",  etAffected.getText().toString());
-        object.put("person_occupation",  etAffected.getText().toString());
-        object.put("injury_mark",  etAffected.getText().toString());
-        object.put("ambulance_attend_option",  etAffected.getText().toString()); //number
-        object.put("injury_illness",  etAffected.getText().toString());
-        object.put("person_home_phone",  etAffected.getText().toString());
-        object.put("injury_illness_detail",  etAffected.getText().toString());
-        object.put("what_you_see",  etAffected.getText().toString());
-        object.put("person_birth_date",  etAffected.getText().toString());
-        object.put("wet_weather_option",  etAffected.getText().toString()); //number
-        object.put("attended_person_option",  etAffected.getText().toString());
-        object.put("event_desc_desc",  etAffected.getText().toString());
-        object.put("reported_date",  etAffected.getText().toString());
-        object.put("person_mobile_phone",  etAffected.getText().toString());
-        object.put("property_damage_option",  etAffected.getText().toString());
-        object.put("ambulance_who",  etAffected.getText().toString());
-        object.put("cease_date",  etAffected.getText().toString());
-        object.put("first_aid_name",  etAffected.getText().toString());
-        object.put("person_phone_address",  etAffected.getText().toString());
-        object.put("action_taken",  etAffected.getText().toString());
-        object.put("incident_desc",  etAffected.getText().toString());
-        object.put("person_workplace_name",  etAffected.getText().toString());
-        object.put("event_type",  etAffected.getText().toString());
+        //  object.put("weather_option", wea.getText().toString());
+        object.put("occourance_date",  tvOccurenceDate.getText().toString());
+        //   object.put("incedent_option",  .getText().toString());
+        object.put("incedent_location",  etIncident.getText().toString());
+        object.put("person_post_code",  etPostcode.getText().toString());
+        //  object.put("injury_type",  .getText().toString());
+        //  object.put("photo_option",  etAffected.getText().toString());
+        //  object.put("third_party_detail",  thi.getText().toString());
+        //   object.put("cease_option",  ce.getText().toString());
+        object.put("medical_center",  etMedCenter.getText().toString());
+        object.put("weather_conditions",  etWeatherCond.getText().toString());
+        //    object.put("breakdown_agency",  br.getText().toString());
+        object.put("person_sur_name",  etSurname.getText().toString());
+        object.put("person_first_name",  etFirstname.getText().toString());
+        //  object.put("same_occourance",  same.getText().toString());
+        //   object.put("third_party_option",  etAffected.getText().toString());
+        //   object.put("first_aid_option",  fir.getText().toString());
+        //    object.put("person_state",  per.getText().toString());
+        //     object.put("person_gender_option",  etAffected.getText().toString());
+        object.put("eyewear_type",  etEyewear.getText().toString());
+        //     object.put("witness_statement",  .getText().toString());
+        //     object.put("person_drug_option",  dru.getText().toString());
+        object.put("other_mechanism",  etOthers.getText().toString());
+        //     object.put("person_address",  etAddress.getText().toString());
+        //     object.put("damage_type",  da.getText().toString());
+        object.put("date_attended",  etDateAtten.getText().toString());
+        object.put("additional_comments",  etComment.getText().toString());
+        object.put("footwaer_type",  etFootwear.getText().toString());
+        //  object.put("incident_report_person_signature",  etAffected.getText().toString()); //file
+        //   object.put("incident_report_date",  repo.getText().toString());
+        object.put("vehicle_damage_detail",  etDamageVeh.getText().toString());
+        //    object.put("effected_person_detail",  per.getText().toString());
+        //    object.put("attendee_name",  atte.getText().toString());
+        //    object.put("incident_report_date",  inci.getText().toString());
+        //    object.put("injury_machanism",  inj.getText().toString());
+        //    object.put("cctv_option",  cct.getText().toString()); // number
+        //    object.put("other_breakdown_agency",  age.getText().toString());
+        //   object.put("body_location",  etBodily.getText().toString());
+        object.put("carring_type",  etCarrying.getText().toString());
+        //   object.put("incident_report_person",  repo.getText().toString());
+        //    object.put("warning_sign_option",  war.getText().toString());
+        //     object.put("affected_person_option",  etAffected.getText().toString());
+        object.put("person_occupation",  etOccupation.getText().toString());
+        //      object.put("injury_mark",  inj.getText().toString());
+        //     object.put("ambulance_attend_option",  ambu.getText().toString()); //number
+        //     object.put("injury_illness",  inju.getText().toString());
+        object.put("person_home_phone",  etHomePhone.getText().toString());
+        object.put("injury_illness_detail",  etIllness.getText().toString());
+        //     object.put("what_you_see",  etW.getText().toString());
+        //     object.put("person_birth_date",  per.getText().toString());
+        //     object.put("wet_weather_option",  wet.getText().toString()); //number
+        //      object.put("attended_person_option",  atten.getText().toString());
+        //    object.put("event_desc_desc",  eve.getText().toString());
+        object.put("reported_date",  tvReportTime.getText().toString());
+        object.put("person_mobile_phone",  etMobileNo.getText().toString());
+        //    object.put("property_damage_option",  da.getText().toString());
+        //     object.put("ambulance_who",  amb.getText().toString());
+        //     object.put("cease_date",  cea.getText().toString());
+        object.put("first_aid_name",  tvFirstAid.getText().toString());
+        //     object.put("person_phone_address",  pho.getText().toString());
+        object.put("action_taken",  etAction.getText().toString());
+        //    object.put("incident_desc",  inci.getText().toString());
+        object.put("person_workplace_name",  etWorkplace.getText().toString());
+        //     object.put("event_type",  eve.getText().toString());
 
+        object.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                CallProgressWheel.dismissLoadingDialog();
+                if (e == null) {
+                    Toast.makeText(getApplicationContext(), "Report form saved successfully!", Toast.LENGTH_LONG).show();
+
+                }
+                else
+                    Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
     private void getData() {

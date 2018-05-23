@@ -14,7 +14,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         Buddy.init(MyApplication.this, "55bc98e3-d134-47dd-8ee8-0e1ba73a7a69","");
         Parse.initialize(new Parse.Configuration.Builder(MyApplication.this)
                 .applicationId("55bc98e3-d134-47dd-8ee8-0e1ba73a7a69")

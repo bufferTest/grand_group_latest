@@ -1,12 +1,17 @@
 <resources>
     <string name="app_name">Grand Group</string>
+    <string name="helvetica_neu_bold">Helvetica Neu Bold.ttf</string>
+    <string name="helvetica_neue_light">HelveticaNeue Light.ttf</string>
+    <string name="helvetica_neue_medium">HelveticaNeue Medium.ttf</string>
+    <string name="helvetica_neue_italic">Helvetica Neue Bold Italic.ttf</string>
+
+
     <string name="forgot_password">Forgot Password?</string>
-
-
     <string name="userFirstName">first_name</string>
     <string name="userLastName">last_name</string>
     <string name="userEmail">user_email</string>
     <string name="userPassword">user_password</string>
+    <string name="userName">user_name</string>
     <string name="profilePic">thumb_image </string>
     <string name="isAdmin">is_admin</string>
 

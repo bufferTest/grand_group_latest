@@ -24,6 +24,16 @@ public class UserProfileBean implements Serializable {
     private String userEmail = "";
     private  boolean isAdmin = true;
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    private String userName = "";
+
     public boolean isAdmin() {
         return isAdmin;
     }
