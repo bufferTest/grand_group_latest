@@ -1,11 +1,20 @@
 package com.grandgroup.model;
 
-public class EventsModel {
+import java.io.Serializable;
+
+public class EventsModel implements Serializable {
     private String event_date;
     private String event_title;
     private String event_desc;
+    private String rowid;
 
     public EventsModel(String event_date, String event_title, String event_desc) {
+        this.event_date = event_date;
+        this.event_title = event_title;
+        this.event_desc = event_desc;
+    }
+
+    public EventsModel(String rowid,String event_date, String event_title, String event_desc) {
         this.event_date = event_date;
         this.event_title = event_title;
         this.event_desc = event_desc;
@@ -35,5 +44,11 @@ public class EventsModel {
         this.event_desc = event_desc;
     }
 
+    public String getRowid() {
+        return rowid;
+    }
 
+    public void setRowid(String rowid) {
+        this.rowid = rowid;
+    }
 }

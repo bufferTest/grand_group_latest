@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.grandgroup.model.EventsModel;
 import com.grandgroup.utills.AppConstant;
@@ -46,21 +47,37 @@ public class SQLiteQueries {
     public List<EventsModel> getEvents(String date) {
         open();
         List<EventsModel> events_list = new ArrayList<>();
-        String Query = "SELECT * FROM " + AppConstant.EVENTSTABLE + " where " + AppConstant.EVENTDATE + " = '" + date + "'";
+        String Query = "SELECT rowid,* FROM " + AppConstant.EVENTSTABLE + " where " + AppConstant.EVENTDATE + " = '" + date + "'";
         Cursor cursor = database.rawQuery(Query, null);
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             for (int i = 0; i < cursor.getCount(); i++) {
+                String rowid = cursor.getString(cursor.getColumnIndex("rowid"));
+                Log.e(AppConstant.ROWID, rowid);
                 String eventdate = cursor.getString(cursor.getColumnIndex(AppConstant.EVENTDATE));
                 String eventtitle = cursor.getString(cursor.getColumnIndex(AppConstant.EVENTTITLE));
                 String eventdesc = cursor.getString(cursor.getColumnIndex(AppConstant.EVENTSDESC));
-                EventsModel eventsModel = new EventsModel(eventdate,eventtitle,eventdesc);
+                EventsModel eventsModel = new EventsModel(rowid, eventdate, eventtitle, eventdesc);
                 events_list.add(eventsModel);
                 cursor.moveToNext();
             }
         }
         cursor.close();
         return events_list;
+    }
+
+
+    public void updateEvent(EventsModel eventsModel) {
+        open();
+        String query;
+
+        query = "UPDATE " + AppConstant.EVENTSTABLE + " SET " + AppConstant.EVENTDATE + "= " + eventsModel.getEvent_date() + ", "
+                + AppConstant.EVENTTITLE + "='" + eventsModel.getEvent_title() + "',"
+                + AppConstant.EVENTSDESC + "='" + eventsModel.getEvent_desc() + "' "
+                + " WHERE " + AppConstant.ROWID + "=" + eventsModel.getRowid() + "";
+
+        database.execSQL(query);
+        database.close();
     }
 
 }

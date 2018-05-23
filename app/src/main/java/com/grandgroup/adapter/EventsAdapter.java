@@ -1,6 +1,7 @@
 package com.grandgroup.adapter;
 
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +15,28 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.CustomHolder> {
 
+    @BindView(R.id.tv_text)
+    TextView tvText;
+    @BindView(R.id.tv_date)
+    TextView tvDate;
+    @BindView(R.id.lay_events)
+    ConstraintLayout layEvents;
     private ArrayList<EventsModel> eventsList;
+    private onClick onclick;
 
-    public EventsAdapter(ArrayList<EventsModel> eventsList) {
+    public EventsAdapter(ArrayList<EventsModel> eventsList, onClick onclick) {
         this.eventsList = eventsList;
+        this.onclick = onclick;
+    }
+
+
+
+    public interface onClick {
+        public void onClick(int position);
     }
 
     @NonNull
@@ -50,6 +66,11 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.CustomHold
         public CustomHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+
+        @OnClick(R.id.lay_events)
+        public void onViewClicked() {
+            onclick.onClick(getLayoutPosition());
         }
     }
 }
