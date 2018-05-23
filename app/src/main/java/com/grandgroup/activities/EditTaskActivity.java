@@ -52,6 +52,9 @@ public class EditTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
         eventsModel = (EventsModel) getIntent().getSerializableExtra("value");
+        tvEventDate.setText(eventsModel.getEvent_date());
+        etEventName.setText(eventsModel.getEvent_title());
+        etEventDesc.setText(eventsModel.getEvent_desc());
         setInitialData();
     }
 
