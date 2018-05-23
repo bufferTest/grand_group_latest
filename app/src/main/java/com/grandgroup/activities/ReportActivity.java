@@ -54,11 +54,11 @@ public class ReportActivity extends BaseActivity implements AdapterView.OnItemSe
     private void setInitialData() {
         ButterKnife.bind(this);
         mContext = ReportActivity.this;
-        tvTitle.setText("Report");
+        tvTitle.setText("Reports");
         btnAdd.setVisibility(View.VISIBLE);
         spinnerReport.setOnItemSelectedListener(this);
-        categories.add("Incedent Report");
-        categories.add("Risk Report");
+        categories.add("Incident Report");
+        categories.add("Risk / Hazard Report");
 
         // Creating adapter for spinner
         ArrayAdapter dataAdapter = new ArrayAdapter(mContext, R.layout.spinner_dropdown_item, categories);

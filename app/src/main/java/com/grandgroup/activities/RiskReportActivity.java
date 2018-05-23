@@ -136,7 +136,7 @@ public class RiskReportActivity extends AppCompatActivity {
     private void setInitialData() {
         mContext = RiskReportActivity.this;
         ButterKnife.bind(mContext);
-        tvTitle.setText("Risk Report");
+        tvTitle.setText("Risk / Hazard Report");
         //Like Array
         likeArray = new ArrayList<>();
         likeArray.add("Rare");

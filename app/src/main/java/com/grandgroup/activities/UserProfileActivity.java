@@ -70,7 +70,7 @@ public class UserProfileActivity extends BaseActivity {
     private void setInitialData() {
         ButterKnife.bind(this);
         mContext = UserProfileActivity.this;
-        tvTitle.setText("profile");
+        tvTitle.setText("User Profile");
 
         Gson gson = new Gson();
         String json = AppPrefrence.init(mContext).getString(AppConstant.USER_PROFILE);
@@ -95,7 +95,7 @@ public class UserProfileActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.btn_back, R.id.btn_save, R.id.tv_tv_change_pic})
+    @OnClick({R.id.btn_back, R.id.btn_save, R.id.iv_user_pic})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
@@ -105,7 +105,7 @@ public class UserProfileActivity extends BaseActivity {
             case R.id.btn_save:
                 updateProfile(etFirstName.getText().toString(), etLastName.getText().toString(), etEmail.getText().toString(), scaled);
                 break;
-            case R.id.tv_tv_change_pic:
+            case R.id.iv_user_pic:
                 selectImage();
         }
     }

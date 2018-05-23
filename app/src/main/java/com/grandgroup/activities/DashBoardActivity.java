@@ -72,7 +72,7 @@ public class DashBoardActivity extends AppCompatActivity {
             case R.id.iv_logout:
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
                 alertDialog.setTitle("Logout");
-                alertDialog.setMessage("Are you sure you want Logout?");
+                alertDialog.setMessage("Are you sure you want to logout?");
                 alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, int which) {
                         CallProgressWheel.showLoadingDialog(mContext);
