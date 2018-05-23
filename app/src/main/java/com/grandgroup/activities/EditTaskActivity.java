@@ -51,11 +51,11 @@ public class EditTaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
+        setInitialData();
         eventsModel = (EventsModel) getIntent().getSerializableExtra("value");
         tvEventDate.setText(eventsModel.getEvent_date());
         etEventName.setText(eventsModel.getEvent_title());
         etEventDesc.setText(eventsModel.getEvent_desc());
-        setInitialData();
     }
 
     private void setInitialData() {
