@@ -71,7 +71,7 @@ public class SQLiteQueries {
         open();
         String query;
 
-        query = "UPDATE " + AppConstant.EVENTSTABLE + " SET " + AppConstant.EVENTDATE + "= " + eventsModel.getEvent_date() + ", "
+        query = "UPDATE " + AppConstant.EVENTSTABLE + " SET " + AppConstant.EVENTDATE + "= '" + eventsModel.getEvent_date() + "', "
                 + AppConstant.EVENTTITLE + "='" + eventsModel.getEvent_title() + "',"
                 + AppConstant.EVENTSDESC + "='" + eventsModel.getEvent_desc() + "' "
                 + " WHERE " + AppConstant.ROWID + "=" + eventsModel.getRowid() + "";

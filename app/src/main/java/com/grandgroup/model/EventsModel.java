@@ -14,7 +14,8 @@ public class EventsModel implements Serializable {
         this.event_desc = event_desc;
     }
 
-    public EventsModel(String rowid,String event_date, String event_title, String event_desc) {
+    public EventsModel(String rowid, String event_date, String event_title, String event_desc) {
+        this.rowid = rowid;
         this.event_date = event_date;
         this.event_title = event_title;
         this.event_desc = event_desc;
