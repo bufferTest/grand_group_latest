@@ -28,6 +28,7 @@ public class AppConstant {
     /**
      * Events Table
      */
+    public static final String ROWID = "rowid";
     public static final String EVENTSTABLE = "Events_Table";
     public static final String EVENTDATE = "events_Date";
     public static final String EVENTTITLE = "events_Title";

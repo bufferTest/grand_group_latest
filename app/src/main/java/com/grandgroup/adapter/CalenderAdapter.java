@@ -12,7 +12,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.grandgroup.R;
+import com.grandgroup.database.SQLiteQueries;
+import com.grandgroup.model.EventsModel;
 import com.grandgroup.model.calenderModel;
+import com.grandgroup.utills.GrandGroupHelper;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,13 +53,20 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.Custom
     public void onBindViewHolder(@NonNull CustomHolder holder, int position) {
         if (arrayList.get(position) != null) {
             holder.material_calendar_day.setText(arrayList.get(position).getValue().toString());
-//            holder.saved_event_imageView.setVisibility(View.VISIBLE);
             if (arrayList.get(position).getSelected()) {
                 selectedPosition = position;
                 holder.lay_day.setBackground(ContextCompat.getDrawable(mContext, R.drawable.selector));
             } else {
                 holder.lay_day.setBackground(null);
             }
+
+            String formattedDate = String.valueOf(new StringBuilder().append(GrandGroupHelper.getMonth(calendar.get(Calendar.MONTH))).append(" ")
+                    .append(arrayList.get(position).getValue().toString())
+                    .append(", ").append(calendar.get(Calendar.YEAR)));
+            ArrayList<EventsModel> eventsList = new ArrayList<>(SQLiteQueries.getInstance(mContext).getEvents(formattedDate));
+            if (eventsList.size() > 0)
+                holder.saved_event_imageView.setVisibility(View.VISIBLE);
+
 
             if (firsttym)
                 if (currentcalendar.get(Calendar.YEAR) == calendar.get(Calendar.YEAR))

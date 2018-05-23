@@ -210,11 +210,19 @@ public class TaskManagerActivity extends BaseActivity {
     private void setEventsAdapter(int month, int date, int year) {
         String formattedDate = String.valueOf(new StringBuilder().append(GrandGroupHelper.getMonth(month)).append(" ").append(date).append(", ").append(year));
         Log.e("formatteddate",formattedDate);
-        ArrayList<EventsModel> eventsList = new ArrayList<>(SQLiteQueries.getInstance(mContext).getEvents(formattedDate));
+        final ArrayList<EventsModel> eventsList = new ArrayList<>(SQLiteQueries.getInstance(mContext).getEvents(formattedDate));
         if (eventsList.size() > 0) {
             tv_no_events.setVisibility(View.GONE);
             rv_events.setVisibility(View.VISIBLE);
-            EventsAdapter adapter = new EventsAdapter(eventsList);
+            EventsAdapter adapter = new EventsAdapter(eventsList, new EventsAdapter.onClick() {
+                @Override
+                public void onClick(int position) {
+                    Intent intent = new Intent(mContext, EditTaskActivity.class);
+                    intent.putExtra("value",eventsList.get(position));
+                    startActivity(intent);
+                    mContext.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                }
+            });
             rv_events.setHasFixedSize(true);
             rv_events.setAdapter(adapter);
             LinearLayoutManager llm = new LinearLayoutManager(this);
