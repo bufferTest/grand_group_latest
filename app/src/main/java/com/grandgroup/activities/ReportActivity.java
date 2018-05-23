@@ -66,9 +66,9 @@ public class ReportActivity extends BaseActivity implements AdapterView.OnItemSe
         dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         // attaching data adapter to spinner
         spinnerReport.setAdapter(dataAdapter);
-        if (selectedCat.equalsIgnoreCase("Incedent Report")) {
+        if (selectedCat.equalsIgnoreCase("Incident Report")) {
             getReports("IncidentReport");
-        } else if (selectedCat.equalsIgnoreCase("Risk Report")) {
+        } else if (selectedCat.equalsIgnoreCase("Risk / Hazard Report")) {
             getReports("RiskReport");
         }
     }
@@ -82,11 +82,11 @@ public class ReportActivity extends BaseActivity implements AdapterView.OnItemSe
                 break;
 
             case R.id.btn_add:
-                if (selectedCat.equalsIgnoreCase("Incedent Report")) {
+                if (selectedCat.equalsIgnoreCase("Incident Report")) {
                     Intent intent = new Intent(mContext, IncidentReportsActivity.class);
                     startActivity(intent);
                     mContext.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                } else if (selectedCat.equalsIgnoreCase("Risk Report")) {
+                } else if (selectedCat.equalsIgnoreCase("Risk / Hazard Report")) {
                     Intent intent = new Intent(mContext, RiskReportActivity.class);
                     startActivity(intent);
                     mContext.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
@@ -107,14 +107,14 @@ public class ReportActivity extends BaseActivity implements AdapterView.OnItemSe
                         incidentReportList = new ArrayList();
                         CallProgressWheel.dismissLoadingDialog();
                         if (reports.size() > 0) {
-                            if (selectedCat.equalsIgnoreCase("Incedent Report")) {
+                            if (selectedCat.equalsIgnoreCase("Incident Report")) {
                                 for (int i = 0; i < reports.size(); i++) {
                                     IncidentModel incidentModel = new IncidentModel();
                                     incidentModel.setOjectId(reports.get(i).getObjectId());
                                     incidentReportList.add(incidentModel);
                                 }
                                 setAdapter(0, reports);
-                            } else if (selectedCat.equalsIgnoreCase("Risk Report")) {
+                            } else if (selectedCat.equalsIgnoreCase("Risk / Hazard Report")) {
                                 for (int i = 0; i < reports.size(); i++) {
                                     RiskReportModel riskReportModel = new RiskReportModel();
                                     riskReportModel.setObjectId(reports.get(i).getObjectId());
@@ -289,9 +289,9 @@ public class ReportActivity extends BaseActivity implements AdapterView.OnItemSe
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         selectedCat = parent.getItemAtPosition(position).toString();
-        if (selectedCat.equalsIgnoreCase("Incedent Report")) {
+        if (selectedCat.equalsIgnoreCase("Incident Report")) {
             getReports("IncidentReport");
-        } else if (selectedCat.equalsIgnoreCase("Risk Report")) {
+        } else if (selectedCat.equalsIgnoreCase("Risk / Hazard Report")) {
             getReports("RiskReport");
         }
     }

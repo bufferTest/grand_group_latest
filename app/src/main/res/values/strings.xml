@@ -11,6 +11,7 @@
     <string name="userLastName">last_name</string>
     <string name="userEmail">user_email</string>
     <string name="userPassword">user_password</string>
+    <string name="userName">user_name</string>
     <string name="profilePic">thumb_image </string>
     <string name="isAdmin">is_admin</string>
 

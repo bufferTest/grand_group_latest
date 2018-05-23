@@ -226,12 +226,15 @@ public class ShiftStructure extends BaseActivity {
                                 shiftDetailModel.setShift_name(p.getString(getString(R.string.shiftName)));
                                 allShiftsList.add(shiftDetailModel);
                             }
+
                             setAdapter();
                         }
+
                     } else {
                         CallProgressWheel.dismissLoadingDialog();
                     }
                 }
+
             });
         } else {
             CallProgressWheel.dismissLoadingDialog();
