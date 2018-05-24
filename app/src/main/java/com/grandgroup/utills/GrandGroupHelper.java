@@ -1,17 +1,23 @@
 package com.grandgroup.utills;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
@@ -23,14 +29,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.text.DateFormat;
 import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class GrandGroupHelper {
 
     private static GrandGroupHelper grandGroupHelper = null;
     public Context context;
     public ProgressDialog progress;
-
+    private List<Address> addresses;
     public void setContext(Context ctx) {
 
         context = ctx;
@@ -201,10 +214,52 @@ public class GrandGroupHelper {
         }
         return directory.getAbsolutePath();
     }
+    public String getLocationFormLatLong(Context context, Double latitude, Double longitude) {
+        try {
+            Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+            addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (addresses != null) {
+            String location = "";
+            if (addresses.size() > 0)
+                location = addresses.get(0).getLocality();
+            return location;
+        } else
+            return "";
+    }
 
 
+    public String convertMillisToHours(long millis) {
+        @SuppressLint("DefaultLocale") String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+                TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+        return hms;
+    }
+
+    public long convertHoursToMillis( String hours) {
+        String[] tokens = hours.split(":");
+        int secondsToMs = Integer.parseInt(tokens[2]) * 1000;
+        int minutesToMs = Integer.parseInt(tokens[1]) * 60000;
+        int hoursToMs = Integer.parseInt(tokens[0]) * 3600000;
+        return secondsToMs + minutesToMs + hoursToMs;
+    }
 
 
+    public boolean isEmailValid(CharSequence email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+    public String getCurrentDate(){
+        Calendar calendar = Calendar.getInstance();
+        String selectedDateForSever = new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
+        return selectedDateForSever;
+    }
+    public String getCurrentTime(){
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
     public void loadImagesAsset() {
 
             AssetManager assetManager = context.getAssets();
@@ -247,7 +302,25 @@ public class GrandGroupHelper {
             }
     }
 
-    private void copyFile(InputStream in, OutputStream out) throws IOException {
+    public float getDistance(){
+        float distanceInMeters = 550;
+       /* Location loc1 = new Location("");
+        loc1.setLatitude(latitude);
+        loc1.setLongitude(longitude);
+        Location loc2 = new Location("");
+        if (!loc2.equals("")) {
+            loc2.setLatitude(Double.parseDouble(latLong[0]));
+            loc2.setLongitude(Double.parseDouble(latLong[1]));
+            float distanceInMeters = loc1.distanceTo(loc2);
+            // AppPrefrence.init(mContext).putString(AppConstant.LAT_LONG, latitude + "," + longitude);
+            if (distanceInMeters <= 500) {
+
+            }
+        }*/
+            return distanceInMeters;
+    }
+
+    public void copyFile(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
         int read;
         while ((read = in.read(buffer)) != -1) {

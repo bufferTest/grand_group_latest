@@ -231,6 +231,7 @@ public class ReportActivity extends BaseActivity implements AdapterView.OnItemSe
                             Intent intent = new Intent(mContext, IncidentReportsActivity.class);
                             intent.putExtra("incidentModel", incidentModel);
                             startActivity(intent);
+                            mContext.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                         }
                     });
                     rvReports.setHasFixedSize(true);
@@ -272,6 +273,7 @@ public class ReportActivity extends BaseActivity implements AdapterView.OnItemSe
                         Intent intent = new Intent(mContext, RiskReportActivity.class);
                         intent.putExtra("riskReportObject", riskReportModel);
                         startActivity(intent);
+                        mContext.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                     }
                 });
                 rvReports.setHasFixedSize(true);

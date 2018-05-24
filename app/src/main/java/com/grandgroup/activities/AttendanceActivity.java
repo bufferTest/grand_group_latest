@@ -12,6 +12,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.grandgroup.R;
 import com.grandgroup.model.UserProfileBean;
+import com.grandgroup.services.GPSTracker;
 import com.grandgroup.utills.AppConstant;
 import com.grandgroup.utills.AppPrefrence;
 import com.grandgroup.utills.CallProgressWheel;
@@ -35,8 +36,8 @@ public class AttendanceActivity extends BaseActivity {
     TextView tvTitle;
 
     private AppCompatActivity mContext;
-    //qr code scanner object
     private IntentIntegrator qrScan;
+    private GPSTracker gpsTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +49,17 @@ public class AttendanceActivity extends BaseActivity {
     private void setInitialData() {
         mContext = AttendanceActivity.this;
         ButterKnife.bind(mContext);
+        gpsTracker = new GPSTracker(mContext);
         tvTitle.setText("Attendance");
         qrScan = new IntentIntegrator(mContext);
        // qrScan.setOrientation(1);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+       gpsTracker.getLatitude() ;
+        gpsTracker.getLongitude();
     }
 
     @OnClick({R.id.btn_back, R.id.btn_scan})
@@ -94,9 +103,9 @@ public class AttendanceActivity extends BaseActivity {
         CallProgressWheel.showLoadingDialog(mContext);
         ParseUser user = ParseUser.getCurrentUser();
         String parseUserId = user.getObjectId();
-        Gson gson = new Gson();
+    /*    Gson gson = new Gson();
         String json = AppPrefrence.init(mContext).getString(AppConstant.USER_PROFILE);
-        UserProfileBean userProfileObj = gson.fromJson(json, UserProfileBean.class);
+        UserProfileBean userProfileObj = gson.fromJson(json, UserProfileBean.class);*/
         ParseObject attendenceObject = new ParseObject("Attendence");
         attendenceObject.put("location_code", contents);
         attendenceObject.put("submitted_date", getCurrentDate());
@@ -104,7 +113,8 @@ public class AttendanceActivity extends BaseActivity {
         attendenceObject.put("submitted_by", ParseObject.createWithoutData("_User",parseUserId));
         attendenceObject.put("submitted_month", getCurrentDate());
        // attendenceObject.put("submitted_site_name", etControls.getText().toString());
-        attendenceObject.put("user_name", userProfileObj.getUserName());
+//        attendenceObject.put("user_name", userProfileObj.getUserName());
+        attendenceObject.put("user_name", user.getUsername());
         attendenceObject.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
