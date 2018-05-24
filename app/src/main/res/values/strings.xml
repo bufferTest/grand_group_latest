@@ -43,5 +43,6 @@
 
     <string name="complete_note">Complete this section <u>Only if the affected person is a member of the Public</u>:</string>
     <string name="ensure_note">Please ensure that the following is included with all incident reports\n\nPhotos(not just screen shots of footage)\n\nCCTV footage - 30 minutes before and prior to the incident\n\nthird party Incident reports\n\nwitness statements</string>
+    <string name="site_checkin_error_msg">Sorry, you are out of geofence radius. Please move closer to site location and try again.</string>
 
 </resources>
