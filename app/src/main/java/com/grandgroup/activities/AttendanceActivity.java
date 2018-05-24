@@ -111,11 +111,9 @@ public class AttendanceActivity extends BaseActivity {
                 CallProgressWheel.dismissLoadingDialog();
                 if (e == null) {
                     Toast.makeText(getApplicationContext(), "Data saved successfully!", Toast.LENGTH_LONG).show();
-
                 }
                 else
                     Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
-
             }
         });
     }
