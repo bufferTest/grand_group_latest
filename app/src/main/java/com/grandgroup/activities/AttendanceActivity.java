@@ -44,6 +44,7 @@ public class AttendanceActivity extends BaseActivity {
     private IntentIntegrator qrScan;
     private GPSTracker gpsTracker;
     private Gson gson;
+    private String siteName = "";
     private  Location loc1 = new Location(""), loc2 = new Location("");
 
     @Override
@@ -126,7 +127,7 @@ public class AttendanceActivity extends BaseActivity {
             attendenceObject.put("submitted_day", getCurrentDate());
             attendenceObject.put("submitted_by", ParseObject.createWithoutData("_User", parseUserId));
             attendenceObject.put("submitted_month", getCurrentDate());
-            // attendenceObject.put("submitted_site_name", etControls.getText().toString());
+             attendenceObject.put("submitted_site_name", siteName);
 //        attendenceObject.put("user_name", userProfileObj.getUserName());
             attendenceObject.put("user_name", user.getUsername());
             attendenceObject.saveInBackground(new SaveCallback() {
@@ -154,6 +155,7 @@ public class AttendanceActivity extends BaseActivity {
             loc2.setLatitude(sitesList.get(i).getSite_location().getLongitude());
             if(loc1.distanceTo(loc2) <= 500){
                 isAtLocation = true;
+                siteName =  sitesList.get(i).getSite_name();
                 break;
             }
         }
