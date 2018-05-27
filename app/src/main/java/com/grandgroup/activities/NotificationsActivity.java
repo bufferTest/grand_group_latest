@@ -60,7 +60,6 @@ public class NotificationsActivity extends BaseActivity {
     public void getNotifications() {
         if (GrandGroupHelper.grandGroupHelper(mContext).CheckIsConnectedToInternet()) {
             CallProgressWheel.showLoadingDialog(mContext);
-
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Notifications");
             query.findInBackground(new FindCallback<ParseObject>() {
                 @Override

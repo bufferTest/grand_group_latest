@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:MGC="http://schemas.android.com/tools"
     android:id="@+id/cl_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -16,12 +17,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <TextView
+    <com.grandgroup.views.CustomTextView
         android:id="@+id/tv_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="bottom"
        android:textSize="11sp"
+        MGC:fonttextview="@string/helvetica_neue_italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_text" />
 
@@ -32,6 +34,5 @@
         android:background="@android:color/darker_gray"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_time" />
-
+        app:layout_constraintTop_toBottomOf="@+id/tv_time"/>
 </android.support.constraint.ConstraintLayout>

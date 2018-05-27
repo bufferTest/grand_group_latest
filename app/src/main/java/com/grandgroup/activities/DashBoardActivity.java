@@ -11,20 +11,31 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.grandgroup.R;
+import com.grandgroup.model.NotificationsModel;
+import com.grandgroup.model.SiteModel;
+import com.grandgroup.model.UserProfileBean;
 import com.grandgroup.utills.AppConstant;
 import com.grandgroup.utills.AppPrefrence;
 import com.grandgroup.utills.CallProgressWheel;
+import com.grandgroup.utills.GrandGroupHelper;
+import com.parse.FindCallback;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class DashBoardActivity extends AppCompatActivity {
     private AppCompatActivity mContext;
-
+    private ArrayList<SiteModel> sitesList =  new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +47,40 @@ public class DashBoardActivity extends AppCompatActivity {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         ButterKnife.bind(this);
         mContext = DashBoardActivity.this;
+        if(AppPrefrence.init(mContext).getBoolean(AppConstant.HAS_SITES))
+        getSitesFormParse();
+    }
+
+    private void getSitesFormParse() {
+        if (GrandGroupHelper.grandGroupHelper(mContext).CheckIsConnectedToInternet()) {
+            CallProgressWheel.showLoadingDialog(mContext);
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Site");
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> notifications, ParseException e) {
+                    if (e == null) {
+                        CallProgressWheel.dismissLoadingDialog();
+                        if (notifications.size() > 0) {
+                            AppPrefrence.init(mContext).putBoolean(AppConstant.HAS_SITES,true);
+                            for (int i = 0; i < notifications.size(); i++) {
+                                SiteModel siteModel = new SiteModel();
+                                siteModel.setSite_address(notifications.get(i).get("site_address").toString());
+                                siteModel.setSite_detail(notifications.get(i).get("site_detail").toString());
+                                siteModel.setSite_location(notifications.get(i).getParseGeoPoint("site_location"));
+                                siteModel.setSite_name(notifications.get(i).get("site_name").toString());
+                                sitesList.add(siteModel);
+                            }
+                            Gson gson = new Gson();
+                            String siteArrayString = gson.toJson(sitesList);
+                            AppPrefrence.init(mContext).putString("siteArrayString",siteArrayString);
+                        }
+                    } else
+                        CallProgressWheel.dismissLoadingDialog();
+                }
+            });
+        } else {
+            CallProgressWheel.dismissLoadingDialog();
+        }
     }
 
     @OnClick({R.id.iv_notifications, R.id.iv_settings, R.id.iv_task_manager, R.id.iv_attendance, R.id.iv_shift_structure, R.id.iv_report, R.id.iv_my_profile, R.id.iv_logout})

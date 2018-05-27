@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
+import android.location.LocationManager;
 import android.os.Build;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -23,22 +24,17 @@ import com.grandgroup.model.UserProfileBean;
 import com.grandgroup.utills.AppConstant;
 import com.grandgroup.utills.AppPrefrence;
 import com.grandgroup.utills.CallProgressWheel;
-import com.grandgroup.utills.GrandGroupHelper;
-import com.parse.GetCallback;
 import com.parse.LogInCallback;
-import com.parse.LogOutCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.internal.Utils;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
     private GradientDrawable bgShape;
     private AppCompatActivity mContext;
 
@@ -59,9 +55,8 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // remove title
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
 
@@ -80,10 +75,23 @@ public class LoginActivity extends AppCompatActivity {
         setIntialData();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        final LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (manager != null)
+            if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER) && !manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                buildAlertMessageNoGps();
+            }
+        checkForPermission();
+
+    }
+
     @OnClick({R.id.btn_login, R.id.cb_remember_me, R.id.forgot_password})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
+                hideKeyboard();
                 if (cbRememberMe.isChecked()) {
                     AppPrefrence.init(mContext).putBoolean(AppConstant.IS_REMEMBERED, true);
                     AppPrefrence.init(mContext).putString(AppConstant.USER_NAME, etUserName.getText().toString());
@@ -166,6 +174,23 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
-
+    private void buildAlertMessageNoGps() {
+        final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setMessage(getResources().getString(R.string.gps_check_message))
+                .setCancelable(false)
+                .setPositiveButton(getResources().getString(R.string.yes_text), new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton(getResources().getString(R.string.no_text), new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final android.support.v7.app.AlertDialog alert = builder.create();
+        alert.show();
+    }
 }
 

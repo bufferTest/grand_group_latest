@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.buddy.sdk.Buddy;
 import com.facebook.stetho.Stetho;
+import com.grandgroup.utills.TypefaceUtil;
 import com.parse.Parse;
 
 /**
@@ -20,5 +21,7 @@ public class MyApplication extends Application {
                 .clientKey("").server("https://parse.buddy.com/parse").build());
 
         Stetho.initializeWithDefaults(this);
+        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/HelveticaNeue Light.ttf");
+
     }
 }

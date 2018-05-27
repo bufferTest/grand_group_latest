@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -276,45 +277,7 @@ public class RiskReportActivity extends AppCompatActivity {
     }
 
     private void uploaddata() {
-        CallProgressWheel.showLoadingDialog(mContext);
-        ParseObject riskReportObject = new ParseObject("RiskReport");
-        riskReportObject.put("risk_likelihood", tvSelectedLikelihood.getText().toString());
-        riskReportObject.put("risk_action_plan", etActionPlan.getText().toString());
-        riskReportObject.put("risk_location", etLocation.getText().toString());
-        riskReportObject.put("risk_description", tvReportDesc.getText().toString());
-        riskReportObject.put("risk_control_effectiveness", et_control_eff.getText().toString());
-        riskReportObject.put("risk_control", etControls.getText().toString());
-        riskReportObject.put("risk_reported_by", etReportedBy.getText().toString());
-        riskReportObject.put("risk_consequence", tv_select_consq.getText().toString());
-        riskReportObject.put("risk_date", tv_event_date.getText().toString());
-        if (signBitmap != null) {
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            signBitmap.compress(Bitmap.CompressFormat.PNG, 70, stream);
-            byte[] image = stream.toByteArray();
-            ParseFile file = new ParseFile("ile.png", image);
-            riskReportObject.put("risk_file", file);
-        }
-
-        if (photoOfHazardBitmap != null) {
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            photoOfHazardBitmap.compress(Bitmap.CompressFormat.PNG, 70, stream);
-            byte[] image = stream.toByteArray();
-            ParseFile file = new ParseFile("ile.png", image);
-            riskReportObject.put("signature_file", file);
-        }
-        riskReportObject.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                CallProgressWheel.dismissLoadingDialog();
-                if (e == null) {
-                    Toast.makeText(getApplicationContext(), "Report form saved successfully!", Toast.LENGTH_LONG).show();
-
-                }
-                else
-                    Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
-
-            }
-        });
+        new AsyncTaskRunner().execute();
     }
 
     private void selectImage() {
@@ -420,5 +383,56 @@ public class RiskReportActivity extends AppCompatActivity {
                 .startChooser();
         CallProgressWheel.dismissLoadingDialog();
     }
+    private class AsyncTaskRunner extends AsyncTask<Void, Void, Void> {
+        ParseObject riskReportObject = new ParseObject("RiskReport");
 
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            riskReportObject.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    CallProgressWheel.dismissLoadingDialog();
+                    if (e == null)
+                        Toast.makeText(getApplicationContext(), "Report form saved successfully!", Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            riskReportObject.put("risk_likelihood", tvSelectedLikelihood.getText().toString());
+            riskReportObject.put("risk_action_plan", etActionPlan.getText().toString());
+            riskReportObject.put("risk_location", etLocation.getText().toString());
+            riskReportObject.put("risk_description", tvReportDesc.getText().toString());
+            riskReportObject.put("risk_control_effectiveness", et_control_eff.getText().toString());
+            riskReportObject.put("risk_control", etControls.getText().toString());
+            riskReportObject.put("risk_reported_by", etReportedBy.getText().toString());
+            riskReportObject.put("risk_consequence", tv_select_consq.getText().toString());
+            riskReportObject.put("risk_date", tv_event_date.getText().toString());
+            if (signBitmap != null) {
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                signBitmap.compress(Bitmap.CompressFormat.PNG, 70, stream);
+                byte[] image = stream.toByteArray();
+                ParseFile file = new ParseFile("ile.png", image);
+                riskReportObject.put("risk_file", file);
+            }
+
+            if (photoOfHazardBitmap != null) {
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                photoOfHazardBitmap.compress(Bitmap.CompressFormat.PNG, 70, stream);
+                byte[] image = stream.toByteArray();
+                ParseFile file = new ParseFile("ile.png", image);
+                riskReportObject.put("signature_file", file);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            CallProgressWheel.showLoadingDialog(mContext);
+        }
+
+    }
 }

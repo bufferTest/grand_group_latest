@@ -5,6 +5,7 @@ public class AppConstant {
     public static final String USER_PSWD = "userPswd";
     public static final String IS_REMEMBERED = "isRemembered";
     public static final String IS_LOGGED_IN = "isLoggedIn";
+    public static final String HAS_SITES = "hasSites";
     public static final String USER_PROFILE = "userprofile";
 
 
