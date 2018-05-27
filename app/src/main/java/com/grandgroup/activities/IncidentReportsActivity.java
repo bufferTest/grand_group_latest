@@ -559,6 +559,12 @@ public class IncidentReportsActivity extends BaseActivity {
                     break;
             }
 
+           /*switch (incidentReportObject.getInjury_type()){
+                case "option1"
+           }
+*/
+
+
 //        setRadioButton(rgEventClass, incidentReportObject.getEvent_type());
 
 
