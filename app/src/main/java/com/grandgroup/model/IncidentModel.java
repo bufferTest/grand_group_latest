@@ -69,6 +69,16 @@ public class IncidentModel implements Serializable {
     private String first_aid_signature = "";
     private String objectId = "";
 
+    public String getPhotos_available() {
+        return photos_available;
+    }
+
+    public void setPhotos_available(String photos_available) {
+        this.photos_available = photos_available;
+    }
+
+    private String photos_available = "";
+
     public String getOjectId() {
         return objectId;
     }
