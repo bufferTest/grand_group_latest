@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +34,10 @@ import com.grandgroup.views.CustomTimeDialog;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -423,12 +428,13 @@ public class IncidentReportsActivity extends BaseActivity {
                 case "2":
                     rbCeasedNo.setChecked(true);
                     break;
-            } switch (incidentReportObject.getCease_option()) {
+            }
+            switch (incidentReportObject.getIncedent_option()) {
                 case "1":
-                    rbCeasedYes.setChecked(true);
+                    rbContractor.setChecked(true);
                     break;
                 case "2":
-                    rbCeasedNo.setChecked(true);
+                    rbIncident.setChecked(true);
                     break;
             }
 
@@ -580,7 +586,7 @@ public class IncidentReportsActivity extends BaseActivity {
                     break;
             }
 
-            switch (incidentReportObject.getIncedent_option()) {
+            switch (incidentReportObject.getAffected_person_option()) {
                 case "1":
                     rbCrunches.setChecked(true);
                     break;
@@ -638,10 +644,8 @@ public class IncidentReportsActivity extends BaseActivity {
             etEyewear.setText(incidentReportObject.getEyewear_type());
             etCarrying.setText(incidentReportObject.getCarring_type());
             etComment.setText(incidentReportObject.getAdditional_comments());
-//        setRadioButton(rgIncidentSpecs,incidentReportObject.inci);
-//        etNotes.setText(incidentReportObject.ge);
-            setsignatures(incidentReportObject.getFirst_aid_signature(),ivImage);
-            setsignatures(incidentReportObject.getIncident_report_person_signature(),ivAmbPerSign);
+            setsignatures(incidentReportObject.getFirst_aid_signature(), ivImage);
+            setsignatures(incidentReportObject.getIncident_report_person_signature(), ivAmbPerSign);
             etNotes.setText(incidentReportObject.getWitness_statement());
             setsignatures(incidentReportObject.getFirst_aid_signature(), ivImage);
             setsignatures(incidentReportObject.getIncident_report_person_signature(), ivAmbPerSign);
@@ -661,7 +665,6 @@ public class IncidentReportsActivity extends BaseActivity {
                         .dontTransform()).into(signatureView);
     }
 
-
     private void setRadioButton(RadioGroup radiogroup, String value) {
         int count = radiogroup.getChildCount();
 
@@ -677,7 +680,7 @@ public class IncidentReportsActivity extends BaseActivity {
     }
 
     @OnClick({R.id.btn_back, R.id.btn_add, R.id.rg_type, R.id.rg_ceased, R.id.rg_occurence, R.id.rg_gender, R.id.rg_third_party, R.id.rg_prop_damage, R.id.rg_attend_affe, R.id.rg_first_aid, R.id.lay_signature, R.id.lay_amb_per_sign, R.id.rg_cctv, R.id.rg_wand_report, R.id.rg_wet_weather, R.id.rg_incident_specs, R.id.lay_screenshot,
-            R.id.tv_occurence_value, R.id.tv_ceased_time_value, R.id.tv_report_time_value, R.id.et_birthday, R.id.et_date_atten, R.id.btn_email, R.id.btn_save, R.id.iv_image, R.id.iv_amb_per_sign})
+            R.id.tv_occurence_value, R.id.et_amb_date, R.id.tv_ceased_time_value, R.id.tv_report_time_value, R.id.et_birthday, R.id.et_date_atten, R.id.btn_email, R.id.btn_save, R.id.iv_image, R.id.iv_amb_per_sign})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
@@ -730,11 +733,27 @@ public class IncidentReportsActivity extends BaseActivity {
             case R.id.tv_occurence_value:
                 CustomDateDialog.getInstance().DatePicker(mContext, new CustomDateDialog.DateDialogListener() {
                     @Override
-                    public void onOkayClick(int date, int month, int year) {
+                    public void onOkayClick(final int date, final int month, final int year) {
                         CustomTimeDialog.getInstance().timePicker(mContext, new CustomTimeDialog.TimeDialogListener() {
                             @Override
                             public void onOkayClick(String twentyFourTime, String TwelveHourTime) {
+                                String dayOfMonth = "", monthOfYear = "", selectedDate, formattedDate = "";
 
+                                monthOfYear = (month + 1 < 10) ? "0" + (month + 1) : "" + (month + 1);
+                                dayOfMonth = (date < 10) ? "0" + date : "" + date;
+                                selectedDate = monthOfYear + " " + dayOfMonth + ", " + year + " " + TwelveHourTime;
+                                Log.e("day", selectedDate);
+                                DateFormat originalFormat = new SimpleDateFormat("MM dd, yyyy hh:mm a");
+                                DateFormat targetFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a");
+                                try {
+                                    Date date1 = originalFormat.parse(selectedDate);
+                                    formattedDate = targetFormat.format(date1);
+                                    Log.e("day1", formattedDate);
+
+                                } catch (java.text.ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                tvOccurenceValue.setText(formattedDate);
                             }
                         });
                     }
@@ -743,11 +762,27 @@ public class IncidentReportsActivity extends BaseActivity {
             case R.id.tv_ceased_time_value:
                 CustomDateDialog.getInstance().DatePicker(mContext, new CustomDateDialog.DateDialogListener() {
                     @Override
-                    public void onOkayClick(int date, int month, int year) {
+                    public void onOkayClick(final int date, final int month, final int year) {
                         CustomTimeDialog.getInstance().timePicker(mContext, new CustomTimeDialog.TimeDialogListener() {
                             @Override
                             public void onOkayClick(String twentyFourTime, String TwelveHourTime) {
+                                String dayOfMonth = "", monthOfYear = "", selectedDate, formattedDate = "";
 
+                                monthOfYear = (month + 1 < 10) ? "0" + (month + 1) : "" + (month + 1);
+                                dayOfMonth = (date < 10) ? "0" + date : "" + date;
+                                selectedDate = monthOfYear + " " + dayOfMonth + ", " + year + " " + TwelveHourTime;
+                                Log.e("day", selectedDate);
+                                DateFormat originalFormat = new SimpleDateFormat("MM dd, yyyy hh:mm a");
+                                DateFormat targetFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a");
+                                try {
+                                    Date date1 = originalFormat.parse(selectedDate);
+                                    formattedDate = targetFormat.format(date1);
+                                    Log.e("day1", formattedDate);
+
+                                } catch (java.text.ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                tvCeasedTimeValue.setText(formattedDate);
                             }
                         });
                     }
@@ -756,11 +791,27 @@ public class IncidentReportsActivity extends BaseActivity {
             case R.id.tv_report_time_value:
                 CustomDateDialog.getInstance().DatePicker(mContext, new CustomDateDialog.DateDialogListener() {
                     @Override
-                    public void onOkayClick(int date, int month, int year) {
+                    public void onOkayClick(final int date, final int month, final int year) {
                         CustomTimeDialog.getInstance().timePicker(mContext, new CustomTimeDialog.TimeDialogListener() {
                             @Override
                             public void onOkayClick(String twentyFourTime, String TwelveHourTime) {
+                                String dayOfMonth = "", monthOfYear = "", selectedDate, formattedDate = "";
 
+                                monthOfYear = (month + 1 < 10) ? "0" + (month + 1) : "" + (month + 1);
+                                dayOfMonth = (date < 10) ? "0" + date : "" + date;
+                                selectedDate = monthOfYear + " " + dayOfMonth + ", " + year + " " + TwelveHourTime;
+                                Log.e("day", selectedDate);
+                                DateFormat originalFormat = new SimpleDateFormat("MM dd, yyyy hh:mm a");
+                                DateFormat targetFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a");
+                                try {
+                                    Date date1 = originalFormat.parse(selectedDate);
+                                    formattedDate = targetFormat.format(date1);
+                                    Log.e("day1", formattedDate);
+
+                                } catch (java.text.ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                tvReportTimeValue.setText(formattedDate);
                             }
                         });
                     }
@@ -769,11 +820,27 @@ public class IncidentReportsActivity extends BaseActivity {
             case R.id.et_birthday:
                 CustomDateDialog.getInstance().DatePicker(mContext, new CustomDateDialog.DateDialogListener() {
                     @Override
-                    public void onOkayClick(int date, int month, int year) {
+                    public void onOkayClick(final int date, final int month, final int year) {
                         CustomTimeDialog.getInstance().timePicker(mContext, new CustomTimeDialog.TimeDialogListener() {
                             @Override
                             public void onOkayClick(String twentyFourTime, String TwelveHourTime) {
+                                String dayOfMonth = "", monthOfYear = "", selectedDate, formattedDate = "";
 
+                                monthOfYear = (month + 1 < 10) ? "0" + (month + 1) : "" + (month + 1);
+                                dayOfMonth = (date < 10) ? "0" + date : "" + date;
+                                selectedDate = monthOfYear + " " + dayOfMonth + ", " + year + " " + TwelveHourTime;
+                                Log.e("day", selectedDate);
+                                DateFormat originalFormat = new SimpleDateFormat("MM dd, yyyy hh:mm a");
+                                DateFormat targetFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a");
+                                try {
+                                    Date date1 = originalFormat.parse(selectedDate);
+                                    formattedDate = targetFormat.format(date1);
+                                    Log.e("day1", formattedDate);
+
+                                } catch (java.text.ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                etBirthday.setText(formattedDate);
                             }
                         });
                     }
@@ -783,11 +850,56 @@ public class IncidentReportsActivity extends BaseActivity {
             case R.id.et_date_atten:
                 CustomDateDialog.getInstance().DatePicker(mContext, new CustomDateDialog.DateDialogListener() {
                     @Override
-                    public void onOkayClick(int date, int month, int year) {
+                    public void onOkayClick(final int date, final int month, final int year) {
                         CustomTimeDialog.getInstance().timePicker(mContext, new CustomTimeDialog.TimeDialogListener() {
                             @Override
                             public void onOkayClick(String twentyFourTime, String TwelveHourTime) {
+                                String dayOfMonth = "", monthOfYear = "", selectedDate, formattedDate = "";
 
+                                monthOfYear = (month + 1 < 10) ? "0" + (month + 1) : "" + (month + 1);
+                                dayOfMonth = (date < 10) ? "0" + date : "" + date;
+                                selectedDate = monthOfYear + " " + dayOfMonth + ", " + year + " " + TwelveHourTime;
+                                Log.e("day", selectedDate);
+                                DateFormat originalFormat = new SimpleDateFormat("MM dd, yyyy hh:mm a");
+                                DateFormat targetFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a");
+                                try {
+                                    Date date1 = originalFormat.parse(selectedDate);
+                                    formattedDate = targetFormat.format(date1);
+                                    Log.e("day1", formattedDate);
+
+                                } catch (java.text.ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                etDateAtten.setText(formattedDate);
+                            }
+                        });
+                    }
+                });
+                break;
+            case R.id.et_amb_date:
+                CustomDateDialog.getInstance().DatePicker(mContext, new CustomDateDialog.DateDialogListener() {
+                    @Override
+                    public void onOkayClick(final int date, final int month, final int year) {
+                        CustomTimeDialog.getInstance().timePicker(mContext, new CustomTimeDialog.TimeDialogListener() {
+                            @Override
+                            public void onOkayClick(String twentyFourTime, String TwelveHourTime) {
+                                String dayOfMonth = "", monthOfYear = "", selectedDate, formattedDate = "";
+
+                                monthOfYear = (month + 1 < 10) ? "0" + (month + 1) : "" + (month + 1);
+                                dayOfMonth = (date < 10) ? "0" + date : "" + date;
+                                selectedDate = monthOfYear + " " + dayOfMonth + ", " + year + " " + TwelveHourTime;
+                                Log.e("day", selectedDate);
+                                DateFormat originalFormat = new SimpleDateFormat("MM dd, yyyy hh:mm a");
+                                DateFormat targetFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a");
+                                try {
+                                    Date date1 = originalFormat.parse(selectedDate);
+                                    formattedDate = targetFormat.format(date1);
+                                    Log.e("day1", formattedDate);
+
+                                } catch (java.text.ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                etAmbDate.setText(formattedDate);
                             }
                         });
                     }
@@ -871,70 +983,187 @@ public class IncidentReportsActivity extends BaseActivity {
     private void saveDataOnParse() {
         CallProgressWheel.showLoadingDialog(mContext);
         ParseObject object = new ParseObject("IncidentReport");
-        //  object.put("weather_option", wea.getText().toString());
+
+        /*tvCeasedTimeValue.setText(incidentReportObject.getCease_date());
+        tvReportTimeValue.setText(incidentReportObject.getReported_date());
+        etFirstname.setText(incidentReportObject.getPerson_first_name());
+        etSurname.setText(incidentReportObject.getPerson_sur_name());
+        etHomeAddress.setText(incidentReportObject.getPerson_phone_address());
+        etState.setText(incidentReportObject.getPerson_state());
+        etPostcode.setText(incidentReportObject.getPerson_post_code());
+        etHomePhone.setText(incidentReportObject.getPerson_home_phone());
+        etMobileNo.setText(incidentReportObject.getPerson_mobile_phone());
+        etBirthday.setText(incidentReportObject.getPerson_birth_date());
+        etOccupation.setText(incidentReportObject.getPerson_occupation());
+        etWorkplace.setText(incidentReportObject.getPerson_workplace_name());
+        etAddres.setText(incidentReportObject.getPerson_address());
+        etIncident.setText(incidentReportObject.getIncedent_location());
+        etBrief.setText(incidentReportObject.getIncident_desc());
+        etDescription.setText(incidentReportObject.getEvent_desc_desc());
+        etAction.setText(incidentReportObject.getAction_taken());
+        etInjury.setText(incidentReportObject.getInjury_type());
+        etIllness.setText(incidentReportObject.getInjury_illness());
+        etBodily.setText(incidentReportObject.getBody_location());
+        etMark.setText(incidentReportObject.getInjury_mark());
+        etMechanism.setText(incidentReportObject.getInjury_machanism());
+        etOthers.setText(incidentReportObject.getOther_mechanism());
+        etObserve.setText(incidentReportObject.getWhat_you_see());
+        etThirdReport.setText(incidentReportObject.getThird_party_detail());
+        etDamageAdv.setText(incidentReportObject.getDamage_type());
+        etDamageVeh.setText(incidentReportObject.getVehicle_damage_detail());
+        etName.setText(incidentReportObject.getAttendee_name());
+        etAidName.setText(incidentReportObject.getFirst_aid_name());
+        etInjuryDetail.setText(incidentReportObject.getInjury_illness_detail());
+        etMedCenter.setText(incidentReportObject.getMedical_center());
+        etDateAtten.setText(incidentReportObject.getDate_attended());
+        etAmbReq.setText(incidentReportObject.getAmbulance_who());
+        etAmbPerName.setText(incidentReportObject.getIncident_report_person());
+        etAmbDate.setText(incidentReportObject.getIncident_report_date());
+        etWeatherCond.setText(incidentReportObject.getWeather_conditions());
+        etFootwear.setText(incidentReportObject.getFootwaer_type());
+        etEyewear.setText(incidentReportObject.getEyewear_type());
+        etCarrying.setText(incidentReportObject.getCarring_type());
+        etComment.setText(incidentReportObject.getAdditional_comments());
+        setsignatures(incidentReportObject.getFirst_aid_signature(), ivImage);
+        setsignatures(incidentReportObject.getIncident_report_person_signature(), ivAmbPerSign);
+        etNotes.setText(incidentReportObject.getWitness_statement());
+
+
+        incidentModel.setWeather_option(incidentReportObject.get("weather_option").toString());
+        incidentModel.setIncedent_option(incidentReportObject.get("incident_option").toString());
+        incidentModel.setOccourance_date(incidentReportObject.get("occourance_date").toString());
+        incidentModel.setIncedent_location(incidentReportObject.get("incident_location").toString());
+        incidentModel.setPerson_post_code(incidentReportObject.get("person_post_code").toString());
+        incidentModel.setInjury_type(incidentReportObject.get("injury_type").toString());
+        incidentModel.setThird_party_detail(incidentReportObject.get("third_party_detail").toString());
+        incidentModel.setCease_option(incidentReportObject.get("cease_option").toString());
+        incidentModel.setMedical_center(incidentReportObject.get("medical_center").toString());
+        incidentModel.setWeather_conditions(incidentReportObject.get("weather_conditions").toString());
+        incidentModel.setBreakdown_agency(incidentReportObject.get("breakdown_agency").toString());
+        incidentModel.setPerson_sur_name(incidentReportObject.get("person_sur_name").toString());
+        incidentModel.setPerson_first_name(incidentReportObject.get("person_first_name").toString());
+        incidentModel.setSame_occourance(incidentReportObject.get("same_occourance").toString());
+        incidentModel.setThird_party_option(incidentReportObject.get("third_party_option").toString());
+        incidentModel.setFirst_aid_option(incidentReportObject.get("first_aid_option").toString());
+        incidentModel.setPerson_state(incidentReportObject.get("person_state").toString());
+        incidentModel.setPerson_gender_option(incidentReportObject.get("person_gender_option").toString());
+        incidentModel.setEyewear_type(incidentReportObject.get("eyewear_type").toString());
+        incidentModel.setWitness_statement(incidentReportObject.get("witness_statement").toString());
+        incidentModel.setPerson_drug_option(incidentReportObject.get("person_drug_option").toString());
+        incidentModel.setOther_mechanism(incidentReportObject.get("other_mechanism").toString());
+        incidentModel.setPerson_address(incidentReportObject.get("person_address").toString());
+        incidentModel.setDamage_type(incidentReportObject.get("damage_type").toString());
+        incidentModel.setDate_attended(incidentReportObject.get("date_attended").toString());
+        incidentModel.setAdditional_comments(incidentReportObject.get("additional_comments").toString());
+        incidentModel.setFootwaer_type(incidentReportObject.get("footwear_type").toString());
+        incidentModel.setIncident_report_date(incidentReportObject.get("incident_report_date").toString());
+        incidentModel.setVehicle_damage_detail(incidentReportObject.get("vehicle_damage_detail").toString());
+        incidentModel.setEffected_person_detail(incidentReportObject.get("affected_person_detail").toString());
+        incidentModel.setAttendee_name(incidentReportObject.get("attendee_name").toString());
+        incidentModel.setInjury_machanism(incidentReportObject.get("injury_mechanism").toString());
+        incidentModel.setCctv_option(incidentReportObject.get("cctv_option").toString());
+        incidentModel.setOther_breakdown_agency(incidentReportObject.get("other_breakdown_agency").toString());
+        incidentModel.setBody_location(incidentReportObject.get("body_location").toString());
+        incidentModel.setCarring_type(incidentReportObject.get("carrying_type").toString());
+        incidentModel.setIncident_report_person(incidentReportObject.get("incident_report_person").toString());
+        incidentModel.setWarning_sign_option(incidentReportObject.get("warning_sign_option").toString());
+        incidentModel.setAffected_person_option(incidentReportObject.get("affected_person_option").toString());
+        incidentModel.setPerson_occupation(incidentReportObject.get("person_occupation").toString());
+        incidentModel.setInjury_mark(incidentReportObject.get("injury_mark").toString());
+        incidentModel.setAmbulance_attend_option(incidentReportObject.get("ambulance_attend_option").toString());
+        incidentModel.setInjury_illness(incidentReportObject.get("injury_illness").toString());
+        incidentModel.setPerson_home_phone(incidentReportObject.get("person_home_phone").toString());
+        incidentModel.setInjury_illness_detail(incidentReportObject.get("injury_illness_detail").toString());
+        incidentModel.setWhat_you_see(incidentReportObject.get("what_you_see").toString());
+        incidentModel.setPerson_birth_date(incidentReportObject.get("person_birth_date").toString());
+        incidentModel.setWet_weather_option(incidentReportObject.get("wet_weather_option").toString());
+        incidentModel.setAttended_person_option(incidentReportObject.get("attended_person_option").toString());
+        incidentModel.setEvent_desc_desc(incidentReportObject.get("event_desc_desc").toString());
+        incidentModel.setReported_date(incidentReportObject.get("reported_date").toString());
+        incidentModel.setPerson_mobile_phone(incidentReportObject.get("person_mobile_phone").toString());
+        incidentModel.setProperty_damage_option(incidentReportObject.get("property_damage_option").toString());
+        incidentModel.setAmbulance_who(incidentReportObject.get("ambulance_who").toString());
+        incidentModel.setCease_date(incidentReportObject.get("cease_date").toString());
+        incidentModel.setFirst_aid_name(incidentReportObject.get("first_aid_name").toString());
+        incidentModel.setPerson_phone_address(incidentReportObject.get("person_home_address").toString());
+        incidentModel.setAction_taken(incidentReportObject.get("action_taken").toString());
+        incidentModel.setIncident_desc(incidentReportObject.get("incident_desc").toString());
+        incidentModel.setPerson_workplace_name(incidentReportObject.get("person_workplace_name").toString());
+        incidentModel.setEvent_type(incidentReportObject.get("event_type").toString());
+        incidentModel.setCease_date(incidentReportObject.get("cease_date").toString());
+        incidentModel.setPhotos_available(incidentReportObject.get("photo_option").toString());
+        incidentModel.setWandOption(incidentReportObject.get("web_report_option").toString());*/
+
+        String weatheroption = null;
+        switch (rgWeather.getCheckedRadioButtonId()) {
+            case R.id.rb_weather_yes:
+                weatheroption = "1";
+                break;
+            case R.id.rb_weather_no:
+                weatheroption = "2";
+                break;
+        }
+        object.put("weather_option", weatheroption);
+        object.put("incident_option", tvOccurenceDate.getText().toString());
         object.put("occourance_date", tvOccurenceDate.getText().toString());
-        //   object.put("incedent_option",  .getText().toString());
-        object.put("incedent_location", etIncident.getText().toString());
-        object.put("person_post_code", etPostcode.getText().toString());
-        //  object.put("injury_type",  .getText().toString());
-        //  object.put("photo_option",  etAffected.getText().toString());
-        //  object.put("third_party_detail",  thi.getText().toString());
-        //   object.put("cease_option",  ce.getText().toString());
-        object.put("medical_center", etMedCenter.getText().toString());
-        object.put("weather_conditions", etWeatherCond.getText().toString());
-        //    object.put("breakdown_agency",  br.getText().toString());
-        object.put("person_sur_name", etSurname.getText().toString());
-        object.put("person_first_name", etFirstname.getText().toString());
-        //  object.put("same_occourance",  same.getText().toString());
-        //   object.put("third_party_option",  etAffected.getText().toString());
-        //   object.put("first_aid_option",  fir.getText().toString());
-        //    object.put("person_state",  per.getText().toString());
-        //     object.put("person_gender_option",  etAffected.getText().toString());
-        object.put("eyewear_type", etEyewear.getText().toString());
-        //     object.put("witness_statement",  .getText().toString());
-        //     object.put("person_drug_option",  dru.getText().toString());
-        object.put("other_mechanism", etOthers.getText().toString());
-        //     object.put("person_address",  etHomeAddress.getText().toString());
-        //     object.put("damage_type",  da.getText().toString());
-        object.put("date_attended", etDateAtten.getText().toString());
-        object.put("additional_comments", etComment.getText().toString());
-        object.put("footwaer_type", etFootwear.getText().toString());
-        //  object.put("incident_report_person_signature",  etAffected.getText().toString()); //file
-        //   object.put("incident_report_date",  repo.getText().toString());
-        object.put("vehicle_damage_detail", etDamageVeh.getText().toString());
-        //    object.put("effected_person_detail",  per.getText().toString());
-        //    object.put("attendee_name",  atte.getText().toString());
-        //    object.put("incident_report_date",  inci.getText().toString());
-        //    object.put("injury_machanism",  inj.getText().toString());
-        //    object.put("cctv_option",  cct.getText().toString()); // number
-        //    object.put("other_breakdown_agency",  age.getText().toString());
-        //   object.put("body_location",  etBodily.getText().toString());
-        object.put("carring_type", etCarrying.getText().toString());
-        //   object.put("incident_report_person",  repo.getText().toString());
-        //    object.put("warning_sign_option",  war.getText().toString());
-        //     object.put("affected_person_option",  etAffected.getText().toString());
-        object.put("person_occupation", etOccupation.getText().toString());
-        //      object.put("injury_mark",  inj.getText().toString());
-        //     object.put("ambulance_attend_option",  ambu.getText().toString()); //number
-        //     object.put("injury_illness",  inju.getText().toString());
-        object.put("person_home_phone", etHomePhone.getText().toString());
-        object.put("injury_illness_detail", etIllness.getText().toString());
-        //     object.put("what_you_see",  etW.getText().toString());
-        //     object.put("person_birth_date",  per.getText().toString());
-        //     object.put("wet_weather_option",  wet.getText().toString()); //number
-        //      object.put("attended_person_option",  atten.getText().toString());
-        //    object.put("event_desc_desc",  eve.getText().toString());
-        object.put("reported_date", tvReportTime.getText().toString());
-        object.put("person_mobile_phone", etMobileNo.getText().toString());
-        //    object.put("property_damage_option",  da.getText().toString());
-        //     object.put("ambulance_who",  amb.getText().toString());
-        //     object.put("cease_date",  cea.getText().toString());
-        object.put("first_aid_name", tvFirstAid.getText().toString());
-        //     object.put("person_phone_address",  pho.getText().toString());
-        object.put("action_taken", etAction.getText().toString());
-        //    object.put("incident_desc",  inci.getText().toString());
-        object.put("person_workplace_name", etWorkplace.getText().toString());
-        //     object.put("event_type",  eve.getText().toString());
+        object.put("incident_location", tvOccurenceDate.getText().toString());
+        object.put("person_post_code", tvOccurenceDate.getText().toString());
+        object.put("injury_type", tvOccurenceDate.getText().toString());
+        object.put("third_party_detail", tvOccurenceDate.getText().toString());
+        object.put("cease_option", tvOccurenceDate.getText().toString());
+        object.put("medical_center", tvOccurenceDate.getText().toString());
+        object.put("weather_conditions", tvOccurenceDate.getText().toString());
+        object.put("breakdown_agency", tvOccurenceDate.getText().toString());
+        object.put("person_sur_name", tvOccurenceDate.getText().toString());
+        object.put("person_first_name", tvOccurenceDate.getText().toString());
+        object.put("same_occourance", tvOccurenceDate.getText().toString());
+        object.put("third_party_option", tvOccurenceDate.getText().toString());
+        object.put("first_aid_option", tvOccurenceDate.getText().toString());
+        object.put("person_state", tvOccurenceDate.getText().toString());
+        object.put("person_gender_option", tvOccurenceDate.getText().toString());
+        object.put("eyewear_type", tvOccurenceDate.getText().toString());
+        object.put("witness_statement", tvOccurenceDate.getText().toString());
+        object.put("person_drug_option", tvOccurenceDate.getText().toString());
+        object.put("other_mechanism", tvOccurenceDate.getText().toString());
+        object.put("person_address", tvOccurenceDate.getText().toString());
+        object.put("damage_type", tvOccurenceDate.getText().toString());
+        object.put("date_attended", tvOccurenceDate.getText().toString());
+        object.put("additional_comments", tvOccurenceDate.getText().toString());
+        object.put("footwear_type", tvOccurenceDate.getText().toString());
+        object.put("incident_report_date", tvOccurenceDate.getText().toString());
+        object.put("vehicle_damage_detail", tvOccurenceDate.getText().toString());
+        object.put("affected_person_detail", tvOccurenceDate.getText().toString());
+        object.put("attendee_name", tvOccurenceDate.getText().toString());
+        object.put("injury_mechanism", tvOccurenceDate.getText().toString());
+        object.put("cctv_option", tvOccurenceDate.getText().toString());
+        object.put("other_breakdown_agency", tvOccurenceDate.getText().toString());
+        object.put("body_location", tvOccurenceDate.getText().toString());
+        object.put("carrying_type", tvOccurenceDate.getText().toString());
+        object.put("incident_report_person", tvOccurenceDate.getText().toString());
+        object.put("warning_sign_option", tvOccurenceDate.getText().toString());
+        object.put("affected_person_option", tvOccurenceDate.getText().toString());
+        object.put("person_occupation", tvOccurenceDate.getText().toString());
+        object.put("injury_mark", tvOccurenceDate.getText().toString());
+        object.put("ambulance_attend_option", tvOccurenceDate.getText().toString());
+        object.put("injury_illness", tvOccurenceDate.getText().toString());
+        object.put("what_you_see", tvOccurenceDate.getText().toString());
+        object.put("person_birth_date", tvOccurenceDate.getText().toString());
+        object.put("wet_weather_option", tvOccurenceDate.getText().toString());
+        object.put("attended_person_option", tvOccurenceDate.getText().toString());
+        object.put("event_desc_desc", tvOccurenceDate.getText().toString());
+        object.put("reported_date", tvOccurenceDate.getText().toString());
+        object.put("person_mobile_phone", tvOccurenceDate.getText().toString());
+        object.put("property_damage_option", tvOccurenceDate.getText().toString());
+        object.put("ambulance_who", tvOccurenceDate.getText().toString());
+        object.put("cease_date", tvOccurenceDate.getText().toString());
+        object.put("first_aid_name", tvOccurenceDate.getText().toString());
+        object.put("action_taken", tvOccurenceDate.getText().toString());
+        object.put("incident_desc", tvOccurenceDate.getText().toString());
+        object.put("person_workplace_name", tvOccurenceDate.getText().toString());
+        object.put("event_type", tvOccurenceDate.getText().toString());
+        object.put("photo_option", tvOccurenceDate.getText().toString());
+        object.put("web_report_option", tvOccurenceDate.getText().toString());
+
 
         object.saveInBackground(new SaveCallback() {
             @Override

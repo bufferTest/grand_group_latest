@@ -496,6 +496,7 @@
                     android:text="Mobile Number:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -509,9 +510,9 @@
                     android:background="@drawable/boundary"
                     android:hint="enter Mobile number"
                     android:padding="8dp"
+                    android:textSize="@dimen/_11ssp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_mobile_no" />
@@ -524,6 +525,7 @@
                     android:text="Birth Date:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -539,7 +541,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_birthday" />
@@ -552,6 +554,7 @@
                     android:text="Occupation:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -567,7 +570,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_occupation" />
@@ -580,6 +583,7 @@
                     android:text="Workplace Name:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -594,7 +598,7 @@
                     android:hint="Enter Workplace Name"
                     android:padding="8dp"
                     android:textColor="@android:color/black"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     android:textColorHint="@android:color/darker_gray"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
@@ -609,6 +613,7 @@
                     android:text="Address:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -622,9 +627,9 @@
                     android:background="@drawable/boundary"
                     android:hint="enter address"
                     android:padding="8dp"
+                    android:textSize="@dimen/_11ssp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_addres" />
@@ -637,6 +642,7 @@
                     android:text="Location of the Incident at the center:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -652,7 +658,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_incident" />
@@ -665,6 +671,7 @@
                     android:text="Event Classification:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_incident" />
@@ -682,6 +689,7 @@
                         android:id="@+id/rb_miss"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="Near Miss" />
 
@@ -689,12 +697,14 @@
                         android:id="@+id/rb_incident"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="Incident" />
 
                     <RadioButton
                         android:id="@+id/rb_hazard"
                         android:layout_width="wrap_content"
+                        android:textSize="@dimen/_11ssp"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
                         android:text="Hazard" />
@@ -703,6 +713,7 @@
                         android:id="@+id/rb_contact"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="Community Contact" />
 
@@ -710,6 +721,7 @@
                         android:id="@+id/rb_issue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="HSE Document / Contact Issue" />
 
@@ -723,6 +735,7 @@
                     android:text="Brief Description of the incident(eg cut to left):"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -741,7 +754,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_brief" />
@@ -754,6 +767,7 @@
                     android:text="Description of Event:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -772,7 +786,7 @@
                     android:gravity="top"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_description" />
@@ -785,6 +799,7 @@
                     android:text="Immediate Action Taken:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -802,7 +817,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_action" />
@@ -815,6 +830,7 @@
                     android:text="Injury Type:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -832,7 +848,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_injury" />
@@ -845,6 +861,7 @@
                     android:text="Injury / Illness Consequence:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -862,7 +879,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_illness" />
@@ -875,6 +892,7 @@
                     android:text="Bodily location injury/disease description:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -893,7 +911,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_bodily" />
@@ -906,6 +924,7 @@
                     android:text="Please mark on where on the body the injury occurred:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -924,7 +943,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_mark" />
@@ -937,6 +956,7 @@
                     android:text="Mechanism of injury / disease:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -955,7 +975,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_mechanism" />
@@ -968,6 +988,7 @@
                     android:text="if others Please explain:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -986,7 +1007,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_others" />
@@ -999,6 +1020,7 @@
                     android:text="What you see and observe:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -1017,7 +1039,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_observe" />
@@ -1031,6 +1053,7 @@
                     android:text="Was there a third party involved ?ie Did a cleaner attend:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_observe" />
@@ -1049,6 +1072,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
                         android:text="@string/yes" />
 
                     <RadioButton
@@ -1056,6 +1080,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
                         android:text="@string/no" />
 
                 </RadioGroup>
@@ -1069,6 +1094,7 @@
                     android:text="If yes ,please attach a third party incident report"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_third_party" />
@@ -1086,7 +1112,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_third_report" />
@@ -1100,6 +1126,7 @@
                     android:text="Was there any property damage?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_third_report" />
@@ -1117,6 +1144,7 @@
                         android:id="@+id/rb_damage_yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/yes" />
 
@@ -1125,6 +1153,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
                         android:text="@string/no" />
 
                 </RadioGroup>
@@ -1138,6 +1167,7 @@
                     android:text="Please advise type of damage:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_prop_damage" />
@@ -1155,7 +1185,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_damage_adv" />
@@ -1168,6 +1198,7 @@
                     android:text="If there was vehicle damage,please indicate on diagram below the location of the damage:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_damage_adv" />
@@ -1186,7 +1217,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_damage_veh" />
@@ -1199,6 +1230,7 @@
                     android:text="Did anyone attend to the affected person?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_damage_veh" />
@@ -1217,6 +1249,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
                         android:text="@string/yes" />
 
                     <RadioButton
@@ -1224,6 +1257,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
                         android:text="@string/no" />
 
                 </RadioGroup>
@@ -1236,6 +1270,7 @@
                     android:text="Name(s):"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_attend_affe" />
@@ -1253,7 +1288,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_name" />
@@ -1267,6 +1302,7 @@
                     android:text="Was First Aid treatment administered at the workplace?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_name" />
@@ -1285,6 +1321,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
                         android:text="@string/yes" />
 
                     <RadioButton
@@ -1292,6 +1329,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
                         android:text="@string/no" />
 
                 </RadioGroup>
@@ -1304,6 +1342,7 @@
                     android:text="If 'Yes', who administered the first aid?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_first_aid" />
@@ -1316,6 +1355,7 @@
                     android:text="NAME:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_aid_yes_admin" />
@@ -1333,7 +1373,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_aid_admin" />
@@ -1346,6 +1386,7 @@
                     android:text="SIGNATURE:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_aid_name" />
@@ -1384,6 +1425,7 @@
                     android:text="NAME:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/lay_signature" />
@@ -1401,7 +1443,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_injury_det" />
@@ -1415,6 +1457,7 @@
                     android:text="Medical Center/Doctor/Hospitals that the injured person attended:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_injury_detail" />
@@ -1432,7 +1475,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_med_center" />
@@ -1446,6 +1489,7 @@
                     android:text="Date attended:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_med_center" />
@@ -1460,7 +1504,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_date_atten" />
@@ -1473,6 +1517,7 @@
                     android:text="Did an ambulance attend?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_date_atten" />
@@ -1491,6 +1536,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
                         android:text="@string/yes" />
 
                     <RadioButton
@@ -1498,6 +1544,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
                         android:text="@string/no" />
 
                 </RadioGroup>
@@ -1511,6 +1558,7 @@
                     android:text="Who requested the Ambulance?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_ambulance" />
@@ -1528,7 +1576,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_amb_req" />
@@ -1541,6 +1589,7 @@
                     android:text="Person Completing the Incident Report:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_amb_req" />
@@ -1551,6 +1600,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="Name"
+                    android:textSize="@dimen/_12ssp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
@@ -1564,13 +1614,13 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
                     android:gravity="top"
+                    android:textSize="@dimen/_11ssp"
                     android:hint="enter who requested ambulance"
                     android:lines="3"
                     android:maxLines="3"
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_amb_per_name" />
@@ -1584,6 +1634,7 @@
                     android:text="SIGNATURE:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_amb_per_name" />
@@ -1621,6 +1672,7 @@
                     android:text="Date:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/lay_amb_per_sign" />
@@ -1635,7 +1687,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_amb_date" />
@@ -1646,11 +1698,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="@string/complete_note"
-                    android:padding="8dp"
                     android:textStyle="bold"
                     android:textIsSelectable="false"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_amb_date" />
@@ -1661,6 +1712,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="Was wear a factor?"
+                    android:textSize="@dimen/_12ssp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
@@ -1680,6 +1732,7 @@
                         android:id="@+id/rb_weather_yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/yes" />
 
@@ -1687,6 +1740,7 @@
                         android:id="@+id/rb_weather_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/no" />
 
@@ -1700,6 +1754,7 @@
                     android:text="Weather condition at the time?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_weather" />
@@ -1717,7 +1772,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_weather_cond" />
@@ -1730,6 +1785,7 @@
                     android:text="Did this person appear to be affected by drugs or alcohol?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_weather_cond" />
@@ -1748,12 +1804,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
                         android:text="@string/yes" />
 
                     <RadioButton
                         android:id="@+id/rb_drug_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/no" />
 
@@ -1768,6 +1826,7 @@
                     android:text="Type of footwear worn?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_drug_affect" />
@@ -1785,7 +1844,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_footwear" />
@@ -1798,6 +1857,7 @@
                     android:text="Type of eyewear worn?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_footwear" />
@@ -1815,7 +1875,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_eyewear" />
@@ -1828,6 +1888,7 @@
                     android:text="Were they carring anything?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_eyewear" />
@@ -1845,7 +1906,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_carrying" />
@@ -1859,6 +1920,7 @@
                     android:text="CCTV Available?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_carrying" />
@@ -1877,6 +1939,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
                         android:text="@string/yes" />
 
                     <RadioButton
@@ -1884,6 +1947,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
                         android:text="@string/no" />
 
                 </RadioGroup>
@@ -1896,6 +1960,7 @@
                     android:text="Photos Available?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_cctv" />
