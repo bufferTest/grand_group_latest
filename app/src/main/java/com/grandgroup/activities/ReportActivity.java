@@ -146,6 +146,7 @@ public class ReportActivity extends BaseActivity implements AdapterView.OnItemSe
                         public void onClick(int position) {
                             ParseObject incidentReportObject = reports.get(position);
                             IncidentModel incidentModel = new IncidentModel();
+                            incidentModel.setOjectId(incidentReportObject.getObjectId());
                             incidentModel.setWeather_option(incidentReportObject.get("weather_option").toString());
                             incidentModel.setIncedent_option(incidentReportObject.get("incident_option").toString());
                             incidentModel.setOccourance_date(incidentReportObject.get("occourance_date").toString());
@@ -251,6 +252,7 @@ public class ReportActivity extends BaseActivity implements AdapterView.OnItemSe
                         ParseObject riskReportObject = reports.get(position);
                         RiskReportModel riskReportModel = new RiskReportModel();
                         riskReportModel.setRisk_likelihood(riskReportObject.get("risk_likelihood").toString());
+                        riskReportModel.setObjectId(riskReportObject.getObjectId());
                         riskReportModel.setRisk_action_plan(riskReportObject.get("risk_action_plan").toString());
                         riskReportModel.setRisk_location(riskReportObject.get("risk_location").toString());
                         riskReportModel.setRisk_description(riskReportObject.get("risk_description").toString());
