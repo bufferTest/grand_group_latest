@@ -69,6 +69,16 @@ public class IncidentModel implements Serializable {
     private String first_aid_signature = "";
     private String objectId = "";
 
+    public String getWandOption() {
+        return wandOption;
+    }
+
+    public void setWandOption(String wandOption) {
+        this.wandOption = wandOption;
+    }
+
+    private String wandOption = "";
+
     public String getPhotos_available() {
         return photos_available;
     }

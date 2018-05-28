@@ -62,14 +62,13 @@ public class TaskManagerActivity extends BaseActivity {
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
         date = cal.get(Calendar.DAY_OF_MONTH);
-        setUpWeekNames();
-        setupcalender();
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        setUpWeekNames();
+        setupcalender();
         setEventsAdapter(month, date, year);
     }
 

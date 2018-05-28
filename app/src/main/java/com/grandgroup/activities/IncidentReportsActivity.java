@@ -425,9 +425,16 @@ public class IncidentReportsActivity extends BaseActivity {
                 case "2":
                     rbCeasedNo.setChecked(true);
                     break;
+            } switch (incidentReportObject.getCease_option()) {
+                case "1":
+                    rbCeasedYes.setChecked(true);
+                    break;
+                case "2":
+                    rbCeasedNo.setChecked(true);
+                    break;
             }
 
-            switch (incidentReportObject.getOccourance_date()) {
+            switch (incidentReportObject.getSame_occourance()) {
                 case "1":
                     rbOccYes.setChecked(true);
                     break;
@@ -442,6 +449,14 @@ public class IncidentReportsActivity extends BaseActivity {
                     break;
                 case "2":
                     rbFemale.setChecked(true);
+                    break;
+            }
+            switch (incidentReportObject.getPerson_gender_option()) {
+                case "1":
+                    rbAttendYes.setChecked(true);
+                    break;
+                case "2":
+                    rbAttendNo.setChecked(true);
                     break;
             }
 
@@ -486,6 +501,14 @@ public class IncidentReportsActivity extends BaseActivity {
                     break;
                 case "2":
                     rbAidNo.setChecked(true);
+                    break;
+            }
+            switch (incidentReportObject.getWandOption()) {
+                case "1":
+                    rbWandYes.setChecked(true);
+                    break;
+                case "2":
+                    rbWandNo.setChecked(true);
                     break;
             }
 
