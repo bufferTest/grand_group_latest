@@ -455,7 +455,7 @@ public class IncidentReportsActivity extends BaseActivity {
                     rbFemale.setChecked(true);
                     break;
             }
-            switch (incidentReportObject.getPerson_gender_option()) {
+            switch (incidentReportObject.getAttended_person_option()) {
                 case "1":
                     rbAttendYes.setChecked(true);
                     break;
@@ -984,116 +984,6 @@ public class IncidentReportsActivity extends BaseActivity {
         CallProgressWheel.showLoadingDialog(mContext);
         ParseObject object = new ParseObject("IncidentReport");
 
-        /*tvCeasedTimeValue.setText(incidentReportObject.getCease_date());
-        tvReportTimeValue.setText(incidentReportObject.getReported_date());
-        etFirstname.setText(incidentReportObject.getPerson_first_name());
-        etSurname.setText(incidentReportObject.getPerson_sur_name());
-        etHomeAddress.setText(incidentReportObject.getPerson_phone_address());
-        etState.setText(incidentReportObject.getPerson_state());
-        etPostcode.setText(incidentReportObject.getPerson_post_code());
-        etHomePhone.setText(incidentReportObject.getPerson_home_phone());
-        etMobileNo.setText(incidentReportObject.getPerson_mobile_phone());
-        etBirthday.setText(incidentReportObject.getPerson_birth_date());
-        etOccupation.setText(incidentReportObject.getPerson_occupation());
-        etWorkplace.setText(incidentReportObject.getPerson_workplace_name());
-        etAddres.setText(incidentReportObject.getPerson_address());
-        etIncident.setText(incidentReportObject.getIncedent_location());
-        etBrief.setText(incidentReportObject.getIncident_desc());
-        etDescription.setText(incidentReportObject.getEvent_desc_desc());
-        etAction.setText(incidentReportObject.getAction_taken());
-        etInjury.setText(incidentReportObject.getInjury_type());
-        etIllness.setText(incidentReportObject.getInjury_illness());
-        etBodily.setText(incidentReportObject.getBody_location());
-        etMark.setText(incidentReportObject.getInjury_mark());
-        etMechanism.setText(incidentReportObject.getInjury_machanism());
-        etOthers.setText(incidentReportObject.getOther_mechanism());
-        etObserve.setText(incidentReportObject.getWhat_you_see());
-        etThirdReport.setText(incidentReportObject.getThird_party_detail());
-        etDamageAdv.setText(incidentReportObject.getDamage_type());
-        etDamageVeh.setText(incidentReportObject.getVehicle_damage_detail());
-        etName.setText(incidentReportObject.getAttendee_name());
-        etAidName.setText(incidentReportObject.getFirst_aid_name());
-        etInjuryDetail.setText(incidentReportObject.getInjury_illness_detail());
-        etMedCenter.setText(incidentReportObject.getMedical_center());
-        etDateAtten.setText(incidentReportObject.getDate_attended());
-        etAmbReq.setText(incidentReportObject.getAmbulance_who());
-        etAmbPerName.setText(incidentReportObject.getIncident_report_person());
-        etAmbDate.setText(incidentReportObject.getIncident_report_date());
-        etWeatherCond.setText(incidentReportObject.getWeather_conditions());
-        etFootwear.setText(incidentReportObject.getFootwaer_type());
-        etEyewear.setText(incidentReportObject.getEyewear_type());
-        etCarrying.setText(incidentReportObject.getCarring_type());
-        etComment.setText(incidentReportObject.getAdditional_comments());
-        setsignatures(incidentReportObject.getFirst_aid_signature(), ivImage);
-        setsignatures(incidentReportObject.getIncident_report_person_signature(), ivAmbPerSign);
-        etNotes.setText(incidentReportObject.getWitness_statement());
-
-
-        incidentModel.setWeather_option(incidentReportObject.get("weather_option").toString());
-        incidentModel.setIncedent_option(incidentReportObject.get("incident_option").toString());
-        incidentModel.setOccourance_date(incidentReportObject.get("occourance_date").toString());
-        incidentModel.setIncedent_location(incidentReportObject.get("incident_location").toString());
-        incidentModel.setPerson_post_code(incidentReportObject.get("person_post_code").toString());
-        incidentModel.setInjury_type(incidentReportObject.get("injury_type").toString());
-        incidentModel.setThird_party_detail(incidentReportObject.get("third_party_detail").toString());
-        incidentModel.setCease_option(incidentReportObject.get("cease_option").toString());
-        incidentModel.setMedical_center(incidentReportObject.get("medical_center").toString());
-        incidentModel.setWeather_conditions(incidentReportObject.get("weather_conditions").toString());
-        incidentModel.setBreakdown_agency(incidentReportObject.get("breakdown_agency").toString());
-        incidentModel.setPerson_sur_name(incidentReportObject.get("person_sur_name").toString());
-        incidentModel.setPerson_first_name(incidentReportObject.get("person_first_name").toString());
-        incidentModel.setSame_occourance(incidentReportObject.get("same_occourance").toString());
-        incidentModel.setThird_party_option(incidentReportObject.get("third_party_option").toString());
-        incidentModel.setFirst_aid_option(incidentReportObject.get("first_aid_option").toString());
-        incidentModel.setPerson_state(incidentReportObject.get("person_state").toString());
-        incidentModel.setPerson_gender_option(incidentReportObject.get("person_gender_option").toString());
-        incidentModel.setEyewear_type(incidentReportObject.get("eyewear_type").toString());
-        incidentModel.setWitness_statement(incidentReportObject.get("witness_statement").toString());
-        incidentModel.setPerson_drug_option(incidentReportObject.get("person_drug_option").toString());
-        incidentModel.setOther_mechanism(incidentReportObject.get("other_mechanism").toString());
-        incidentModel.setPerson_address(incidentReportObject.get("person_address").toString());
-        incidentModel.setDamage_type(incidentReportObject.get("damage_type").toString());
-        incidentModel.setDate_attended(incidentReportObject.get("date_attended").toString());
-        incidentModel.setAdditional_comments(incidentReportObject.get("additional_comments").toString());
-        incidentModel.setFootwaer_type(incidentReportObject.get("footwear_type").toString());
-        incidentModel.setIncident_report_date(incidentReportObject.get("incident_report_date").toString());
-        incidentModel.setVehicle_damage_detail(incidentReportObject.get("vehicle_damage_detail").toString());
-        incidentModel.setEffected_person_detail(incidentReportObject.get("affected_person_detail").toString());
-        incidentModel.setAttendee_name(incidentReportObject.get("attendee_name").toString());
-        incidentModel.setInjury_machanism(incidentReportObject.get("injury_mechanism").toString());
-        incidentModel.setCctv_option(incidentReportObject.get("cctv_option").toString());
-        incidentModel.setOther_breakdown_agency(incidentReportObject.get("other_breakdown_agency").toString());
-        incidentModel.setBody_location(incidentReportObject.get("body_location").toString());
-        incidentModel.setCarring_type(incidentReportObject.get("carrying_type").toString());
-        incidentModel.setIncident_report_person(incidentReportObject.get("incident_report_person").toString());
-        incidentModel.setWarning_sign_option(incidentReportObject.get("warning_sign_option").toString());
-        incidentModel.setAffected_person_option(incidentReportObject.get("affected_person_option").toString());
-        incidentModel.setPerson_occupation(incidentReportObject.get("person_occupation").toString());
-        incidentModel.setInjury_mark(incidentReportObject.get("injury_mark").toString());
-        incidentModel.setAmbulance_attend_option(incidentReportObject.get("ambulance_attend_option").toString());
-        incidentModel.setInjury_illness(incidentReportObject.get("injury_illness").toString());
-        incidentModel.setPerson_home_phone(incidentReportObject.get("person_home_phone").toString());
-        incidentModel.setInjury_illness_detail(incidentReportObject.get("injury_illness_detail").toString());
-        incidentModel.setWhat_you_see(incidentReportObject.get("what_you_see").toString());
-        incidentModel.setPerson_birth_date(incidentReportObject.get("person_birth_date").toString());
-        incidentModel.setWet_weather_option(incidentReportObject.get("wet_weather_option").toString());
-        incidentModel.setAttended_person_option(incidentReportObject.get("attended_person_option").toString());
-        incidentModel.setEvent_desc_desc(incidentReportObject.get("event_desc_desc").toString());
-        incidentModel.setReported_date(incidentReportObject.get("reported_date").toString());
-        incidentModel.setPerson_mobile_phone(incidentReportObject.get("person_mobile_phone").toString());
-        incidentModel.setProperty_damage_option(incidentReportObject.get("property_damage_option").toString());
-        incidentModel.setAmbulance_who(incidentReportObject.get("ambulance_who").toString());
-        incidentModel.setCease_date(incidentReportObject.get("cease_date").toString());
-        incidentModel.setFirst_aid_name(incidentReportObject.get("first_aid_name").toString());
-        incidentModel.setPerson_phone_address(incidentReportObject.get("person_home_address").toString());
-        incidentModel.setAction_taken(incidentReportObject.get("action_taken").toString());
-        incidentModel.setIncident_desc(incidentReportObject.get("incident_desc").toString());
-        incidentModel.setPerson_workplace_name(incidentReportObject.get("person_workplace_name").toString());
-        incidentModel.setEvent_type(incidentReportObject.get("event_type").toString());
-        incidentModel.setCease_date(incidentReportObject.get("cease_date").toString());
-        incidentModel.setPhotos_available(incidentReportObject.get("photo_option").toString());
-        incidentModel.setWandOption(incidentReportObject.get("web_report_option").toString());*/
-
         String weatheroption = null;
         switch (rgWeather.getCheckedRadioButtonId()) {
             case R.id.rb_weather_yes:
@@ -1104,65 +994,253 @@ public class IncidentReportsActivity extends BaseActivity {
                 break;
         }
         object.put("weather_option", weatheroption);
-        object.put("incident_option", tvOccurenceDate.getText().toString());
+
+        String typeOption = null;
+        switch (rgType.getCheckedRadioButtonId()) {
+            case R.id.rb_contractor:
+                typeOption = "1";
+                break;
+            case R.id.rb_member:
+                typeOption = "2";
+                break;
+        }
+        object.put("incident_option", typeOption);
+
         object.put("occourance_date", tvOccurenceDate.getText().toString());
-        object.put("incident_location", tvOccurenceDate.getText().toString());
-        object.put("person_post_code", tvOccurenceDate.getText().toString());
-        object.put("injury_type", tvOccurenceDate.getText().toString());
-        object.put("third_party_detail", tvOccurenceDate.getText().toString());
-        object.put("cease_option", tvOccurenceDate.getText().toString());
-        object.put("medical_center", tvOccurenceDate.getText().toString());
-        object.put("weather_conditions", tvOccurenceDate.getText().toString());
-        object.put("breakdown_agency", tvOccurenceDate.getText().toString());
-        object.put("person_sur_name", tvOccurenceDate.getText().toString());
-        object.put("person_first_name", tvOccurenceDate.getText().toString());
-        object.put("same_occourance", tvOccurenceDate.getText().toString());
-        object.put("third_party_option", tvOccurenceDate.getText().toString());
-        object.put("first_aid_option", tvOccurenceDate.getText().toString());
-        object.put("person_state", tvOccurenceDate.getText().toString());
-        object.put("person_gender_option", tvOccurenceDate.getText().toString());
-        object.put("eyewear_type", tvOccurenceDate.getText().toString());
-        object.put("witness_statement", tvOccurenceDate.getText().toString());
-        object.put("person_drug_option", tvOccurenceDate.getText().toString());
-        object.put("other_mechanism", tvOccurenceDate.getText().toString());
-        object.put("person_address", tvOccurenceDate.getText().toString());
-        object.put("damage_type", tvOccurenceDate.getText().toString());
-        object.put("date_attended", tvOccurenceDate.getText().toString());
-        object.put("additional_comments", tvOccurenceDate.getText().toString());
-        object.put("footwear_type", tvOccurenceDate.getText().toString());
-        object.put("incident_report_date", tvOccurenceDate.getText().toString());
-        object.put("vehicle_damage_detail", tvOccurenceDate.getText().toString());
-        object.put("affected_person_detail", tvOccurenceDate.getText().toString());
-        object.put("attendee_name", tvOccurenceDate.getText().toString());
-        object.put("injury_mechanism", tvOccurenceDate.getText().toString());
-        object.put("cctv_option", tvOccurenceDate.getText().toString());
-        object.put("other_breakdown_agency", tvOccurenceDate.getText().toString());
-        object.put("body_location", tvOccurenceDate.getText().toString());
-        object.put("carrying_type", tvOccurenceDate.getText().toString());
-        object.put("incident_report_person", tvOccurenceDate.getText().toString());
-        object.put("warning_sign_option", tvOccurenceDate.getText().toString());
-        object.put("affected_person_option", tvOccurenceDate.getText().toString());
-        object.put("person_occupation", tvOccurenceDate.getText().toString());
-        object.put("injury_mark", tvOccurenceDate.getText().toString());
-        object.put("ambulance_attend_option", tvOccurenceDate.getText().toString());
-        object.put("injury_illness", tvOccurenceDate.getText().toString());
-        object.put("what_you_see", tvOccurenceDate.getText().toString());
-        object.put("person_birth_date", tvOccurenceDate.getText().toString());
-        object.put("wet_weather_option", tvOccurenceDate.getText().toString());
-        object.put("attended_person_option", tvOccurenceDate.getText().toString());
-        object.put("event_desc_desc", tvOccurenceDate.getText().toString());
-        object.put("reported_date", tvOccurenceDate.getText().toString());
-        object.put("person_mobile_phone", tvOccurenceDate.getText().toString());
-        object.put("property_damage_option", tvOccurenceDate.getText().toString());
-        object.put("ambulance_who", tvOccurenceDate.getText().toString());
-        object.put("cease_date", tvOccurenceDate.getText().toString());
-        object.put("first_aid_name", tvOccurenceDate.getText().toString());
-        object.put("action_taken", tvOccurenceDate.getText().toString());
-        object.put("incident_desc", tvOccurenceDate.getText().toString());
-        object.put("person_workplace_name", tvOccurenceDate.getText().toString());
-        object.put("event_type", tvOccurenceDate.getText().toString());
-        object.put("photo_option", tvOccurenceDate.getText().toString());
-        object.put("web_report_option", tvOccurenceDate.getText().toString());
+        object.put("incident_location", etIncident.getText().toString());
+        object.put("person_post_code", etPostcode.getText().toString());
+        object.put("injury_type", etInjury.getText().toString());
+        object.put("third_party_detail", etThirdReport.getText().toString());
+
+        String ceaseOption = null;
+        switch (rgCeased.getCheckedRadioButtonId()) {
+            case R.id.rb_ceased_yes:
+                ceaseOption = "1";
+                break;
+            case R.id.rb_ceased_no:
+                ceaseOption = "2";
+                break;
+        }
+        object.put("cease_option", ceaseOption);
+        object.put("medical_center", etMedCenter.getText().toString());
+        object.put("weather_conditions", etWeatherCond.getText().toString());
+//        object.put("breakdown_agency", tvOccurenceDate.getText().toString());
+        object.put("person_sur_name", etSurname.getText().toString());
+        object.put("person_first_name", etFirstname.getText().toString());
+
+        String sameOcc = null;
+        switch (rgOccurence.getCheckedRadioButtonId()) {
+            case R.id.rb_occ_yes:
+                sameOcc = "1";
+                break;
+            case R.id.rb_occ_no:
+                sameOcc = "2";
+                break;
+        }
+        object.put("same_occourance", sameOcc);
+
+        String thirdOption =  null;
+        switch (rgThirdParty.getCheckedRadioButtonId()) {
+            case R.id.rb_third_yes:
+                thirdOption = "1";
+                break;
+            case R.id.rb_third_no:
+                thirdOption = "2";
+                break;
+        }
+
+        object.put("third_party_option", thirdOption);
+
+        String firstAidOption = null;
+        switch (rgFirstAid.getCheckedRadioButtonId()) {
+            case R.id.rb_aid_yes:
+                firstAidOption = "1";
+                break;
+            case R.id.rb_aid_no:
+                firstAidOption = "1";
+                break;
+        }
+        object.put("first_aid_option", firstAidOption);
+        object.put("person_state", etState.getText().toString());
+
+        String genderOption = null;
+        switch (rgGender.getCheckedRadioButtonId()) {
+            case R.id.rb_male:
+                genderOption = "1";
+                break;
+            case R.id.rb_female:
+                genderOption = "2";
+                break;
+        }
+
+        object.put("person_gender_option", genderOption);
+        object.put("eyewear_type", etEyewear.getText().toString());
+        object.put("witness_statement", etNotes.getText().toString());
+
+        String drugOption =  null;
+        switch (rgDrugAffect.getCheckedRadioButtonId()) {
+            case R.id.rb_drug_yes:
+                drugOption = "1";
+                break;
+            case R.id.rb_drug_no:
+                drugOption = "2";
+                break;
+        }
+
+        object.put("person_drug_option", drugOption);
+        object.put("other_mechanism", etOthers.getText().toString());
+        object.put("person_address", etAddres.getText().toString());
+        object.put("damage_type", etDamageAdv.getText().toString());
+        object.put("date_attended", etDateAtten.getText().toString());
+        object.put("additional_comments", etComment.getText().toString());
+        object.put("footwear_type", etFootwear.getText().toString());
+        object.put("incident_report_date", etAmbDate.getText().toString());
+        object.put("vehicle_damage_detail", etDamageVeh.getText().toString());
+        object.put("affected_person_detail", etAffected.getText().toString());
+        object.put("attendee_name", etName.getText().toString());
+        object.put("injury_mechanism", etMechanism.getText().toString());
+
+        String cctvOption = null;
+        switch (rgCctv.getCheckedRadioButtonId()) {
+            case R.id.rb_cctv_yes:
+                cctvOption = "1";
+                break;
+            case R.id.rb_cctv_no:
+                cctvOption = "2";
+                break;
+        }
+        object.put("cctv_option", cctvOption);
+
+//        object.put("other_breakdown_agency", tvOccurenceDate.getText().toString());
+        object.put("body_location", etBodily.getText().toString());
+        object.put("carrying_type", etCarrying.getText().toString());
+        object.put("incident_report_person", etAmbPerName.getText().toString());
+//        object.put("warning_sign_option", tvOccurenceDate.getText().toString());
+
+        String affectedPersonOption = null;
+        switch (rgIncidentSpecs.getCheckedRadioButtonId()) {
+            case R.id.rb_crunches:
+                affectedPersonOption = "1";
+                break;
+            case R.id.rb_stick:
+                affectedPersonOption = "2";
+                break;
+            case R.id.rb_frame:
+                affectedPersonOption = "3";
+                break;
+            case R.id.rb_wheelchair:
+                affectedPersonOption = "4";
+                break;
+            case R.id.rb_motorised:
+                affectedPersonOption = "5";
+                break;
+        }
+        object.put("affected_person_option", affectedPersonOption);
+        object.put("person_occupation", etOccupation.getText().toString());
+        object.put("injury_mark", etMark.getText().toString());
+
+        String ambAttendOption = null;
+        switch (rgAmbulance.getCheckedRadioButtonId()) {
+            case R.id.rb_amb_yes:
+                ambAttendOption ="1";
+                break;
+            case R.id.rb_amb_no:
+                ambAttendOption ="2";
+                break;
+        }
+
+        object.put("ambulance_attend_option", ambAttendOption);
+        object.put("injury_illness", etInjuryDetail.getText().toString());
+        object.put("what_you_see", etObserve.getText().toString());
+        object.put("person_birth_date", etBirthday.getText().toString());
+
+        String wetWetherOption = null;
+        switch (rgWetWeather.getCheckedRadioButtonId()) {
+            case R.id.rb_wet_yes:
+                wetWetherOption ="1";
+                break;
+            case R.id.rb_wet_no:
+                wetWetherOption ="2";
+                break;
+        }
+
+        object.put("wet_weather_option", wetWetherOption);
+
+        String attendPersonOption =  null;
+        switch (rgAttendAffe.getCheckedRadioButtonId()) {
+            case R.id.rb_attend_yes:
+                attendPersonOption =  "1";
+                break;
+            case R.id.rb_attend_no:
+                attendPersonOption =  "2";
+                break;
+        }
+
+        object.put("attended_person_option", attendPersonOption);
+        object.put("event_desc_desc", etDescription.getText().toString());
+        object.put("reported_date", tvReportTimeValue.getText().toString());
+        object.put("person_mobile_phone", etMobileNo.getText().toString());
+
+        String damageOption =  null;
+        switch (rgPropDamage.getCheckedRadioButtonId()) {
+            case R.id.rb_damage_yes:
+                damageOption = "1";
+                break;
+            case R.id.rb_damage_no:
+                damageOption = "2";
+                break;
+        }
+
+        object.put("property_damage_option", damageOption);
+        object.put("ambulance_who", etAmbReq.getText().toString());
+        object.put("cease_date", tvCeasedTimeValue.getText().toString());
+        object.put("first_aid_name", etAidName.getText().toString());
+        object.put("action_taken", etAction.getText().toString());
+        object.put("incident_desc", etBrief.getText().toString());
+        object.put("person_workplace_name", etWorkplace.getText().toString());
+
+        String eventTypeOption =  null;
+        switch (rgEventClass.getCheckedRadioButtonId()) {
+            case R.id.rb_miss:
+                eventTypeOption = "1";
+                break;
+            case R.id.rb_incident:
+                eventTypeOption = "2";
+                break;
+            case R.id.rb_hazard:
+                eventTypeOption = "3";
+                break;
+            case R.id.rb_contact:
+                eventTypeOption = "4";
+                break;
+            case R.id.rb_issue:
+                eventTypeOption = "5";
+                break;
+        }
+        object.put("event_type", eventTypeOption);
+
+        String photosOption = null;
+        switch (rgPhotos.getCheckedRadioButtonId()) {
+            case R.id.rb_photos_yes:
+                photosOption ="1";
+                break;
+            case R.id.rb_photos_no:
+                photosOption ="2";
+                break;
+        }
+
+        object.put("photo_option", photosOption);
+
+        String wandOption = null;
+        switch (rgWandReport.getCheckedRadioButtonId()) {
+            case R.id.rb_wand_yes:
+                wandOption = "1";
+                break;
+            case R.id.rb_wand_no:
+                wandOption = "2";
+                break;
+        }
+        object.put("web_report_option", wandOption);
 
 
         object.saveInBackground(new SaveCallback() {
