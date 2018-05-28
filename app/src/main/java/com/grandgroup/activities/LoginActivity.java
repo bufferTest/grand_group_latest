@@ -97,7 +97,6 @@ public class LoginActivity extends BaseActivity {
                     AppPrefrence.init(mContext).putString(AppConstant.USER_NAME, etUserName.getText().toString());
                     AppPrefrence.init(mContext).putString(AppConstant.USER_PSWD, etPswd.getText().toString());
                 }
-
                 loginUser();
                 break;
 
@@ -117,7 +116,8 @@ public class LoginActivity extends BaseActivity {
                                     if (e == null) {
                                         Toast.makeText(mContext,"Reset password link has been sent to your email.",Toast.LENGTH_LONG).show();
                                     } else {
-                                        // Something went wrong. Look at the ParseException to see what's up.
+                                        Toast.makeText(mContext,"Something went wrong.",Toast.LENGTH_LONG).show();
+
                                     }
                                 }
                             });

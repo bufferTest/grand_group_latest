@@ -412,8 +412,6 @@ public class IncidentReportsActivity extends BaseActivity {
         ButterKnife.bind(mContext);
         tvTitle.setText("Incident Report");
         if (getIntent().getSerializableExtra("incidentModel") != null) {
-            btnEmail.setVisibility(View.GONE);
-            btnSave.setVisibility(View.GONE);
             incidentReportObject = (IncidentModel) getIntent().getSerializableExtra("incidentModel");
             etAffected.setText(incidentReportObject.getEffected_person_detail());
             tvOccurenceValue.setText(incidentReportObject.getOccourance_date());
@@ -640,6 +638,10 @@ public class IncidentReportsActivity extends BaseActivity {
             etEyewear.setText(incidentReportObject.getEyewear_type());
             etCarrying.setText(incidentReportObject.getCarring_type());
             etComment.setText(incidentReportObject.getAdditional_comments());
+//        setRadioButton(rgIncidentSpecs,incidentReportObject.inci);
+//        etNotes.setText(incidentReportObject.ge);
+            setsignatures(incidentReportObject.getFirst_aid_signature(),ivImage);
+            setsignatures(incidentReportObject.getIncident_report_person_signature(),ivAmbPerSign);
             etNotes.setText(incidentReportObject.getWitness_statement());
             setsignatures(incidentReportObject.getFirst_aid_signature(), ivImage);
             setsignatures(incidentReportObject.getIncident_report_person_signature(), ivAmbPerSign);

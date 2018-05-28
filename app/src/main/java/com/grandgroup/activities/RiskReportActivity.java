@@ -34,9 +34,11 @@ import com.grandgroup.utills.CommonUtils;
 import com.grandgroup.utills.PermissionUtils;
 import com.grandgroup.views.CustomDateDialog;
 import com.grandgroup.views.CustomTimeDialog;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
@@ -59,7 +61,7 @@ import static com.grandgroup.utills.AppConstant.SIGNATRUE_REQUEST;
 import static com.grandgroup.utills.AppConstant.WRITE_PERMISSIONS_REQUEST;
 
 public class RiskReportActivity extends AppCompatActivity {
-    private RiskReportModel riskReportObject;
+    private RiskReportModel riskReportObjectModel;
     private Bitmap signBitmap = null, photoOfHazardBitmap;
 
     @BindView(R.id.tv_title)
@@ -161,19 +163,17 @@ public class RiskReportActivity extends AppCompatActivity {
         controlEffectivenessArray.add("Good");
         controlEffectivenessArray.add("Effective");
         if (getIntent().getSerializableExtra("riskReportObject") != null) {
-            btnSave.setVisibility(View.GONE);
-            btnEmail.setVisibility(View.GONE);
-            riskReportObject = (RiskReportModel) getIntent().getSerializableExtra("riskReportObject");
-            tvReportDesc.setText(riskReportObject.getRisk_description());
-            tv_event_date.setText(riskReportObject.getRisk_date());
-            etLocation.setText(riskReportObject.getRisk_location());
-            tvSelectedLikelihood.setText(riskReportObject.getRisk_likelihood());
-            tv_select_consq.setText(riskReportObject.getRisk_consequence());
-            etControls.setText(riskReportObject.getRisk_control());
-            et_control_eff.setText(riskReportObject.getRisk_control_effectiveness());
-            etActionPlan.setText(riskReportObject.getRisk_action_plan());
-            etReportedBy.setText(riskReportObject.getRisk_reported_by());
-            Glide.with(mContext).load(riskReportObject.getSignature_file())
+            riskReportObjectModel = (RiskReportModel) getIntent().getSerializableExtra("riskReportObject");
+            tvReportDesc.setText(riskReportObjectModel.getRisk_description());
+            tv_event_date.setText(riskReportObjectModel.getRisk_date());
+            etLocation.setText(riskReportObjectModel.getRisk_location());
+            tvSelectedLikelihood.setText(riskReportObjectModel.getRisk_likelihood());
+            tv_select_consq.setText(riskReportObjectModel.getRisk_consequence());
+            etControls.setText(riskReportObjectModel.getRisk_control());
+            et_control_eff.setText(riskReportObjectModel.getRisk_control_effectiveness());
+            etActionPlan.setText(riskReportObjectModel.getRisk_action_plan());
+            etReportedBy.setText(riskReportObjectModel.getRisk_reported_by());
+            Glide.with(mContext).load(riskReportObjectModel.getSignature_file())
                     .apply(new RequestOptions()
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .placeholder(R.drawable.default_user)
@@ -182,7 +182,7 @@ public class RiskReportActivity extends AppCompatActivity {
                             .centerCrop()
                             .dontTransform()).into(ivSignature);
 
-            Glide.with(mContext).load(riskReportObject.getRisk_file())
+            Glide.with(mContext).load(riskReportObjectModel.getRisk_file())
                     .apply(new RequestOptions()
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .placeholder(R.drawable.default_user)
@@ -263,10 +263,6 @@ public class RiskReportActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.btn_save:
-               /* if (PermissionUtils.requestPermission(mContext, SAVE_PERMISSIONS_REQUEST, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    Uri uri = CommonUtils.getInstance().createPdf(lay_screenshot, "Risk_Report_Form");
-                    Toast.makeText(mContext, "Form Saved Successfully", Toast.LENGTH_SHORT).show();
-                }*/
                 uploaddata();
                 break;
             case R.id.iv_signature:
@@ -385,19 +381,44 @@ public class RiskReportActivity extends AppCompatActivity {
     }
     private class AsyncTaskRunner extends AsyncTask<Void, Void, Void> {
         ParseObject riskReportObject = new ParseObject("RiskReport");
-
         @Override
         protected void onPostExecute(Void aVoid) {
-            riskReportObject.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    CallProgressWheel.dismissLoadingDialog();
-                    if (e == null)
-                        Toast.makeText(getApplicationContext(), "Report form saved successfully!", Toast.LENGTH_LONG).show();
-                    else
-                        Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
-                }
-            });
+           if(getIntent().getSerializableExtra("riskReportObject") == null) {
+               riskReportObject.saveInBackground(new SaveCallback() {
+                   @Override
+                   public void done(ParseException e) {
+                       CallProgressWheel.dismissLoadingDialog();
+                       if (e == null)
+                           Toast.makeText(getApplicationContext(), "Report form saved successfully!", Toast.LENGTH_LONG).show();
+                       else
+                           Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
+                   }
+               });
+           }
+           else {
+               ParseQuery<ParseObject> query = ParseQuery.getQuery("RiskReport");
+               query.getInBackground(riskReportObjectModel.getObjectId(), new GetCallback<ParseObject>() {
+                   public void done(ParseObject gameScore, ParseException e) {
+                       if (e == null) {
+                           riskReportObject.saveInBackground(new SaveCallback() {
+                               @Override
+                               public void done(ParseException e) {
+                                   CallProgressWheel.dismissLoadingDialog();
+                                   if (e == null)
+                                       Toast.makeText(getApplicationContext(), "Report form saved successfully!", Toast.LENGTH_LONG).show();
+                                   else
+                                       Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
+                               }
+
+                           });
+                       }
+                       else {
+                           Toast.makeText(getApplicationContext(), "Please, Try Again "+e.getMessage(), Toast.LENGTH_LONG).show();
+
+                       }
+                   }
+               });
+           }
         }
 
         @Override

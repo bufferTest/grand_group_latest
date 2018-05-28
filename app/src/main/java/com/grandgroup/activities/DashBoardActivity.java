@@ -47,7 +47,7 @@ public class DashBoardActivity extends AppCompatActivity {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         ButterKnife.bind(this);
         mContext = DashBoardActivity.this;
-        if(AppPrefrence.init(mContext).getBoolean(AppConstant.HAS_SITES))
+        if(!AppPrefrence.init(mContext).getBoolean(AppConstant.HAS_SITES))
         getSitesFormParse();
     }
 
@@ -64,6 +64,7 @@ public class DashBoardActivity extends AppCompatActivity {
                             AppPrefrence.init(mContext).putBoolean(AppConstant.HAS_SITES,true);
                             for (int i = 0; i < notifications.size(); i++) {
                                 SiteModel siteModel = new SiteModel();
+                                siteModel.setObjectId(notifications.get(i).getObjectId());
                                 siteModel.setSite_address(notifications.get(i).get("site_address").toString());
                                 siteModel.setSite_detail(notifications.get(i).get("site_detail").toString());
                                 siteModel.setSite_location(notifications.get(i).getParseGeoPoint("site_location"));
