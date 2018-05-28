@@ -209,6 +209,8 @@ public class ReportActivity extends BaseActivity implements AdapterView.OnItemSe
                             incidentModel.setPerson_workplace_name(incidentReportObject.get("person_workplace_name").toString());
                             incidentModel.setEvent_type(incidentReportObject.get("event_type").toString());
                             incidentModel.setCease_date(incidentReportObject.get("cease_date").toString());
+                            incidentModel.setPhotos_available(incidentReportObject.get("photo_option").toString());
+
 
                             ParseFile firstAidSign = incidentReportObject.getParseFile("first_aid_signature");
                             ParseFile inci_repo_person_sign = incidentReportObject.getParseFile("incident_report_person_signature");

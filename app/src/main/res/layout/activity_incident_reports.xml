@@ -41,6 +41,7 @@
                     android:text="Affected Person Details:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,6 +54,7 @@
                     android:imeOptions="actionDone"
                     android:maxLines="1"
                     android:padding="8dp"
+                    android:textSize="@dimen/_11ssp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -68,6 +70,7 @@
                     android:text="Type:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_affected" />
@@ -86,12 +89,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
                         android:text="@string/contract_provider" />
 
                     <RadioButton
                         android:id="@+id/rb_member"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/member_visitor" />
 
@@ -106,6 +111,7 @@
                     android:text="Affected Person Details:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_type" />
 
@@ -118,6 +124,7 @@
                     android:hint="@string/select_date_time"
                     android:maxLines="1"
                     android:padding="8dp"
+                    android:textSize="@dimen/_11ssp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -130,9 +137,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Type:"
+                    android:text="Ceased Work same as Occurrence date &amp; time?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_occurence_value" />
@@ -150,6 +158,7 @@
                         android:id="@+id/rb_ceased_yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/yes" />
 
@@ -157,6 +166,7 @@
                         android:id="@+id/rb_ceased_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/no" />
 
@@ -168,6 +178,7 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="12dp"
                     android:text="Ceased Work Date:"
+                    android:textSize="@dimen/_12ssp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
@@ -182,6 +193,7 @@
                     android:hint="@string/select_date_time"
                     android:maxLines="1"
                     android:padding="8dp"
+                    android:textSize="@dimen/_11ssp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -196,6 +208,7 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="12dp"
                     android:text="Reported Date / Time:"
+                    android:textSize="@dimen/_12ssp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
@@ -210,6 +223,7 @@
                     android:hint="@string/select_date_time"
                     android:maxLines="1"
                     android:padding="8dp"
+                    android:textSize="@dimen/_11ssp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -222,9 +236,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Type:"
+                    android:text="Same as occurence date?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_report_time_value" />
@@ -242,6 +257,7 @@
                         android:id="@+id/rb_occ_yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/yes" />
 
@@ -249,6 +265,7 @@
                         android:id="@+id/rb_occ_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/no" />
 
@@ -261,6 +278,7 @@
                     android:layout_margin="8dp"
                     android:text="First Name:"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
@@ -275,9 +293,9 @@
                     android:background="@drawable/boundary"
                     android:hint="First Name"
                     android:padding="8dp"
+                    android:textSize="@dimen/_11ssp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_first_name" />
@@ -289,6 +307,7 @@
                     android:layout_margin="8dp"
                     android:text="Surname:"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
@@ -303,9 +322,9 @@
                     android:background="@drawable/boundary"
                     android:hint="surname"
                     android:padding="8dp"
+                    android:textSize="@dimen/_11ssp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_surname" />
@@ -318,6 +337,7 @@
                     android:text="Gender:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_surname" />
@@ -335,6 +355,7 @@
                         android:id="@+id/rb_male"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/yes" />
 
@@ -342,26 +363,28 @@
                         android:id="@+id/rb_female"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/no" />
 
                 </RadioGroup>
 
                 <TextView
-                    android:id="@+id/tv_address"
+                    android:id="@+id/tv_home_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:text="Home Address:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rg_gender" />
 
                 <EditText
-                    android:id="@+id/et_address"
+                    android:id="@+id/et_home_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -369,14 +392,14 @@
                     android:hint="enter home address"
                     android:lines="3"
                     android:maxLines="3"
+                    android:textSize="@dimen/_11ssp"
                     android:padding="8dp"
                     android:gravity="top"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_address" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_home_address" />
 
                 <TextView
                     android:id="@+id/tv_state"
@@ -386,10 +409,11 @@
                     android:text="State:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_address" />
+                    app:layout_constraintTop_toBottomOf="@+id/et_home_address" />
 
                 <EditText
                     android:id="@+id/et_state"
@@ -401,7 +425,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_state" />
@@ -414,6 +438,7 @@
                     android:text="Postcode:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -429,7 +454,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_postcode" />
@@ -442,6 +467,7 @@
                     android:text="Home Phone Number:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -457,7 +483,7 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_home_phone" />
@@ -743,6 +769,7 @@
                     android:lines="4"
                     android:maxLines="4"
                     android:padding="8dp"
+                    android:gravity="top"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
                     android:textSize="14sp"
@@ -1154,6 +1181,7 @@
                     android:gravity="top"
                     android:hint="enter vehicle damage"
                     android:lines="3"
+                    android:inputType="text"
                     android:maxLines="3"
                     android:padding="8dp"
                     android:textColor="@android:color/black"
@@ -1617,10 +1645,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:hint="@string/complete_note"
+                    android:text="@string/complete_note"
                     android:padding="8dp"
+                    android:textStyle="bold"
+                    android:textIsSelectable="false"
                     android:textColor="@color/colorPrimary"
-                    android:textColorHint="@android:color/darker_gray"
                     android:textSize="14sp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
@@ -1631,7 +1660,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Type:"
+                    android:text="Was wear a factor?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
@@ -1698,7 +1727,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Did this person appear to be affected by drugs or alcohal?"
+                    android:text="Did this person appear to be affected by drugs or alcohol?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
