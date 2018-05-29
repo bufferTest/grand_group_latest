@@ -142,7 +142,7 @@ public class LoginActivity extends BaseActivity {
                     SnackbarUtil.showWarningShortSnackbarTopDialog(dialog, getResources().getString(R.string.forgot_email_empty_text));
                 } else {
                     CallProgressWheel.showLoadingDialog(mContext);
-                    ParseUser.requestPasswordResetInBackground(etUserName.getText().toString(),
+                    ParseUser.requestPasswordResetInBackground(email,
                             new RequestPasswordResetCallback() {
                                 public void done(ParseException e) {
                                     if (e == null) {
