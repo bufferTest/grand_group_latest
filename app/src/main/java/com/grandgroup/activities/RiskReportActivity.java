@@ -339,7 +339,7 @@ public class RiskReportActivity extends AppCompatActivity {
                     startCamera();
                 }
             case GALLERY_PERMISSIONS_REQUEST:
-                if (PermissionUtils.permissionGranted(requestCode, CAMERA_PERMISSIONS_REQUEST, grantResults)) {
+                if (PermissionUtils.permissionGranted(requestCode, GALLERY_PERMISSIONS_REQUEST, grantResults)) {
                     GalleryIntent();
                 }
                 break;

@@ -7,12 +7,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
@@ -44,11 +42,6 @@ public class GrandGroupHelper {
     public Context context;
     public ProgressDialog progress;
     private List<Address> addresses;
-    public void setContext(Context ctx) {
-
-        context = ctx;
-    }
-
 
     private GrandGroupHelper(Context ctx) {
 
@@ -64,6 +57,14 @@ public class GrandGroupHelper {
         return grandGroupHelper;
     }
 
+    public static String getMonth(int month) {
+        return new DateFormatSymbols().getMonths()[month];
+    }
+
+    public void setContext(Context ctx) {
+
+        context = ctx;
+    }
 
     public String loadJSONFromAsset() {
         String json = null;
@@ -92,6 +93,7 @@ public class GrandGroupHelper {
                 });
         alertDialog.show();
     }
+
     public boolean CheckIsConnectedToInternet() {
         ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
@@ -105,16 +107,15 @@ public class GrandGroupHelper {
         }
         return false;
     }
-    public void noInternet()
-    {
-        Toast.makeText(context,"Sorry, Your device is not connected to internet",
+
+    public void noInternet() {
+        Toast.makeText(context, "Sorry, Your device is not connected to internet",
                 Toast.LENGTH_SHORT).show();
 
     }
 
-
     public void showLoader(Context context) {
-        if(context!= null) {
+        if (context != null) {
             progress = new ProgressDialog(context);
             progress.setMessage("Wait while loading...");
             progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
@@ -123,7 +124,7 @@ public class GrandGroupHelper {
     }
 
     public void showLoader(Context context, String msg) {
-        if(context!= null) {
+        if (context != null) {
             progress = new ProgressDialog(context);
             progress.setMessage(msg);
             progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
@@ -141,8 +142,6 @@ public class GrandGroupHelper {
         }
     }
 
-
-
     public void hideKeyboard(View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
@@ -152,7 +151,7 @@ public class GrandGroupHelper {
     public String fetchHtmlFromAssets(Context context, String filename) {
 
 
-            StringBuilder buf = new StringBuilder();
+        StringBuilder buf = new StringBuilder();
         try {
             InputStream json = context.getAssets().open(filename);
             BufferedReader in =
@@ -162,7 +161,7 @@ public class GrandGroupHelper {
             while ((str = in.readLine()) != null) {
                 buf.append(str);
             }
-         //  newSrng = buf.toString();
+            //  newSrng = buf.toString();
             in.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -170,36 +169,32 @@ public class GrandGroupHelper {
         return buf.toString();
     }
 
-
-
-
-    public String saveToExternalStorage(Bitmap bitmapImage, String filename){
+    public String saveToExternalStorage(Bitmap bitmapImage, String filename) {
         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Dir";
         File dir = new File(path);
-        if(!dir.exists())
+        if (!dir.exists())
             dir.mkdirs();
-        try{
-        OutputStream file = new FileOutputStream(new File(path + File.separator + filename));
+        try {
+            OutputStream file = new FileOutputStream(new File(path + File.separator + filename));
             // Use the compress method on the BitMap object to write image to the OutputStream
             bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, file);
 
             file.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return dir.getAbsolutePath();
 
 
     }
 
-    private String savetoInternalStorage(Bitmap bitmapImage, String imgName)
-    {
+    private String savetoInternalStorage(Bitmap bitmapImage, String imgName) {
         ContextWrapper cw = new ContextWrapper(context.getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
         // Create imageDir
-        File mypath=new File(directory,imgName);
+        File mypath = new File(directory, imgName);
 
         FileOutputStream fos = null;
         try {
@@ -208,12 +203,12 @@ public class GrandGroupHelper {
             bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
 
             fos.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return directory.getAbsolutePath();
     }
+
     public String getLocationFormLatLong(Context context, Double latitude, Double longitude) {
         try {
             Geocoder geocoder = new Geocoder(context, Locale.getDefault());
@@ -230,7 +225,6 @@ public class GrandGroupHelper {
             return "";
     }
 
-
     public String convertMillisToHours(long millis) {
         @SuppressLint("DefaultLocale") String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
                 TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
@@ -238,7 +232,7 @@ public class GrandGroupHelper {
         return hms;
     }
 
-    public long convertHoursToMillis( String hours) {
+    public long convertHoursToMillis(String hours) {
         String[] tokens = hours.split(":");
         int secondsToMs = Integer.parseInt(tokens[2]) * 1000;
         int minutesToMs = Integer.parseInt(tokens[1]) * 60000;
@@ -246,63 +240,65 @@ public class GrandGroupHelper {
         return secondsToMs + minutesToMs + hoursToMs;
     }
 
-
     public boolean isEmailValid(CharSequence email) {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
-    public String getCurrentDate(){
+
+    public String getCurrentDate() {
         Calendar calendar = Calendar.getInstance();
         String selectedDateForSever = new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
         return selectedDateForSever;
     }
-    public String getCurrentTime(){
+
+    public String getCurrentTime() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);
     }
+
     public void loadImagesAsset() {
 
-            AssetManager assetManager = context.getAssets();
-            String[] files = null;
-            try {
-                files = assetManager.list("");
-            } catch (IOException e) {
-            }
+        AssetManager assetManager = context.getAssets();
+        String[] files = null;
+        try {
+            files = assetManager.list("");
+        } catch (IOException e) {
+        }
 
-            for (String filename : files) {
-                if (filename.endsWith("png")) {
-                    InputStream in = null;
-                    OutputStream out = null;
-                    try {
-                        in = assetManager.open(filename);
-                        File outFile = new File(context.getExternalFilesDir(null), filename);
-                        System.out.println("OUTPUT PATH IS "+outFile);
-                        out = new FileOutputStream(outFile);
-                        copyFile(in, out);
+        for (String filename : files) {
+            if (filename.endsWith("png")) {
+                InputStream in = null;
+                OutputStream out = null;
+                try {
+                    in = assetManager.open(filename);
+                    File outFile = new File(context.getExternalFilesDir(null), filename);
+                    System.out.println("OUTPUT PATH IS " + outFile);
+                    out = new FileOutputStream(outFile);
+                    copyFile(in, out);
 
-                    } catch (IOException e) {
-                        Log.e("tag", "Failed to copy asset file: " + filename, e);
-                    } finally {
-                        if (in != null) {
-                            try {
-                                in.close();
-                            } catch (IOException e) {
-                                // NOOP
-                            }
+                } catch (IOException e) {
+                    Log.e("tag", "Failed to copy asset file: " + filename, e);
+                } finally {
+                    if (in != null) {
+                        try {
+                            in.close();
+                        } catch (IOException e) {
+                            // NOOP
                         }
-                        if (out != null) {
-                            try {
-                                out.close();
-                            } catch (IOException e) {
-                                // NOOP
-                            }
+                    }
+                    if (out != null) {
+                        try {
+                            out.close();
+                        } catch (IOException e) {
+                            // NOOP
                         }
                     }
                 }
             }
+        }
     }
 
-    public float getDistance(){
+    public float getDistance() {
         float distanceInMeters = 550;
        /* Location loc1 = new Location("");
         loc1.setLatitude(latitude);
@@ -317,7 +313,7 @@ public class GrandGroupHelper {
 
             }
         }*/
-            return distanceInMeters;
+        return distanceInMeters;
     }
 
     public void copyFile(InputStream in, OutputStream out) throws IOException {
@@ -327,10 +323,6 @@ public class GrandGroupHelper {
             out.write(buffer, 0, read);
 
         }
-    }
-
-    public static String getMonth(int month) {
-        return new DateFormatSymbols().getMonths()[month];
     }
 
 }
