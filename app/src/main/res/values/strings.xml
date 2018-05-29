@@ -45,7 +45,7 @@
     <string name="ensure_note">Please ensure that the following is included with all incident reports\n\nPhotos(not just screen shots of footage)\n\nCCTV footage - 30 minutes before and prior to the incident\n\nthird party Incident reports\n\nwitness statements</string>
     <string name="site_checkin_error_msg">Sorry, you are out of geofence radius. Please move closer to site location and try again.</string>
 
+    <!--forgot password dialog-->
     <string name="fields_error_message">Field can not be empty</string>
     <string name="forgot_email_empty_text">Please Enter Valid Email</string>
-
 </resources>

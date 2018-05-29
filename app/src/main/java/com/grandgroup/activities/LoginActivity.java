@@ -26,7 +26,6 @@ import com.grandgroup.utills.AppPrefrence;
 import com.grandgroup.utills.CallProgressWheel;
 import com.grandgroup.utills.CommonUtils;
 import com.grandgroup.utills.SnackbarUtil;
-import com.grandgroup.views.CustomTextView;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -93,9 +92,9 @@ public class LoginActivity extends BaseActivity {
                 String email = etUserName.getText().toString();
                 String password = etPswd.getText().toString();
                 if (CommonUtils.getInstance().isEmpty(email))
-                    SnackbarUtil.showWarningShortSnackbar(mContext,"Please enter email");
-                else if(CommonUtils.getInstance().isEmpty(password))
-                    SnackbarUtil.showWarningShortSnackbar(mContext,"Please enter Password");
+                    SnackbarUtil.showWarningShortSnackbar(mContext, "Please enter email");
+                else if (CommonUtils.getInstance().isEmpty(password))
+                    SnackbarUtil.showWarningShortSnackbar(mContext, "Please enter Password");
                 else {
                     if (cbRememberMe.isChecked()) {
                         AppPrefrence.init(mContext).putBoolean(AppConstant.IS_REMEMBERED, true);
