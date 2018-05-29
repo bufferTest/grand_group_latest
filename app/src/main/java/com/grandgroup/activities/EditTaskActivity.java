@@ -25,27 +25,12 @@ public class EditTaskActivity extends AppCompatActivity {
     TextView tvTitle;
     @BindView(R.id.tv_event_date)
     TextView tvEventDate;
-    @BindView(R.id.btn_back)
-    Button btnBack;
-    @BindView(R.id.btn_add)
-    Button btnAdd;
-    @BindView(R.id.my_toolbar)
-    RelativeLayout myToolbar;
-    @BindView(R.id.tv_event_date_title)
-    TextView tvEventDateTitle;
-    @BindView(R.id.tv_event_name_title)
-    TextView tvEventNameTitle;
     @BindView(R.id.et_event_name)
     EditText etEventName;
-    @BindView(R.id.tv_event_desc_title)
-    TextView tvEventDescTitle;
     @BindView(R.id.et_event_desc)
     EditText etEventDesc;
-    @BindView(R.id.btn_save)
-    Button btnSave;
     private AppCompatActivity mContext;
     private EventsModel eventsModel;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
