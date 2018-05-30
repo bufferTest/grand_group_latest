@@ -57,16 +57,15 @@ public class TaskManagerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_manager);
         setInitialData();
-
-        cal.setTimeInMillis(System.currentTimeMillis());
-        year = cal.get(Calendar.YEAR);
-        month = cal.get(Calendar.MONTH);
-        date = cal.get(Calendar.DAY_OF_MONTH);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        cal.setTimeInMillis(System.currentTimeMillis());
+        year = cal.get(Calendar.YEAR);
+        month = cal.get(Calendar.MONTH);
+        date = cal.get(Calendar.DAY_OF_MONTH);
         setUpWeekNames();
         setupcalender();
         setEventsAdapter(month, date, year);

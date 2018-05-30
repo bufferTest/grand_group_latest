@@ -1,4 +1,4 @@
-package com.grandgroup.utills;
+package com.grandgroup.interfaces;
 
 public interface OnClickInterFace {
     void onCorrectPassword(boolean bol);

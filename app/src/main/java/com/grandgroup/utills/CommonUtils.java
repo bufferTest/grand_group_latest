@@ -79,7 +79,7 @@ public class CommonUtils {
     }
 
 
-    public void selectDialog(final AppCompatActivity mContext,ArrayList<String> arrayList,String headingText, final OnClickItem onClickItem ) {
+    public void selectDialog(final AppCompatActivity mContext, ArrayList<String> arrayList, String headingText, final OnClickItem onClickItem) {
 
         final Dialog dialog = new Dialog(mContext);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -160,10 +160,6 @@ public class CommonUtils {
         return Uri.fromFile(filePath);
     }
 
-    public interface OnClickItem {
-        void OnClickItem(String Item);
-    }
-
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pictures");
         if (!file.exists()) {
@@ -173,6 +169,17 @@ public class CommonUtils {
         inImage.compress(Bitmap.CompressFormat.JPEG, 60, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Contact", null);
         return Uri.parse(path);
+    }
+
+    public boolean isEmpty(String data) {
+        if (data.trim().length() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public interface OnClickItem {
+        void OnClickItem(String Item);
     }
 
 }

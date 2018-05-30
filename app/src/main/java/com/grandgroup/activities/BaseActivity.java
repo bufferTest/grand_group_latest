@@ -2,10 +2,10 @@ package com.grandgroup.activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
 
 import com.grandgroup.R;
@@ -15,6 +15,7 @@ import java.util.List;
 
 public class BaseActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST = 101;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,12 @@ public class BaseActivity extends AppCompatActivity {
         this.overridePendingTransition(R.anim.slide_right_out, R.anim.slide_right_in);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        hideKeyboard();
+    }
+
     public void hideKeyboard() {
         try {
             InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
@@ -35,6 +42,7 @@ public class BaseActivity extends AppCompatActivity {
         } catch (Exception e) {
         }
     }
+
     // Check Run Timer Permissions
     public boolean checkForPermission() {
         int permissionCAMERA = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
@@ -57,7 +65,7 @@ public class BaseActivity extends AppCompatActivity {
         }
         if (!listPermissionsNeeded.isEmpty()) {
             ActivityCompat.requestPermissions(this,
-                    listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),MY_PERMISSIONS_REQUEST);
+                    listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), MY_PERMISSIONS_REQUEST);
             return false;
         }
 

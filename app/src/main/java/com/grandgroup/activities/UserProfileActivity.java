@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,8 @@ import com.grandgroup.model.UserProfileBean;
 import com.grandgroup.utills.AppConstant;
 import com.grandgroup.utills.AppPrefrence;
 import com.grandgroup.utills.CallProgressWheel;
+import com.grandgroup.utills.CommonUtils;
+import com.grandgroup.utills.PermissionUtils;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -43,6 +46,13 @@ import java.io.ByteArrayOutputStream;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.grandgroup.utills.AppConstant.CAMERA_PERMISSIONS_REQUEST;
+import static com.grandgroup.utills.AppConstant.CAMERA_REQUEST;
+import static com.grandgroup.utills.AppConstant.GALLERY_PERMISSIONS_REQUEST;
+import static com.grandgroup.utills.AppConstant.GALLERY_REQUEST;
+import static com.grandgroup.utills.AppConstant.SAVE_PERMISSIONS_REQUEST;
+import static com.grandgroup.utills.AppConstant.WRITE_PERMISSIONS_REQUEST;
 
 public class UserProfileActivity extends BaseActivity {
     @BindView(R.id.tv_title)
@@ -119,15 +129,12 @@ public class UserProfileActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int item) {
                         if (options[item].equals("Take Photo")) {
-                            if (checkPermissionCamera()) {
-                                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                                cameraIntent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                                startActivityForResult(cameraIntent, 1);
+                            if (PermissionUtils.requestPermission(mContext, CAMERA_PERMISSIONS_REQUEST, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)) {
+                                startCamera();
                             }
                         } else if (options[item].equals("Choose from Gallery")) {
-                            if (checkPermission()) {
-                                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                                startActivityForResult(intent, 2);
+                            if (PermissionUtils.requestPermission(mContext, GALLERY_PERMISSIONS_REQUEST, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                                GalleryIntent();
                             }
 
                         } else if (options[item].equals("Cancel")) {
@@ -138,36 +145,31 @@ public class UserProfileActivity extends BaseActivity {
         builder.show();
     }
 
-    private boolean checkPermission() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                Log.v("Test", "Permission is granted");
-                return true;
-            } else {
-                Log.v("Test", "Permission is revoked");
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                return true;
-            }
-        } else {
-            Log.v("Test", "Permission is granted");
-            return true;
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case CAMERA_PERMISSIONS_REQUEST:
+                if (PermissionUtils.permissionGranted(requestCode, CAMERA_PERMISSIONS_REQUEST, grantResults)) {
+                    startCamera();
+                }
+            case GALLERY_PERMISSIONS_REQUEST:
+                if (PermissionUtils.permissionGranted(requestCode, GALLERY_PERMISSIONS_REQUEST, grantResults)) {
+                    GalleryIntent();
+                }
+                break;
         }
     }
 
-    private boolean checkPermissionCamera() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                Log.v("Test", "Permission is granted");
-                return true;
-            } else {
-                Log.v("Test", "Permission is revoked");
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                return false;
-            }
-        } else {
-            Log.v("Test", "Permission is granted");
-            return true;
-        }
+    private void startCamera() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+    }
+
+    private void GalleryIntent() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, GALLERY_REQUEST);
     }
 
     @Override

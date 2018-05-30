@@ -13,9 +13,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.grandgroup.R;
-import com.grandgroup.model.NotificationsModel;
 import com.grandgroup.model.SiteModel;
-import com.grandgroup.model.UserProfileBean;
 import com.grandgroup.utills.AppConstant;
 import com.grandgroup.utills.AppPrefrence;
 import com.grandgroup.utills.CallProgressWheel;
@@ -35,7 +33,8 @@ import butterknife.OnClick;
 
 public class DashBoardActivity extends AppCompatActivity {
     private AppCompatActivity mContext;
-    private ArrayList<SiteModel> sitesList =  new ArrayList<>();
+    private ArrayList<SiteModel> sitesList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +44,12 @@ public class DashBoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dash_board);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        ButterKnife.bind(this);
+
         mContext = DashBoardActivity.this;
-        if(!AppPrefrence.init(mContext).getBoolean(AppConstant.HAS_SITES))
-        getSitesFormParse();
+        ButterKnife.bind(mContext);
+
+        if (!AppPrefrence.init(mContext).getBoolean(AppConstant.HAS_SITES))
+            getSitesFormParse();
     }
 
     private void getSitesFormParse() {
@@ -61,7 +62,7 @@ public class DashBoardActivity extends AppCompatActivity {
                     if (e == null) {
                         CallProgressWheel.dismissLoadingDialog();
                         if (notifications.size() > 0) {
-                            AppPrefrence.init(mContext).putBoolean(AppConstant.HAS_SITES,true);
+                            AppPrefrence.init(mContext).putBoolean(AppConstant.HAS_SITES, true);
                             for (int i = 0; i < notifications.size(); i++) {
                                 SiteModel siteModel = new SiteModel();
                                 siteModel.setObjectId(notifications.get(i).getObjectId());
@@ -73,7 +74,7 @@ public class DashBoardActivity extends AppCompatActivity {
                             }
                             Gson gson = new Gson();
                             String siteArrayString = gson.toJson(sitesList);
-                            AppPrefrence.init(mContext).putString("siteArrayString",siteArrayString);
+                            AppPrefrence.init(mContext).putString("siteArrayString", siteArrayString);
                         }
                     } else
                         CallProgressWheel.dismissLoadingDialog();
