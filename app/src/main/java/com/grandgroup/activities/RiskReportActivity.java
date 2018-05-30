@@ -18,10 +18,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -33,6 +31,8 @@ import com.grandgroup.utills.CallProgressWheel;
 import com.grandgroup.utills.CommonUtils;
 import com.grandgroup.utills.PermissionUtils;
 import com.grandgroup.views.CustomDateDialog;
+import com.grandgroup.views.CustomEditText;
+import com.grandgroup.views.CustomTextView;
 import com.grandgroup.views.CustomTimeDialog;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -46,7 +46,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,21 +60,18 @@ import static com.grandgroup.utills.AppConstant.SIGNATRUE_REQUEST;
 import static com.grandgroup.utills.AppConstant.WRITE_PERMISSIONS_REQUEST;
 
 public class RiskReportActivity extends AppCompatActivity {
-    private RiskReportModel riskReportObjectModel;
-    private Bitmap signBitmap = null, photoOfHazardBitmap;
-
     @BindView(R.id.tv_title)
-    TextView tvTitle;
+    CustomTextView tvTitle;
     @BindView(R.id.tv_event_date)
-    TextView tv_event_date;
+    CustomTextView tv_event_date;
     @BindView(R.id.iv_image)
     ImageView iv_image;
     @BindView(R.id.tv_select_likelihood)
-    TextView tvSelectedLikelihood;
+    CustomTextView tvSelectedLikelihood;
     @BindView(R.id.tv_select_consq)
-    TextView tv_select_consq;
+    CustomTextView tv_select_consq;
     @BindView(R.id.et_control_eff)
-    TextView et_control_eff;
+    CustomTextView et_control_eff;
     @BindView(R.id.lay_screenshot)
     ConstraintLayout lay_screenshot;
     @BindView(R.id.btn_back)
@@ -85,39 +81,39 @@ public class RiskReportActivity extends AppCompatActivity {
     @BindView(R.id.my_toolbar)
     RelativeLayout myToolbar;
     @BindView(R.id.tv_report_desc_title)
-    TextView tvReportDescTitle;
+    CustomTextView tvReportDescTitle;
     @BindView(R.id.tv_report_desc)
-    EditText tvReportDesc;
+    CustomEditText tvReportDesc;
     @BindView(R.id.tv_report_date_time_title)
-    TextView tvReportDateTimeTitle;
+    CustomTextView tvReportDateTimeTitle;
     @BindView(R.id.tv_location)
-    TextView tvLocation;
+    CustomTextView tvLocation;
     @BindView(R.id.et_location)
-    EditText etLocation;
+    CustomEditText etLocation;
     @BindView(R.id.tv_photo)
-    TextView tvPhoto;
+    CustomTextView tvPhoto;
     @BindView(R.id.lay_photo)
     ConstraintLayout layPhoto;
     @BindView(R.id.tv_likelihood)
-    TextView tvLikelihood;
+    CustomTextView tvLikelihood;
     @BindView(R.id.tv_consequence)
-    TextView tvConsequence;
+    CustomTextView tvConsequence;
     @BindView(R.id.tv_controls)
-    TextView tvControls;
+    CustomTextView tvControls;
     @BindView(R.id.et_controls)
-    EditText etControls;
+    CustomEditText etControls;
     @BindView(R.id.tv_control_eff)
-    TextView tvControlEff;
+    CustomTextView tvControlEff;
     @BindView(R.id.tv_action_plan)
-    TextView tvActionPlan;
+    CustomTextView tvActionPlan;
     @BindView(R.id.et_action_plan)
-    EditText etActionPlan;
+    CustomEditText etActionPlan;
     @BindView(R.id.tv_reported_by)
-    TextView tvReportedBy;
+    CustomTextView tvReportedBy;
     @BindView(R.id.et_reported_by)
-    EditText etReportedBy;
+    CustomEditText etReportedBy;
     @BindView(R.id.tv_signature)
-    TextView tvSignature;
+    CustomTextView tvSignature;
     @BindView(R.id.iv_signature)
     ImageView ivSignature;
     @BindView(R.id.lay_signature)
@@ -126,6 +122,8 @@ public class RiskReportActivity extends AppCompatActivity {
     Button btnEmail;
     @BindView(R.id.btn_save)
     Button btnSave;
+    private RiskReportModel riskReportObjectModel;
+    private Bitmap signBitmap = null, photoOfHazardBitmap;
     private AppCompatActivity mContext;
     private ArrayList<String> likeArray, consequenceArray, controlEffectivenessArray;
 
@@ -379,46 +377,46 @@ public class RiskReportActivity extends AppCompatActivity {
                 .startChooser();
         CallProgressWheel.dismissLoadingDialog();
     }
+
     private class AsyncTaskRunner extends AsyncTask<Void, Void, Void> {
         ParseObject riskReportObject = new ParseObject("RiskReport");
+
         @Override
         protected void onPostExecute(Void aVoid) {
-           if(getIntent().getSerializableExtra("riskReportObject") == null) {
-               riskReportObject.saveInBackground(new SaveCallback() {
-                   @Override
-                   public void done(ParseException e) {
-                       CallProgressWheel.dismissLoadingDialog();
-                       if (e == null)
-                           Toast.makeText(getApplicationContext(), "Report form saved successfully!", Toast.LENGTH_LONG).show();
-                       else
-                           Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
-                   }
-               });
-           }
-           else {
-               ParseQuery<ParseObject> query = ParseQuery.getQuery("RiskReport");
-               query.getInBackground(riskReportObjectModel.getObjectId(), new GetCallback<ParseObject>() {
-                   public void done(ParseObject gameScore, ParseException e) {
-                       if (e == null) {
-                           riskReportObject.saveInBackground(new SaveCallback() {
-                               @Override
-                               public void done(ParseException e) {
-                                   CallProgressWheel.dismissLoadingDialog();
-                                   if (e == null)
-                                       Toast.makeText(getApplicationContext(), "Report form saved successfully!", Toast.LENGTH_LONG).show();
-                                   else
-                                       Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
-                               }
+            if (getIntent().getSerializableExtra("riskReportObject") == null) {
+                riskReportObject.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        CallProgressWheel.dismissLoadingDialog();
+                        if (e == null)
+                            Toast.makeText(getApplicationContext(), "Report form saved successfully!", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
+                    }
+                });
+            } else {
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("RiskReport");
+                query.getInBackground(riskReportObjectModel.getObjectId(), new GetCallback<ParseObject>() {
+                    public void done(ParseObject gameScore, ParseException e) {
+                        if (e == null) {
+                            riskReportObject.saveInBackground(new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    CallProgressWheel.dismissLoadingDialog();
+                                    if (e == null)
+                                        Toast.makeText(getApplicationContext(), "Report form saved successfully!", Toast.LENGTH_LONG).show();
+                                    else
+                                        Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
+                                }
 
-                           });
-                       }
-                       else {
-                           Toast.makeText(getApplicationContext(), "Please, Try Again "+e.getMessage(), Toast.LENGTH_LONG).show();
+                            });
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Please, Try Again " + e.getMessage(), Toast.LENGTH_LONG).show();
 
-                       }
-                   }
-               });
-           }
+                        }
+                    }
+                });
+            }
         }
 
         @Override

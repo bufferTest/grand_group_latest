@@ -17,6 +17,7 @@ import com.grandgroup.model.ShiftDetailModel;
 import com.grandgroup.model.calenderModel;
 import com.grandgroup.utills.CallProgressWheel;
 import com.grandgroup.utills.GrandGroupHelper;
+import com.grandgroup.views.CustomTextView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -38,17 +39,17 @@ import butterknife.OnClick;
 public class ShiftStructure extends BaseActivity {
 
     @BindView(R.id.tv_title)
-    TextView tvTitle;
+    CustomTextView tvTitle;
     @BindView(R.id.calenderRecyclerView)
     RecyclerView calenderRecyclerView;
     @BindView(R.id.headerRecyclerView)
     RecyclerView headerRecyclerView;
     @BindView(R.id.month)
-    TextView month_name;
+    CustomTextView month_name;
     @BindView(R.id.rv_shifts)
     RecyclerView rv_shifts;
     @BindView(R.id.tv_no_events)
-    TextView tv_no_events;
+    CustomTextView tv_no_events;
 
     private AppCompatActivity mContext;
     private int mFirstDay, year, month, date;

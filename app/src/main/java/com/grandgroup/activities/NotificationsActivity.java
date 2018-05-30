@@ -12,6 +12,7 @@ import com.grandgroup.adapter.NotificationsAdapter;
 import com.grandgroup.model.NotificationsModel;
 import com.grandgroup.utills.CallProgressWheel;
 import com.grandgroup.utills.GrandGroupHelper;
+import com.grandgroup.views.CustomTextView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -26,9 +27,9 @@ import butterknife.OnClick;
 
 public class NotificationsActivity extends BaseActivity {
     @BindView(R.id.tv_title)
-    TextView tvTitle;
+    CustomTextView tvTitle;
     @BindView(R.id.tv_no_events)
-    TextView tv_no_events;
+    CustomTextView tv_no_events;
     @BindView(R.id.rv_notifications)
     RecyclerView rv_notifications;
     private AppCompatActivity mContext;

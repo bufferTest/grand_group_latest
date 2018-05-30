@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tool_bar" />
 
-    <TextView
+    <com.grandgroup.views.CustomTextView
         android:id="@+id/tv_tv_change_pic"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
@@ -57,7 +57,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_tv_change_pic" />
 
-    <EditText
+    <com.grandgroup.views.CustomEditText
         android:id="@+id/et_first_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
-    <EditText
+    <com.grandgroup.views.CustomEditText
         android:id="@+id/et_last_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -91,6 +91,7 @@
         android:background="@drawable/btn_round_corner"
         android:text="Save"
         android:textSize="@dimen/_12ssp"
+        android:fontFamily="@string/helvetica_neue_medium"
         android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

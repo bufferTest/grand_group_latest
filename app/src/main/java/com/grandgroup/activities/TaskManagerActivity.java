@@ -19,6 +19,7 @@ import com.grandgroup.database.SQLiteQueries;
 import com.grandgroup.model.EventsModel;
 import com.grandgroup.model.calenderModel;
 import com.grandgroup.utills.GrandGroupHelper;
+import com.grandgroup.views.CustomTextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,19 +32,19 @@ import butterknife.OnClick;
 
 public class TaskManagerActivity extends BaseActivity {
     @BindView(R.id.tv_title)
-    TextView tvTitle;
+    CustomTextView tvTitle;
     @BindView(R.id.calenderRecyclerView)
     RecyclerView calenderRecyclerView;
     @BindView(R.id.headerRecyclerView)
     RecyclerView headerRecyclerView;
     @BindView(R.id.month)
-    TextView month_name;
+    CustomTextView month_name;
     @BindView(R.id.btn_add)
     Button btnAdd;
     @BindView(R.id.rv_events)
     RecyclerView rv_events;
     @BindView(R.id.tv_no_events)
-    TextView tv_no_events;
+    CustomTextView tv_no_events;
 
     private AppCompatActivity mContext;
     private int mFirstDay;

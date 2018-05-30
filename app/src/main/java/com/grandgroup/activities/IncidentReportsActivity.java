@@ -13,11 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -29,6 +27,8 @@ import com.grandgroup.utills.CallProgressWheel;
 import com.grandgroup.utills.CommonUtils;
 import com.grandgroup.utills.PermissionUtils;
 import com.grandgroup.views.CustomDateDialog;
+import com.grandgroup.views.CustomEditText;
+import com.grandgroup.views.CustomTextView;
 import com.grandgroup.views.CustomTimeDialog;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -50,19 +50,19 @@ import static com.grandgroup.utills.AppConstant.WRITE_PERMISSIONS_REQUEST;
 
 public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.tv_title)
-    TextView tvTitle;
+    CustomTextView tvTitle;
     @BindView(R.id.btn_email)
     Button btnEmail;
     @BindView(R.id.btn_save)
     Button btnSave;
     @BindView(R.id.et_affected)
-    EditText etAffected;
+    CustomEditText etAffected;
     @BindView(R.id.rb_contractor)
     RadioButton rbContractor;
     @BindView(R.id.rg_type)
     RadioGroup rgType;
     @BindView(R.id.tv_occurence_value)
-    TextView tvOccurenceValue;
+    CustomTextView tvOccurenceValue;
     @BindView(R.id.rb_ceased_yes)
     RadioButton rbCeasedYes;
     @BindView(R.id.rb_ceased_no)
@@ -70,11 +70,11 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_ceased)
     RadioGroup rgCeased;
     @BindView(R.id.tv_ceased_time_value)
-    TextView tvCeasedTimeValue;
+    CustomTextView tvCeasedTimeValue;
     @BindView(R.id.tv_report_time_value)
-    TextView tvReportTimeValue;
+    CustomTextView tvReportTimeValue;
     @BindView(R.id.tv_occurence_date)
-    TextView tvOccurenceDate;
+    CustomTextView tvOccurenceDate;
     @BindView(R.id.rb_occ_yes)
     RadioButton rbOccYes;
     @BindView(R.id.rb_occ_no)
@@ -82,9 +82,9 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_occurence)
     RadioGroup rgOccurence;
     @BindView(R.id.et_firstname)
-    EditText etFirstname;
+    CustomEditText etFirstname;
     @BindView(R.id.et_surname)
-    EditText etSurname;
+    CustomEditText etSurname;
     @BindView(R.id.rb_male)
     RadioButton rbMale;
     @BindView(R.id.rb_female)
@@ -92,25 +92,25 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_gender)
     RadioGroup rgGender;
     @BindView(R.id.et_home_address)
-    EditText etHomeAddress;
+    CustomEditText etHomeAddress;
     @BindView(R.id.et_state)
-    EditText etState;
+    CustomEditText etState;
     @BindView(R.id.et_postcode)
-    EditText etPostcode;
+    CustomEditText etPostcode;
     @BindView(R.id.et_home_phone)
-    EditText etHomePhone;
+    CustomEditText etHomePhone;
     @BindView(R.id.et_mobile_no)
-    EditText etMobileNo;
+    CustomEditText etMobileNo;
     @BindView(R.id.et_birthday)
-    TextView etBirthday;
+    CustomTextView etBirthday;
     @BindView(R.id.et_occupation)
-    TextView etOccupation;
+    CustomTextView etOccupation;
     @BindView(R.id.et_workplace)
-    TextView etWorkplace;
+    CustomTextView etWorkplace;
     @BindView(R.id.et_addres)
-    TextView etAddres;
+    CustomTextView etAddres;
     @BindView(R.id.et_incident)
-    TextView etIncident;
+    CustomTextView etIncident;
     @BindView(R.id.rb_miss)
     RadioButton rbMiss;
     @BindView(R.id.rb_incident)
@@ -124,25 +124,25 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_event_class)
     RadioGroup rgEventClass;
     @BindView(R.id.et_brief)
-    EditText etBrief;
+    CustomEditText etBrief;
     @BindView(R.id.et_description)
-    EditText etDescription;
+    CustomEditText etDescription;
     @BindView(R.id.et_action)
-    EditText etAction;
+    CustomEditText etAction;
     @BindView(R.id.et_injury)
-    EditText etInjury;
+    CustomEditText etInjury;
     @BindView(R.id.et_illness)
-    EditText etIllness;
+    CustomEditText etIllness;
     @BindView(R.id.et_bodily)
-    EditText etBodily;
+    CustomEditText etBodily;
     @BindView(R.id.et_mark)
-    EditText etMark;
+    CustomEditText etMark;
     @BindView(R.id.et_mechanism)
-    EditText etMechanism;
+    CustomEditText etMechanism;
     @BindView(R.id.et_others)
-    EditText etOthers;
+    CustomEditText etOthers;
     @BindView(R.id.et_observe)
-    EditText etObserve;
+    CustomEditText etObserve;
     @BindView(R.id.rb_third_yes)
     RadioButton rbThirdYes;
     @BindView(R.id.rb_third_no)
@@ -150,7 +150,7 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_third_party)
     RadioGroup rgThirdParty;
     @BindView(R.id.et_third_report)
-    EditText etThirdReport;
+    CustomEditText etThirdReport;
     @BindView(R.id.rb_damage_yes)
     RadioButton rbDamageYes;
     @BindView(R.id.rb_damage_no)
@@ -158,9 +158,9 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_prop_damage)
     RadioGroup rgPropDamage;
     @BindView(R.id.et_damage_adv)
-    EditText etDamageAdv;
+    CustomEditText etDamageAdv;
     @BindView(R.id.et_damage_veh)
-    EditText etDamageVeh;
+    CustomEditText etDamageVeh;
     @BindView(R.id.rb_attend_yes)
     RadioButton rbAttendYes;
     @BindView(R.id.rb_attend_no)
@@ -168,7 +168,7 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_attend_affe)
     RadioGroup rgAttendAffe;
     @BindView(R.id.et_name)
-    EditText etName;
+    CustomEditText etName;
     @BindView(R.id.rb_aid_yes)
     RadioButton rbAidYes;
     @BindView(R.id.rb_aid_no)
@@ -176,15 +176,15 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_first_aid)
     RadioGroup rgFirstAid;
     @BindView(R.id.et_aid_name)
-    EditText etAidName;
+    CustomEditText etAidName;
     @BindView(R.id.iv_image)
     ImageView ivImage;
     @BindView(R.id.et_injury_detail)
-    EditText etInjuryDetail;
+    CustomEditText etInjuryDetail;
     @BindView(R.id.et_med_center)
-    EditText etMedCenter;
+    CustomEditText etMedCenter;
     @BindView(R.id.et_date_atten)
-    TextView etDateAtten;
+    CustomTextView etDateAtten;
     @BindView(R.id.rb_amb_yes)
     RadioButton rbAmbYes;
     @BindView(R.id.rb_amb_no)
@@ -192,13 +192,13 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_ambulance)
     RadioGroup rgAmbulance;
     @BindView(R.id.et_amb_req)
-    EditText etAmbReq;
+    CustomEditText etAmbReq;
     @BindView(R.id.et_amb_per_name)
-    EditText etAmbPerName;
+    CustomEditText etAmbPerName;
     @BindView(R.id.iv_amb_per_sign)
     ImageView ivAmbPerSign;
     @BindView(R.id.et_amb_date)
-    TextView etAmbDate;
+    CustomTextView etAmbDate;
     @BindView(R.id.rb_weather_yes)
     RadioButton rbWeatherYes;
     @BindView(R.id.rb_weather_no)
@@ -206,7 +206,7 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_weather)
     RadioGroup rgWeather;
     @BindView(R.id.et_weather_cond)
-    EditText etWeatherCond;
+    CustomEditText etWeatherCond;
     @BindView(R.id.rb_drug_yes)
     RadioButton rbDrugYes;
     @BindView(R.id.rb_drug_no)
@@ -214,11 +214,11 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_drug_affect)
     RadioGroup rgDrugAffect;
     @BindView(R.id.et_footwear)
-    EditText etFootwear;
+    CustomEditText etFootwear;
     @BindView(R.id.et_eyewear)
-    EditText etEyewear;
+    CustomEditText etEyewear;
     @BindView(R.id.et_carrying)
-    EditText etCarrying;
+    CustomEditText etCarrying;
     @BindView(R.id.rb_cctv_yes)
     RadioButton rbCctvYes;
     @BindView(R.id.rb_cctv_no)
@@ -244,7 +244,7 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_wet_weather)
     RadioGroup rgWetWeather;
     @BindView(R.id.et_comment)
-    EditText etComment;
+    CustomEditText etComment;
     @BindView(R.id.rb_crunches)
     RadioButton rbCrunches;
     @BindView(R.id.rb_stick)
@@ -258,7 +258,7 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_incident_specs)
     RadioGroup rgIncidentSpecs;
     @BindView(R.id.et_notes)
-    EditText etNotes;
+    CustomEditText etNotes;
     @BindView(R.id.lay_screenshot)
     ConstraintLayout layScreenshot;
     private IncidentModel incidentReportObject;

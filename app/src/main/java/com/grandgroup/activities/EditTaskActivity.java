@@ -14,6 +14,7 @@ import com.grandgroup.database.SQLiteQueries;
 import com.grandgroup.model.EventsModel;
 import com.grandgroup.utills.GrandGroupHelper;
 import com.grandgroup.views.CustomDateDialog;
+import com.grandgroup.views.CustomTextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +23,7 @@ import butterknife.OnClick;
 public class EditTaskActivity extends AppCompatActivity {
 
     @BindView(R.id.tv_title)
-    TextView tvTitle;
+    CustomTextView tvTitle;
     @BindView(R.id.tv_event_date)
     TextView tvEventDate;
     @BindView(R.id.et_event_name)

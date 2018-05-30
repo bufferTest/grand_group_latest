@@ -36,7 +36,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_report_desc_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/tv_report_desc"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_report_desc_title" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_report_date_time_title"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -74,7 +74,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/tv_report_desc" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_event_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_report_date_time_title" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_location"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -101,7 +101,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/tv_event_date" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_location"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_location" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -153,7 +153,7 @@
                 </android.support.constraint.ConstraintLayout>
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_likelihood"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -165,7 +165,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/lay_photo" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_select_likelihood"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_likelihood" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_consequence"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -194,7 +194,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/tv_select_likelihood" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_select_consq"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -211,7 +211,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_consequence" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_controls"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -223,7 +223,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/tv_select_consq" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_controls"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -239,7 +239,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_controls" />
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_control_eff"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -251,7 +251,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/et_controls" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/et_control_eff"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -268,7 +268,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_control_eff" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_action_plan"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -280,7 +280,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/et_control_eff" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_action_plan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -297,7 +297,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_action_plan" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_reported_by"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -309,7 +309,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/et_action_plan" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_reported_by"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -326,7 +326,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_reported_by" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_signature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

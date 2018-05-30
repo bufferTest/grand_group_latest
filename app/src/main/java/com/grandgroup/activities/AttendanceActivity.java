@@ -18,6 +18,7 @@ import com.grandgroup.services.GPSTracker;
 import com.grandgroup.utills.AppPrefrence;
 import com.grandgroup.utills.CallProgressWheel;
 import com.grandgroup.utills.GrandGroupHelper;
+import com.grandgroup.views.CustomTextView;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -36,7 +37,7 @@ import butterknife.OnClick;
 
 public class AttendanceActivity extends BaseActivity {
     @BindView(R.id.tv_title)
-    TextView tvTitle;
+    CustomTextView tvTitle;
 
     private AppCompatActivity mContext;
     private IntentIntegrator qrScan;

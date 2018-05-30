@@ -34,6 +34,7 @@ import com.grandgroup.utills.AppPrefrence;
 import com.grandgroup.utills.CallProgressWheel;
 import com.grandgroup.utills.CommonUtils;
 import com.grandgroup.utills.PermissionUtils;
+import com.grandgroup.views.CustomTextView;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -56,7 +57,7 @@ import static com.grandgroup.utills.AppConstant.WRITE_PERMISSIONS_REQUEST;
 
 public class UserProfileActivity extends BaseActivity {
     @BindView(R.id.tv_title)
-    TextView tvTitle;
+    CustomTextView tvTitle;
     @BindView(R.id.iv_user_pic)
     ImageView ivUserPic;
     @BindView(R.id.et_email)
