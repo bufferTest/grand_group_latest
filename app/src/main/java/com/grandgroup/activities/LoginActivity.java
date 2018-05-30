@@ -60,8 +60,7 @@ public class LoginActivity extends BaseActivity {
         mContext = LoginActivity.this;
         ButterKnife.bind(mContext);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         // set backgroud color to drawable
         bgShape = (GradientDrawable) btnLogin.getBackground();

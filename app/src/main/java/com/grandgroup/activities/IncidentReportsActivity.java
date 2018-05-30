@@ -104,13 +104,13 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.et_birthday)
     CustomTextView etBirthday;
     @BindView(R.id.et_occupation)
-    CustomTextView etOccupation;
+    CustomEditText etOccupation;
     @BindView(R.id.et_workplace)
-    CustomTextView etWorkplace;
+    CustomEditText etWorkplace;
     @BindView(R.id.et_addres)
     CustomTextView etAddres;
     @BindView(R.id.et_incident)
-    CustomTextView etIncident;
+    CustomEditText etIncident;
     @BindView(R.id.rb_miss)
     RadioButton rbMiss;
     @BindView(R.id.rb_incident)
@@ -261,6 +261,12 @@ public class IncidentReportsActivity extends BaseActivity {
     CustomEditText etNotes;
     @BindView(R.id.lay_screenshot)
     ConstraintLayout layScreenshot;
+    @BindView(R.id.rb_warning_yes)
+    RadioButton rbWarningYes;
+    @BindView(R.id.rb_warning_no)
+    RadioButton rbWarningNo;
+    @BindView(R.id.rg_warning_sign)
+    RadioGroup rgWarningSign;
     private IncidentModel incidentReportObject;
     private AppCompatActivity mContext;
     private Bitmap signatureBitmap, ambPerSign;
@@ -287,6 +293,15 @@ public class IncidentReportsActivity extends BaseActivity {
                     break;
                 case "2":
                     rbCeasedNo.setChecked(true);
+                    break;
+            }
+
+            switch (incidentReportObject.getWarning_sign_option()) {
+                case "1":
+                    rbWarningYes.setChecked(true);
+                    break;
+                case "2":
+                    rbWarningNo.setChecked(true);
                     break;
             }
             switch (incidentReportObject.getIncedent_option()) {
@@ -1036,6 +1051,8 @@ public class IncidentReportsActivity extends BaseActivity {
                 break;
         }
 
+
+
         object.put("attended_person_option", attendPersonOption);
         object.put("event_desc_desc", etDescription.getText().toString());
         object.put("reported_date", tvReportTimeValue.getText().toString());
@@ -1100,8 +1117,18 @@ public class IncidentReportsActivity extends BaseActivity {
                 wandOption = "2";
                 break;
         }
-        object.put("web_report_option", wandOption);*/
+        object.put("web_report_option", wandOption);
 
+        String warning = null;
+        switch (rgWarningSign.getCheckedRadioButtonId()) {
+            case R.id.rb_warning_yes:
+                warning = "1";
+                break;
+            case R.id.rb_warning_no:
+                warning = "2";
+                break;
+        }
+        object.put("warning_sign_option", warning);*/
 
         object.saveInBackground(new SaveCallback() {
             @Override

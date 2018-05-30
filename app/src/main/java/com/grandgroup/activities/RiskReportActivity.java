@@ -74,8 +74,6 @@ public class RiskReportActivity extends AppCompatActivity {
     CustomTextView et_control_eff;
     @BindView(R.id.lay_screenshot)
     ConstraintLayout lay_screenshot;
-    @BindView(R.id.btn_back)
-    Button btnBack;
     @BindView(R.id.btn_add)
     Button btnAdd;
     @BindView(R.id.my_toolbar)

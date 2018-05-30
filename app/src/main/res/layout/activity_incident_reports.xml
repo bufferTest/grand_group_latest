@@ -505,6 +505,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:textSize="@dimen/_12ssp"
+                    android:inputType="number"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -745,7 +746,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="Brief Description of the incident(eg cut to left):"
+                    android:text="Brief Description of the incident(eg cut to left leg):"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:textSize="@dimen/_12ssp"
@@ -761,7 +762,7 @@
                     android:layout_marginTop="10dp"
                     android:inputType="text"
                     android:background="@drawable/boundary"
-                    android:hint="test description of incident"
+                    android:hint="Description of incident"
                     android:lines="3"
                     android:maxLines="3"
                     android:padding="8dp"
@@ -855,7 +856,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
-                    android:hint="enter injury type"
+                    android:hint="Choose an Item"
                     android:lines="1"
                     android:maxLines="1"
                     android:padding="8dp"
@@ -886,7 +887,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
-                    android:hint="enter illness consequence"
+                    android:hint="Choose an Item"
                     android:lines="1"
                     android:maxLines="1"
                     android:padding="8dp"
@@ -982,7 +983,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
                     android:gravity="top"
-                    android:hint="enter mechanism"
+                    android:hint="Choose an Item"
                     android:lines="1"
                     android:maxLines="1"
                     android:padding="8dp"
@@ -1014,7 +1015,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
                     android:gravity="top"
-                    android:hint="enter reason"
+                    android:hint="Choose an Item"
                     android:lines="3"
                     android:maxLines="3"
                     android:padding="8dp"
@@ -1443,7 +1444,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="NAME:"
+                    android:text="please provide details of injury/illness and first aid treatment provided:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     android:textSize="@dimen/_12ssp"
@@ -1521,7 +1522,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
-                    android:hint="enter date"
+                    android:hint="select date"
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
@@ -1706,7 +1707,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
-                    android:hint="enter date"
+                    android:hint="select date"
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
@@ -2060,6 +2061,45 @@
 
                 </RadioGroup>
 
+                <com.grandgroup.views.CustomTextView
+                    android:id="@+id/tv_warning_signs"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Are Warning Signs Available?"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="@id/et_affected"
+                    app:layout_constraintRight_toRightOf="@+id/et_affected"
+                    app:layout_constraintTop_toBottomOf="@+id/rg_wand_report" />
+
+                <RadioGroup
+                    android:id="@+id/rg_warning_sign"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/et_affected"
+                    app:layout_constraintRight_toRightOf="@+id/et_affected"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_warning_signs">
+
+                    <RadioButton
+                        android:id="@+id/rb_warning_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:fontFamily="@string/helvetica_neue_medium"
+                        android:text="@string/yes" />
+
+                    <RadioButton
+                        android:id="@+id/rb_warning_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:fontFamily="@string/helvetica_neue_medium"
+                        android:text="@string/no" />
+
+                </RadioGroup>
+
 
                 <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_wet_weather"
@@ -2159,7 +2199,7 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
                         android:fontFamily="@string/helvetica_neue_medium"
-                        android:text="using crunches" />
+                        android:text="Using Crutches" />
 
                     <RadioButton
                         android:id="@+id/rb_stick"
@@ -2167,7 +2207,7 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
                         android:fontFamily="@string/helvetica_neue_medium"
-                        android:text="using a walking stick" />
+                        android:text="Using a walking stick" />
 
                     <RadioButton
                         android:id="@+id/rb_frame"
@@ -2175,14 +2215,14 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@string/helvetica_neue_medium"
                         android:buttonTint="@color/colorPrimary"
-                        android:text="using a walking frame" />
+                        android:text="Using a walking frame" />
 
                     <RadioButton
                         android:id="@+id/rb_wheelchair"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
-                        android:text="using a wheelchair" />
+                        android:text="Using a wheelchair" />
 
                     <RadioButton
                         android:id="@+id/rb_motorised"
