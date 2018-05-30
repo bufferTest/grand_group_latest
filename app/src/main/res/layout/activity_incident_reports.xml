@@ -33,7 +33,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_affected"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -45,7 +45,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_affected"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_affected" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_type"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
                 </RadioGroup>
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_occurence"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -115,7 +115,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_type" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_occurence_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_occurence" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_ceased"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

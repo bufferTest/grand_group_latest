@@ -32,6 +32,9 @@ public class CustomEditText extends android.support.v7.widget.AppCompatEditText 
                 if (fontName != null) {
                     Typeface myTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + fontName);
                     setTypeface(myTypeface);
+                }else {
+                    Typeface myTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/HelveticaNeue Medium.ttf");
+                    setTypeface(myTypeface);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

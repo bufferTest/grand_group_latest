@@ -984,7 +984,7 @@ public class IncidentReportsActivity extends BaseActivity {
         CallProgressWheel.showLoadingDialog(mContext);
         ParseObject object = new ParseObject("IncidentReport");
 
-        String weatheroption = null;
+        /*String weatheroption = null;
         switch (rgWeather.getCheckedRadioButtonId()) {
             case R.id.rb_weather_yes:
                 weatheroption = "1";
@@ -1240,7 +1240,7 @@ public class IncidentReportsActivity extends BaseActivity {
                 wandOption = "2";
                 break;
         }
-        object.put("web_report_option", wandOption);
+        object.put("web_report_option", wandOption);*/
 
 
         object.saveInBackground(new SaveCallback() {
