@@ -17,6 +17,7 @@ import com.grandgroup.model.IncidentModel;
 import com.grandgroup.model.RiskReportModel;
 import com.grandgroup.utills.CallProgressWheel;
 import com.grandgroup.utills.GrandGroupHelper;
+import com.grandgroup.views.CustomTextView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -35,7 +36,7 @@ public class ReportActivity extends BaseActivity implements AdapterView.OnItemSe
     ArrayList riskReportList;
     String selectedCat = "Incedent Report";
     @BindView(R.id.tv_title)
-    TextView tvTitle;
+    CustomTextView tvTitle;
     @BindView(R.id.btn_add)
     Button btnAdd;
     @BindView(R.id.spinner_report)
@@ -52,8 +53,8 @@ public class ReportActivity extends BaseActivity implements AdapterView.OnItemSe
     }
 
     private void setInitialData() {
-        ButterKnife.bind(this);
         mContext = ReportActivity.this;
+        ButterKnife.bind(mContext);
         tvTitle.setText("Reports");
         btnAdd.setVisibility(View.VISIBLE);
         spinnerReport.setOnItemSelectedListener(this);

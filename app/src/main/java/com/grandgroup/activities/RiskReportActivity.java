@@ -260,7 +260,7 @@ public class RiskReportActivity extends AppCompatActivity {
                 break;
             case R.id.btn_save:
                 if (getIntent().getSerializableExtra("riskReportObject") == null)
-                new AsyncTaskRunner().execute();
+                    new AsyncTaskRunner().execute();
                 else
                     updateReport();
                 break;
@@ -439,16 +439,16 @@ public class RiskReportActivity extends AppCompatActivity {
         ParseObject riskReportObject = new ParseObject("RiskReport");
         @Override
         protected void onPostExecute(Void aVoid) {
-                riskReportObject.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        CallProgressWheel.dismissLoadingDialog();
-                        if (e == null)
-                            Toast.makeText(getApplicationContext(), "Report form saved successfully!", Toast.LENGTH_LONG).show();
-                        else
-                            Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
-                    }
-                });
+            riskReportObject.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    CallProgressWheel.dismissLoadingDialog();
+                    if (e == null)
+                        Toast.makeText(getApplicationContext(), "Report form saved successfully!", Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
+                }
+            });
         }
 
         @Override
@@ -469,24 +469,24 @@ public class RiskReportActivity extends AppCompatActivity {
                 ParseFile file = new ParseFile("ile.png", image);
                 riskReportObject.put("risk_file", file);
             }
-                if (photoOfHazardBitmap != null) {
-                    int origWidth = signBitmap.getWidth();
-                    int origHeight = signBitmap.getHeight();
-                    if (origWidth > 640 || origHeight > 640) {
-                        Bitmap b2 = Bitmap.createScaledBitmap(photoOfHazardBitmap, 640, 640, false);
-                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        b2.compress(Bitmap.CompressFormat.PNG, 70, stream);
-                        byte[] image = stream.toByteArray();
-                        ParseFile file = new ParseFile("ile.png", image);
-                        riskReportObject.put("signature_file", file);
-                    } else {
-                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        photoOfHazardBitmap.compress(Bitmap.CompressFormat.PNG, 70, stream);
-                        byte[] image = stream.toByteArray();
-                        ParseFile file = new ParseFile("ile.png", image);
-                        riskReportObject.put("signature_file", file);
-                    }
+            if (photoOfHazardBitmap != null) {
+                int origWidth = signBitmap.getWidth();
+                int origHeight = signBitmap.getHeight();
+                if (origWidth > 640 || origHeight > 640) {
+                    Bitmap b2 = Bitmap.createScaledBitmap(photoOfHazardBitmap, 640, 640, false);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    b2.compress(Bitmap.CompressFormat.PNG, 70, stream);
+                    byte[] image = stream.toByteArray();
+                    ParseFile file = new ParseFile("ile.png", image);
+                    riskReportObject.put("signature_file", file);
+                } else {
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    photoOfHazardBitmap.compress(Bitmap.CompressFormat.PNG, 70, stream);
+                    byte[] image = stream.toByteArray();
+                    ParseFile file = new ParseFile("ile.png", image);
+                    riskReportObject.put("signature_file", file);
                 }
+            }
 
             return null;
         }
