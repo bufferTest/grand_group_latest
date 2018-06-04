@@ -1,16 +1,16 @@
 package com.grandgroup.activities;
 
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.location.LocationManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -24,6 +24,8 @@ import com.grandgroup.model.UserProfileBean;
 import com.grandgroup.utills.AppConstant;
 import com.grandgroup.utills.AppPrefrence;
 import com.grandgroup.utills.CallProgressWheel;
+import com.grandgroup.utills.CommonUtils;
+import com.grandgroup.utills.SnackbarUtil;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -35,23 +37,18 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
-    private GradientDrawable bgShape;
-    private AppCompatActivity mContext;
-
     @BindView(R.id.btn_login)
     Button btnLogin;
-
     @BindView(R.id.cl_username_pswd)
     ConstraintLayout clUserNamePswd;
-
     @BindView(R.id.cb_remember_me)
     CheckBox cbRememberMe;
-
     @BindView(R.id.et_username)
     EditText etUserName;
-
     @BindView(R.id.et_pswd)
     EditText etPswd;
+    private GradientDrawable bgShape;
+    private AppCompatActivity mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +60,7 @@ public class LoginActivity extends BaseActivity {
         mContext = LoginActivity.this;
         ButterKnife.bind(mContext);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         // set backgroud color to drawable
         bgShape = (GradientDrawable) btnLogin.getBackground();
@@ -92,41 +88,83 @@ public class LoginActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btn_login:
                 hideKeyboard();
-                if (cbRememberMe.isChecked()) {
-                    AppPrefrence.init(mContext).putBoolean(AppConstant.IS_REMEMBERED, true);
-                    AppPrefrence.init(mContext).putString(AppConstant.USER_NAME, etUserName.getText().toString());
-                    AppPrefrence.init(mContext).putString(AppConstant.USER_PSWD, etPswd.getText().toString());
+                String email = etUserName.getText().toString();
+                String password = etPswd.getText().toString();
+                if (CommonUtils.getInstance().isEmpty(email))
+                    SnackbarUtil.showWarningShortSnackbar(mContext, "Please enter email");
+                else if (CommonUtils.getInstance().isEmpty(password))
+                    SnackbarUtil.showWarningShortSnackbar(mContext, "Please enter Password");
+                else {
+                    if (cbRememberMe.isChecked()) {
+                        AppPrefrence.init(mContext).putBoolean(AppConstant.IS_REMEMBERED, true);
+                        AppPrefrence.init(mContext).putString(AppConstant.USER_NAME, etUserName.getText().toString());
+                        AppPrefrence.init(mContext).putString(AppConstant.USER_PSWD, etPswd.getText().toString());
+                    }
+                    loginUser();
                 }
-                loginUser();
+
                 break;
 
             case R.id.cb_remember_me:
                 if (!cbRememberMe.isChecked()) {
-                        AppPrefrence.init(mContext).putBoolean(AppConstant.IS_REMEMBERED, true);
-                        AppPrefrence.init(mContext).putString(AppConstant.USER_NAME,"");
-                        AppPrefrence.init(mContext).putString(AppConstant.USER_PSWD,"");
-                    }
+                    AppPrefrence.init(mContext).putBoolean(AppConstant.IS_REMEMBERED, true);
+                    AppPrefrence.init(mContext).putString(AppConstant.USER_NAME, "");
+                    AppPrefrence.init(mContext).putString(AppConstant.USER_PSWD, "");
+                }
                 break;
 
             case R.id.forgot_password:
-                if(!etUserName.getText().toString().equalsIgnoreCase("")) {
-                    ParseUser.requestPasswordResetInBackground(etUserName.getText().toString(),
+                openForgotDialog();
+                break;
+        }
+    }
+
+    private void openForgotDialog() {
+        final Dialog dialog = new Dialog(mContext);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_forgot_password);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCanceledOnTouchOutside(false);
+        final EditText forgotEmail = dialog.findViewById(R.id.et_forgot_email);
+        forgotEmail.requestFocus();
+        Button btnOk = dialog.findViewById(R.id.btn_ok);
+        Button btncancel = dialog.findViewById(R.id.btn_cancel);
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = forgotEmail.getText().toString().trim();
+                if (CommonUtils.getInstance().isEmpty(email)) {
+                    SnackbarUtil.showWarningShortSnackbarTopDialog(dialog, getResources().getString(R.string.fields_error_message));
+                } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(forgotEmail.getText().toString().trim()).matches()) {
+                    SnackbarUtil.showWarningShortSnackbarTopDialog(dialog, getResources().getString(R.string.forgot_email_empty_text));
+                } else {
+                    CallProgressWheel.showLoadingDialog(mContext);
+                    ParseUser.requestPasswordResetInBackground(email,
                             new RequestPasswordResetCallback() {
                                 public void done(ParseException e) {
                                     if (e == null) {
-                                        Toast.makeText(mContext,"Reset password link has been sent to your email.",Toast.LENGTH_LONG).show();
+                                        CallProgressWheel.dismissLoadingDialog();
+                                        Toast.makeText(mContext, "Reset password link has been sent to your email.", Toast.LENGTH_LONG).show();
+                                        dialog.dismiss();
                                     } else {
-                                        Toast.makeText(mContext,"Something went wrong.",Toast.LENGTH_LONG).show();
-
+                                        CallProgressWheel.dismissLoadingDialog();
+                                        SnackbarUtil.showWarningShortSnackbarTopDialog(dialog, "Something went wrong.");
                                     }
                                 }
                             });
+
                 }
-                else{
-                    Toast.makeText(mContext,"Please enter email",Toast.LENGTH_LONG).show();
-                }
-                break;
-        }
+            }
+        });
+
+        btncancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     private void loginUser() {
@@ -138,29 +176,29 @@ public class LoginActivity extends BaseActivity {
                     CallProgressWheel.dismissLoadingDialog();
                     UserProfileBean userProfileBean = new UserProfileBean();
                     ParseUser parseUser = ParseUser.getCurrentUser();
-                                AppPrefrence.init(mContext).putBoolean(AppConstant.IS_LOGGED_IN,true);
-                            userProfileBean.setUserFirstName(parseUser.getString(getString(R.string.userFirstName)));
-                            userProfileBean.setUserLastName(parseUser.getString(getString(R.string.userLastName)));
-                            userProfileBean.setUserEmail(parseUser.getString(getString(R.string.userEmail)));
-                            userProfileBean.setUserPassword(parseUser.getString(getString(R.string.userPassword)));
-                            userProfileBean.setUserName(parseUser.getString(getString(R.string.userName)));
-                            userProfileBean.setAdmin(parseUser.getBoolean(getString(R.string.isAdmin)));
-                            ParseFile postImage = parseUser.getParseFile(getString(R.string.profilePic));
-                            if (postImage != null)
-                                userProfileBean.setUserProfilePicUrl(postImage.getUrl());
-                            else
-                                userProfileBean.setUserProfilePicUrl("");
+                    AppPrefrence.init(mContext).putBoolean(AppConstant.IS_LOGGED_IN, true);
+                    userProfileBean.setUserFirstName(parseUser.getString(getString(R.string.userFirstName)));
+                    userProfileBean.setUserLastName(parseUser.getString(getString(R.string.userLastName)));
+                    userProfileBean.setUserEmail(parseUser.getString(getString(R.string.userEmail)));
+                    userProfileBean.setUserPassword(parseUser.getString(getString(R.string.userPassword)));
+                    userProfileBean.setUserName(parseUser.getString(getString(R.string.userName)));
+                    userProfileBean.setAdmin(parseUser.getBoolean(getString(R.string.isAdmin)));
+                    ParseFile postImage = parseUser.getParseFile(getString(R.string.profilePic));
+                    if (postImage != null)
+                        userProfileBean.setUserProfilePicUrl(postImage.getUrl());
+                    else
+                        userProfileBean.setUserProfilePicUrl("");
 
-                            Gson gson = new Gson();
-                            String json = gson.toJson(userProfileBean);
-                           AppPrefrence.init(mContext).putString(AppConstant.USER_PROFILE,json);
-                                startActivity(new Intent(mContext, DashBoardActivity.class));
-                                mContext.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                                finish();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(userProfileBean);
+                    AppPrefrence.init(mContext).putString(AppConstant.USER_PROFILE, json);
+                    startActivity(new Intent(mContext, DashBoardActivity.class));
+                    mContext.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                    finish();
 
                 } else {
                     CallProgressWheel.dismissLoadingDialog();
-                    Toast.makeText(getApplicationContext(),"Invalid email or password!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Invalid email or password!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -174,6 +212,7 @@ public class LoginActivity extends BaseActivity {
         }
 
     }
+
     private void buildAlertMessageNoGps() {
         final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
         builder.setMessage(getResources().getString(R.string.gps_check_message))

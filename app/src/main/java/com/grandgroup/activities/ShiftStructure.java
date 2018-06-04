@@ -1,24 +1,23 @@
 package com.grandgroup.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
+import com.grandgroup.interfaces.CalenderDayClick;
 import com.grandgroup.R;
-import com.grandgroup.adapter.CalenderAdapter;
+import com.grandgroup.adapter.ShiftCalenderAdapter;
 import com.grandgroup.adapter.ShiftStructureAdapter;
 import com.grandgroup.adapter.header_Adapter;
 import com.grandgroup.model.ShiftDetailModel;
 import com.grandgroup.model.calenderModel;
 import com.grandgroup.utills.CallProgressWheel;
 import com.grandgroup.utills.GrandGroupHelper;
+import com.grandgroup.views.CustomTextView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -40,17 +39,17 @@ import butterknife.OnClick;
 public class ShiftStructure extends BaseActivity {
 
     @BindView(R.id.tv_title)
-    TextView tvTitle;
+    CustomTextView tvTitle;
     @BindView(R.id.calenderRecyclerView)
     RecyclerView calenderRecyclerView;
     @BindView(R.id.headerRecyclerView)
     RecyclerView headerRecyclerView;
     @BindView(R.id.month)
-    TextView month_name;
+    CustomTextView month_name;
     @BindView(R.id.rv_shifts)
     RecyclerView rv_shifts;
     @BindView(R.id.tv_no_events)
-    TextView tv_no_events;
+    CustomTextView tv_no_events;
 
     private AppCompatActivity mContext;
     private int mFirstDay, year, month, date;
@@ -63,23 +62,26 @@ public class ShiftStructure extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shift_structure);
         setInitialData();
+    }
 
-        cal.setTimeInMillis(System.currentTimeMillis());
-        year = cal.get(Calendar.YEAR);
-        month = cal.get(Calendar.MONTH);
-        date = cal.get(Calendar.DAY_OF_MONTH);
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        setUpWeekNames();
+        setupcalender();
+        fetchShifts();
     }
 
     private void setInitialData() {
         mContext = ShiftStructure.this;
         ButterKnife.bind(mContext);
         tvTitle.setText("Shift Structure");
+
         cal.setTimeInMillis(System.currentTimeMillis());
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
-        setUpWeekNames();
-        setupcalender();
-        fetchShifts();
+        date = cal.get(Calendar.DAY_OF_MONTH);
     }
 
     @OnClick({R.id.btn_back, R.id.iv_previous, R.id.iv_forward})
@@ -190,7 +192,7 @@ public class ShiftStructure extends BaseActivity {
         }
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 7);
         calenderRecyclerView.setLayoutManager(gridLayoutManager);
-        CalenderAdapter calenderAdpter = new CalenderAdapter(mContext, arrayList, cal, new CalenderAdapter.onDayClick() {
+        ShiftCalenderAdapter calenderAdpter = new ShiftCalenderAdapter(mContext, arrayList, cal, new CalenderDayClick() {
             @Override
             public void onDayClick(Integer position) {
                 year = cal.get(Calendar.YEAR);

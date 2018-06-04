@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.grandgroup.R;
+import com.grandgroup.views.CustomTextView;
 
 import java.io.ByteArrayOutputStream;
 
@@ -21,7 +22,7 @@ import butterknife.OnClick;
 public class SignatureActivity extends AppCompatActivity {
 
     @BindView(R.id.tv_title)
-    TextView tvTitle;
+    CustomTextView tvTitle;
     @BindView(R.id.signaturePad)
     GestureOverlayView signature_pad;
     private AppCompatActivity mContext;
@@ -36,7 +37,7 @@ public class SignatureActivity extends AppCompatActivity {
     private void setInitialData() {
         mContext = SignatureActivity.this;
         ButterKnife.bind(mContext);
-        tvTitle.setText("Signature");
+        tvTitle.setText("SIGNATURE");
     }
 
     @OnClick({R.id.btn_done,R.id.tv_cancle, R.id.btn_clear})

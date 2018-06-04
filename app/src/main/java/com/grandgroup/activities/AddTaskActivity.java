@@ -13,6 +13,8 @@ import com.grandgroup.R;
 import com.grandgroup.database.SQLiteQueries;
 import com.grandgroup.utills.GrandGroupHelper;
 import com.grandgroup.views.CustomDateDialog;
+import com.grandgroup.views.CustomEditText;
+import com.grandgroup.views.CustomTextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,29 +22,14 @@ import butterknife.OnClick;
 
 public class AddTaskActivity extends BaseActivity {
     @BindView(R.id.tv_title)
-    TextView tvTitle;
+    CustomTextView tvTitle;
     @BindView(R.id.tv_event_date)
-    TextView tvEventDate;
-    @BindView(R.id.btn_back)
-    Button btnBack;
-    @BindView(R.id.btn_add)
-    Button btnAdd;
-    @BindView(R.id.my_toolbar)
-    RelativeLayout myToolbar;
-    @BindView(R.id.tv_event_date_title)
-    TextView tvEventDateTitle;
-    @BindView(R.id.tv_event_name_title)
-    TextView tvEventNameTitle;
+    CustomTextView tvEventDate;
     @BindView(R.id.et_event_name)
-    EditText etEventName;
-    @BindView(R.id.tv_event_desc_title)
-    TextView tvEventDescTitle;
+    CustomEditText etEventName;
     @BindView(R.id.et_event_desc)
-    EditText etEventDesc;
-    @BindView(R.id.btn_save)
-    Button btnSave;
+    CustomEditText etEventDesc;
     private AppCompatActivity mContext;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

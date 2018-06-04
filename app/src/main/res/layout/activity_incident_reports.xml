@@ -33,7 +33,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_affected"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -45,7 +45,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_affected"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_affected" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_type"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -85,6 +85,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_type">
 
                     <RadioButton
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:id="@+id/rb_contractor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -93,6 +94,7 @@
                         android:text="@string/contract_provider" />
 
                     <RadioButton
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:id="@+id/rb_member"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -103,19 +105,19 @@
                 </RadioGroup>
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_occurence"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="12dp"
-                    android:text="Affected Person Details:"
+                    android:text="Occurrence Date :"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_type" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_occurence_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -132,7 +134,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_occurence" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_ceased"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -149,7 +151,7 @@
                     android:id="@+id/rg_ceased"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintLeft_toLeftOf="@+id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_ceased">
@@ -158,21 +160,23 @@
                         android:id="@+id/rb_ceased_yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
-                        android:text="@string/yes" />
+                        android:fontFamily="@string/helvetica_neue_medium"
+                        android:text="@string/yes"
+                        android:textSize="@dimen/_11ssp" />
 
                     <RadioButton
                         android:id="@+id/rb_ceased_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
-                        android:text="@string/no" />
+                        android:fontFamily="@string/helvetica_neue_medium"
+                        android:text="@string/no"
+                        android:textSize="@dimen/_11ssp" />
 
                 </RadioGroup>
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_ceased_time"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -184,7 +188,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_ceased" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_ceased_time_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -202,7 +206,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_ceased_time" />
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_report_time"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -214,7 +218,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_ceased_time_value" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_report_time_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -231,7 +235,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_report_time" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_occurence_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -258,6 +262,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/yes" />
 
@@ -266,12 +271,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/no" />
 
                 </RadioGroup>
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_first_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -285,7 +291,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rg_occurence" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_firstname"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -300,7 +306,7 @@
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_first_name" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_surname"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -314,7 +320,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_firstname" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_surname"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -329,7 +335,7 @@
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_surname" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_gender"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -356,6 +362,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/yes" />
 
@@ -364,12 +371,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/no" />
 
                 </RadioGroup>
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_home_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -383,7 +391,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rg_gender" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_home_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -401,7 +409,7 @@
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_home_address" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_state"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -415,7 +423,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_home_address" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_state"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -430,7 +438,7 @@
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_state" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_postcode"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -444,7 +452,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_state" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_postcode"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -459,7 +467,7 @@
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_postcode" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_home_phone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -473,7 +481,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_postcode" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_home_phone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -488,7 +496,7 @@
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_home_phone" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_mobile_no"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -496,12 +504,14 @@
                     android:text="Mobile Number:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
+                    android:inputType="number"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_home_phone" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_mobile_no"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -509,14 +519,15 @@
                     android:background="@drawable/boundary"
                     android:hint="enter Mobile number"
                     android:padding="8dp"
+                    android:inputType="phone"
+                    android:textSize="@dimen/_11ssp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_mobile_no" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_birthday"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -524,12 +535,13 @@
                     android:text="Birth Date:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_mobile_no" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/et_birthday"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -539,12 +551,12 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_birthday" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_occupation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -552,12 +564,13 @@
                     android:text="Occupation:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_birthday" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_occupation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -567,12 +580,12 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_occupation" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_workplace"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -580,12 +593,13 @@
                     android:text="Workplace Name:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_occupation" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_workplace"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -594,14 +608,14 @@
                     android:hint="Enter Workplace Name"
                     android:padding="8dp"
                     android:textColor="@android:color/black"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     android:textColorHint="@android:color/darker_gray"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_workplace" />
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_addres"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -609,12 +623,13 @@
                     android:text="Address:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_workplace" />
 
-                <TextView
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_addres"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -622,14 +637,14 @@
                     android:background="@drawable/boundary"
                     android:hint="enter address"
                     android:padding="8dp"
+                    android:textSize="@dimen/_11ssp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_addres" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_incident"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -637,12 +652,13 @@
                     android:text="Location of the Incident at the center:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_addres" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_incident"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -652,12 +668,12 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_incident" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_event_class"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -665,6 +681,7 @@
                     android:text="Event Classification:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_incident" />
@@ -682,6 +699,8 @@
                         android:id="@+id/rb_miss"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:buttonTint="@color/colorPrimary"
                         android:text="Near Miss" />
 
@@ -689,12 +708,16 @@
                         android:id="@+id/rb_incident"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:buttonTint="@color/colorPrimary"
                         android:text="Incident" />
 
                     <RadioButton
                         android:id="@+id/rb_hazard"
                         android:layout_width="wrap_content"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
                         android:text="Hazard" />
@@ -703,6 +726,8 @@
                         android:id="@+id/rb_contact"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:buttonTint="@color/colorPrimary"
                         android:text="Community Contact" />
 
@@ -710,43 +735,46 @@
                         android:id="@+id/rb_issue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:buttonTint="@color/colorPrimary"
                         android:text="HSE Document / Contact Issue" />
 
                 </RadioGroup>
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_brief"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="Brief Description of the incident(eg cut to left):"
+                    android:text="Brief Description of the incident(eg cut to left leg):"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rg_event_class" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_brief"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:inputType="text"
                     android:background="@drawable/boundary"
-                    android:hint="test description of incident"
+                    android:hint="Description of incident"
                     android:lines="3"
                     android:maxLines="3"
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_brief" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_description"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -754,12 +782,13 @@
                     android:text="Description of Event:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_brief" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_description"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -772,12 +801,12 @@
                     android:gravity="top"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_description" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_action"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -785,12 +814,13 @@
                     android:text="Immediate Action Taken:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_description" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_action"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -802,12 +832,12 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_action" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_injury"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -815,29 +845,30 @@
                     android:text="Injury Type:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_action" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_injury"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
-                    android:hint="enter injury type"
+                    android:hint="Choose an Item"
                     android:lines="1"
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_injury" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_illness"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -845,29 +876,30 @@
                     android:text="Injury / Illness Consequence:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_injury" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_illness"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
-                    android:hint="enter illness consequence"
+                    android:hint="Choose an Item"
                     android:lines="1"
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_illness" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_bodily"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -875,12 +907,13 @@
                     android:text="Bodily location injury/disease description:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_illness" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_bodily"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -893,12 +926,12 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_bodily" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_mark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -906,12 +939,13 @@
                     android:text="Please mark on where on the body the injury occurred:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_bodily" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_mark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -924,12 +958,12 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_mark" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_mechanism"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -937,30 +971,31 @@
                     android:text="Mechanism of injury / disease:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_mark" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_mechanism"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
                     android:gravity="top"
-                    android:hint="enter mechanism"
+                    android:hint="Choose an Item"
                     android:lines="1"
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_mechanism" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_others"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -968,30 +1003,31 @@
                     android:text="if others Please explain:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_mechanism" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_others"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
                     android:gravity="top"
-                    android:hint="enter reason"
+                    android:hint="Choose an Item"
                     android:lines="3"
                     android:maxLines="3"
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_others" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_observe"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -999,12 +1035,13 @@
                     android:text="What you see and observe:"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_others" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_observe"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1017,13 +1054,13 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_observe" />
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_third_party"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1031,6 +1068,7 @@
                     android:text="Was there a third party involved ?ie Did a cleaner attend:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_observe" />
@@ -1049,6 +1087,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/yes" />
 
                     <RadioButton
@@ -1056,12 +1096,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/no" />
 
                 </RadioGroup>
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_third_report"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1069,11 +1111,12 @@
                     android:text="If yes ,please attach a third party incident report"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_third_party" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_third_report"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1086,13 +1129,13 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_third_report" />
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_prop_damage"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1100,6 +1143,7 @@
                     android:text="Was there any property damage?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_third_report" />
@@ -1117,6 +1161,8 @@
                         android:id="@+id/rb_damage_yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/yes" />
 
@@ -1125,12 +1171,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/no" />
 
                 </RadioGroup>
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_damage_adv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1138,11 +1186,12 @@
                     android:text="Please advise type of damage:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_prop_damage" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_damage_adv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1155,12 +1204,12 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_damage_adv" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_damage_veh"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1168,30 +1217,30 @@
                     android:text="If there was vehicle damage,please indicate on diagram below the location of the damage:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_damage_adv" />
 
-                <EditText
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/et_damage_veh"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
                     android:gravity="top"
-                    android:hint="enter vehicle damage"
                     android:lines="3"
                     android:inputType="text"
                     android:maxLines="3"
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_damage_veh" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_attend_affe"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1199,6 +1248,7 @@
                     android:text="Did anyone attend to the affected person?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_damage_veh" />
@@ -1217,6 +1267,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/yes" />
 
                     <RadioButton
@@ -1224,11 +1276,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/no" />
 
                 </RadioGroup>
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1236,11 +1290,12 @@
                     android:text="Name(s):"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_attend_affe" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1253,13 +1308,12 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
-
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_first_aid"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1267,6 +1321,7 @@
                     android:text="Was First Aid treatment administered at the workplace?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_name" />
@@ -1285,6 +1340,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/yes" />
 
                     <RadioButton
@@ -1292,11 +1349,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/no" />
 
                 </RadioGroup>
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_aid_yes_admin"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1304,11 +1363,12 @@
                     android:text="If 'Yes', who administered the first aid?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_first_aid" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_aid_admin"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1316,11 +1376,12 @@
                     android:text="NAME:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_aid_yes_admin" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_aid_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1333,12 +1394,12 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_aid_admin" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_signature"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1346,10 +1407,10 @@
                     android:text="SIGNATURE:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_aid_name" />
-
 
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/lay_signature"
@@ -1358,7 +1419,7 @@
                     android:layout_margin="8dp"
                     android:background="@drawable/boundary"
                     android:lines="3"
-                    android:padding="8dp"
+                    android:padding="2dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_signature">
@@ -1369,6 +1430,7 @@
                         android:layout_height="0dp"
                         android:contentDescription="@null"
                         android:scaleType="fitXY"
+                        android:background="@drawable/signature_background"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -1376,19 +1438,20 @@
                 </android.support.constraint.ConstraintLayout>
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_injury_det"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="NAME:"
+                    android:text="please provide details of injury/illness and first aid treatment provided:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/lay_signature" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_injury_detail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1401,13 +1464,13 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_injury_det" />
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_med_center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1415,30 +1478,30 @@
                     android:text="Medical Center/Doctor/Hospitals that the injured person attended:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_injury_detail" />
 
-                <EditText
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/et_med_center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
                     android:gravity="top"
-                    android:hint="enter medical center"
                     android:lines="3"
                     android:maxLines="3"
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_med_center" />
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_date_atten"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1446,26 +1509,27 @@
                     android:text="Date attended:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_med_center" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/et_date_atten"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
-                    android:hint="enter date"
+                    android:hint="select date"
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_date_atten" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_ambulance"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1473,6 +1537,7 @@
                     android:text="Did an ambulance attend?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_date_atten" />
@@ -1491,6 +1556,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/yes" />
 
                     <RadioButton
@@ -1498,12 +1565,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/no" />
 
                 </RadioGroup>
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_amb_req"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1511,11 +1580,12 @@
                     android:text="Who requested the Ambulance?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_ambulance" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_amb_req"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1528,12 +1598,12 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_amb_req" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_amb_per"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1541,42 +1611,44 @@
                     android:text="Person Completing the Incident Report:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_amb_req" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_amb_per_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="Name"
+                    android:textSize="@dimen/_12ssp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_amb_per" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_amb_per_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
                     android:gravity="top"
+                    android:textSize="@dimen/_11ssp"
                     android:hint="enter who requested ambulance"
                     android:lines="3"
                     android:maxLines="3"
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_amb_per_name" />
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_amb_per_sign"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1584,6 +1656,7 @@
                     android:text="SIGNATURE:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_amb_per_name" />
@@ -1596,7 +1669,7 @@
                     android:layout_margin="8dp"
                     android:background="@drawable/boundary"
                     android:lines="3"
-                    android:padding="8dp"
+                    android:padding="2dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_amb_per_sign">
@@ -1606,6 +1679,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:scaleType="fitXY"
+                        android:background="@drawable/signature_background"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -1613,7 +1687,7 @@
                 </android.support.constraint.ConstraintLayout>
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_amb_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1621,46 +1695,47 @@
                     android:text="Date:"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/lay_amb_per_sign" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/et_amb_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
-                    android:hint="enter date"
+                    android:hint="select date"
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_amb_date" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/et_complete_note"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="@string/complete_note"
-                    android:padding="8dp"
                     android:textStyle="bold"
                     android:textIsSelectable="false"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_amb_date" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_weather_reas"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="Was wear a factor?"
+                    android:textSize="@dimen/_12ssp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
@@ -1680,6 +1755,8 @@
                         android:id="@+id/rb_weather_yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/yes" />
 
@@ -1687,12 +1764,14 @@
                         android:id="@+id/rb_weather_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/no" />
 
                 </RadioGroup>
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_weather_cond"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1700,11 +1779,12 @@
                     android:text="Weather condition at the time?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_weather" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_weather_cond"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1717,12 +1797,12 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_weather_cond" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_drug_affect"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1730,6 +1810,7 @@
                     android:text="Did this person appear to be affected by drugs or alcohol?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_weather_cond" />
@@ -1748,19 +1829,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/yes" />
 
                     <RadioButton
                         android:id="@+id/rb_drug_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:buttonTint="@color/colorPrimary"
                         android:text="@string/no" />
 
                 </RadioGroup>
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_footwear"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1768,11 +1853,12 @@
                     android:text="Type of footwear worn?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_drug_affect" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_footwear"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1785,12 +1871,12 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_footwear" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_eyewear"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1798,11 +1884,12 @@
                     android:text="Type of eyewear worn?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_footwear" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_eyewear"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1815,12 +1902,12 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_eyewear" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_carrying"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1828,11 +1915,12 @@
                     android:text="Were they carring anything?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_eyewear" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_carrying"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1845,13 +1933,13 @@
                     android:padding="8dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_carrying" />
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_cctv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1859,6 +1947,7 @@
                     android:text="CCTV Available?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_carrying" />
@@ -1877,6 +1966,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/yes" />
 
                     <RadioButton
@@ -1884,11 +1975,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/no" />
 
                 </RadioGroup>
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_photos"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1896,6 +1989,7 @@
                     android:text="Photos Available?"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_cctv" />
@@ -1914,6 +2008,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/yes" />
 
                     <RadioButton
@@ -1921,11 +2016,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/no" />
 
                 </RadioGroup>
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_wand_report"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1951,6 +2047,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/yes" />
 
                     <RadioButton
@@ -1958,12 +2055,52 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:fontFamily="@string/helvetica_neue_medium"
+                        android:text="@string/no" />
+
+                </RadioGroup>
+
+                <com.grandgroup.views.CustomTextView
+                    android:id="@+id/tv_warning_signs"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Are Warning Signs Available?"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="@id/et_affected"
+                    app:layout_constraintRight_toRightOf="@+id/et_affected"
+                    app:layout_constraintTop_toBottomOf="@+id/rg_wand_report" />
+
+                <RadioGroup
+                    android:id="@+id/rg_warning_sign"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/et_affected"
+                    app:layout_constraintRight_toRightOf="@+id/et_affected"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_warning_signs">
+
+                    <RadioButton
+                        android:id="@+id/rb_warning_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:fontFamily="@string/helvetica_neue_medium"
+                        android:text="@string/yes" />
+
+                    <RadioButton
+                        android:id="@+id/rb_warning_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/no" />
 
                 </RadioGroup>
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_wet_weather"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1989,6 +2126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/yes" />
 
                     <RadioButton
@@ -1996,12 +2134,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="@string/no" />
 
                 </RadioGroup>
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_any_com"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -2013,7 +2152,7 @@
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_wet_weather" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_comment"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -2032,7 +2171,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_any_com" />
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_incident_specs"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -2058,39 +2197,43 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
-                        android:text="using crunches" />
+                        android:fontFamily="@string/helvetica_neue_medium"
+                        android:text="Using Crutches" />
 
                     <RadioButton
                         android:id="@+id/rb_stick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
-                        android:text="using a walking stick" />
+                        android:fontFamily="@string/helvetica_neue_medium"
+                        android:text="Using a walking stick" />
 
                     <RadioButton
                         android:id="@+id/rb_frame"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:buttonTint="@color/colorPrimary"
-                        android:text="using a walking frame" />
+                        android:text="Using a walking frame" />
 
                     <RadioButton
                         android:id="@+id/rb_wheelchair"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
-                        android:text="using a wheelchair" />
+                        android:text="Using a wheelchair" />
 
                     <RadioButton
                         android:id="@+id/rb_motorised"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
+                        android:fontFamily="@string/helvetica_neue_medium"
                         android:text="Using a motorised wheelchair/scooter" />
 
                 </RadioGroup>
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_ensure"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -2102,7 +2245,7 @@
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/rg_incident_specs" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_notes"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -2114,7 +2257,7 @@
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_ensure" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_notes"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -2146,6 +2289,7 @@
                 android:text="Email"
                 android:textColor="@color/colorWhite"
                 android:textSize="12sp"
+                android:fontFamily="@string/helvetica_neue_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/btn_save"
@@ -2159,6 +2303,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/btn_round_corner"
                 android:text="Save"
+                android:fontFamily="@string/helvetica_neue_medium"
                 android:textColor="@color/colorWhite"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"

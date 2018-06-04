@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,13 +61,11 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.Custom
                 holder.lay_day.setBackground(null);
             }
 
-            String formattedDate = String.valueOf(new StringBuilder().append(GrandGroupHelper.getMonth(calendar.get(Calendar.MONTH))).append(" ")
-                    .append(arrayList.get(position).getValue().toString())
-                    .append(", ").append(calendar.get(Calendar.YEAR)));
-            ArrayList<EventsModel> eventsList = new ArrayList<>(SQLiteQueries.getInstance(mContext).getEvents(formattedDate));
-            if (eventsList.size() > 0)
-                holder.saved_event_imageView.setVisibility(View.VISIBLE);
 
+            if (getEventsList(position).size() > 0)
+                holder.saved_event_imageView.setVisibility(View.VISIBLE);
+            else
+                holder.saved_event_imageView.setVisibility(View.INVISIBLE);
 
             if (firsttym)
                 if (currentcalendar.get(Calendar.YEAR) == calendar.get(Calendar.YEAR))
@@ -75,6 +74,7 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.Custom
                             selectedPosition = position;
                             holder.lay_day.setBackground(ContextCompat.getDrawable(mContext, R.drawable.selector));
                             firsttym = false;
+
                         }
 
         }
@@ -83,6 +83,15 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.Custom
     @Override
     public int getItemCount() {
         return arrayList.size();
+    }
+
+    private ArrayList<EventsModel> getEventsList(int position) {
+        String formattedDate = String.valueOf(new StringBuilder().append(GrandGroupHelper.getMonth(calendar.get(Calendar.MONTH))).append(" ")
+                .append(arrayList.get(position).getValue().toString())
+                .append(", ").append(calendar.get(Calendar.YEAR)));
+        ArrayList<EventsModel> eventsList = new ArrayList<>(SQLiteQueries.getInstance(mContext).getEvents(formattedDate));
+        Log.e(formattedDate, String.valueOf(eventsList.size()));
+        return eventsList;
     }
 
     public interface onDayClick {

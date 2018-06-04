@@ -14,12 +14,11 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.grandgroup.R;
 import com.grandgroup.model.SiteModel;
-import com.grandgroup.model.UserProfileBean;
 import com.grandgroup.services.GPSTracker;
-import com.grandgroup.utills.AppConstant;
 import com.grandgroup.utills.AppPrefrence;
 import com.grandgroup.utills.CallProgressWheel;
 import com.grandgroup.utills.GrandGroupHelper;
+import com.grandgroup.views.CustomTextView;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -38,14 +37,14 @@ import butterknife.OnClick;
 
 public class AttendanceActivity extends BaseActivity {
     @BindView(R.id.tv_title)
-    TextView tvTitle;
+    CustomTextView tvTitle;
 
     private AppCompatActivity mContext;
     private IntentIntegrator qrScan;
     private GPSTracker gpsTracker;
     private Gson gson;
     private String siteName = "", siteObjectId;
-    private  Location loc1 = new Location(""), loc2 = new Location("");
+    private Location loc1 = new Location(""), loc2 = new Location("");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,16 +57,16 @@ public class AttendanceActivity extends BaseActivity {
         mContext = AttendanceActivity.this;
         ButterKnife.bind(mContext);
         gpsTracker = new GPSTracker(mContext);
-         gson = new Gson();
+        gson = new Gson();
         tvTitle.setText("Attendance");
         qrScan = new IntentIntegrator(mContext);
-       // qrScan.setOrientation(1);
+        // qrScan.setOrientation(1);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-       gpsTracker.getLatitude() ;
+        gpsTracker.getLatitude();
         gpsTracker.getLongitude();
     }
 
@@ -110,15 +109,16 @@ public class AttendanceActivity extends BaseActivity {
 
     private void uploadDataOnParse(String contents) {
         CallProgressWheel.showLoadingDialog(mContext);
-         ArrayList<SiteModel> sitesList ;
+        ArrayList<SiteModel> sitesList;
         ParseUser user = ParseUser.getCurrentUser();
         String parseUserId = user.getObjectId();
         String json = AppPrefrence.init(mContext).getString("siteArrayString");
-        Type type = new TypeToken<ArrayList<SiteModel>>(){}.getType();
-        sitesList= gson.fromJson(json, type);
+        Type type = new TypeToken<ArrayList<SiteModel>>() {
+        }.getType();
+        sitesList = gson.fromJson(json, type);
         loc1.setLatitude(gpsTracker.getLatitude());
         loc1.setLongitude(gpsTracker.getLongitude());
-        if(checkForNearByLocation(sitesList, loc1)) {
+        if (checkForNearByLocation(sitesList, loc1)) {
             ParseObject attendenceObject = new ParseObject("Attendence");
             attendenceObject.put("location_code", contents);
             attendenceObject.put("submitted_date", getCurrentDate());
@@ -127,7 +127,7 @@ public class AttendanceActivity extends BaseActivity {
             attendenceObject.put("submitted_site_id", siteObjectId);
             attendenceObject.put("submitted_site", ParseObject.createWithoutData("Site", siteObjectId));
             attendenceObject.put("submitted_month", getCurrentDate());
-             attendenceObject.put("submitted_site_name", siteName);
+            attendenceObject.put("submitted_site_name", siteName);
             attendenceObject.put("user_name", user.getUsername());
             attendenceObject.saveInBackground(new SaveCallback() {
                 @Override
@@ -139,8 +139,7 @@ public class AttendanceActivity extends BaseActivity {
                         Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
                 }
             });
-        }
-        else {
+        } else {
             CallProgressWheel.dismissLoadingDialog();
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.site_checkin_error_msg), Toast.LENGTH_LONG).show();
 
@@ -148,22 +147,22 @@ public class AttendanceActivity extends BaseActivity {
     }
 
     private boolean checkForNearByLocation(ArrayList<SiteModel> sitesList, Location loc1) {
-        boolean isAtLocation= false;
-        for(int i = 0; i<sitesList.size();i++){
+        boolean isAtLocation = false;
+        for (int i = 0; i < sitesList.size(); i++) {
             loc2.setLatitude(sitesList.get(i).getSite_location().getLatitude());
             loc2.setLongitude(sitesList.get(i).getSite_location().getLongitude());
-            if(loc1.distanceTo(loc2) <= 500){
+            if (loc1.distanceTo(loc2) <= 500) {
                 isAtLocation = true;
-                siteName =  sitesList.get(i).getSite_name();
-            siteObjectId = sitesList.get(i).getObjectId();
+                siteName = sitesList.get(i).getSite_name();
+                siteObjectId = sitesList.get(i).getObjectId();
                 break;
             }
         }
         return isAtLocation;
     }
 
-    private String getCurrentDate(){
-         Calendar cal = Calendar.getInstance();
+    private String getCurrentDate() {
+        Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(System.currentTimeMillis());
         return String.valueOf(new StringBuilder().append(GrandGroupHelper.getMonth(cal.get(Calendar.MONTH))).append(" ").append(cal.get(Calendar.DAY_OF_MONTH)).append(", ").append(cal.get(Calendar.YEAR)));
     }

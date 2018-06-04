@@ -16,12 +16,12 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="7dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tool_bar"
-        app:layout_constraintVertical_bias="0.0"
-        android:layout_marginBottom="7dp">
+        app:layout_constraintVertical_bias="0.0">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -36,7 +36,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_report_desc_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -47,21 +47,23 @@
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/tv_report_desc"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/boundary"
+                    android:gravity="top"
                     android:imeOptions="actionNext"
                     android:lines="3"
                     android:maxLines="3"
                     android:padding="8dp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_report_desc_title" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_report_date_time_title"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -72,51 +74,56 @@
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/tv_report_desc" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_event_date"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/boundary"
                     android:drawableEnd="@drawable/ic_arrow"
+                    android:gravity="center_vertical"
                     android:padding="8dp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_report_date_time_title" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_location"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="10dp"
                     android:text="Location Of Hazard"
                     android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_12ssp"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/tv_event_date" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_location"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/boundary"
                     android:imeOptions="actionNext"
                     android:maxLines="1"
                     android:padding="8dp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_location" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="Photo Of Hazard"
                     android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_12ssp"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/et_location" />
@@ -124,7 +131,7 @@
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/lay_photo"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="@dimen/_80sdp"
                     android:layout_margin="8dp"
                     android:background="@drawable/boundary"
                     android:lines="3"
@@ -137,6 +144,7 @@
                         android:id="@+id/iv_image"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
+                        android:contentDescription="@null"
                         android:src="@drawable/ic_camera"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -145,165 +153,187 @@
                 </android.support.constraint.ConstraintLayout>
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_likelihood"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="10dp"
                     android:text="Likelihood"
                     android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_12ssp"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/lay_photo" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_select_likelihood"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/boundary"
                     android:drawableEnd="@drawable/ic_arrow"
+                    android:gravity="center_vertical"
                     android:hint="Select Likelihood"
                     android:padding="8dp"
                     android:textColorHint="@android:color/darker_gray"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_likelihood" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_consequence"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="10dp"
                     android:text="Consequence"
                     android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_12ssp"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/tv_select_likelihood" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_select_consq"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/boundary"
                     android:drawableEnd="@drawable/ic_arrow"
+                    android:gravity="center_vertical"
                     android:hint="Select Consequence"
                     android:padding="8dp"
                     android:textColorHint="@android:color/darker_gray"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_consequence" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_controls"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="10dp"
                     android:text="Controls :"
                     android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_12ssp"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/tv_select_consq" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_controls"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/boundary"
+                    android:gravity="center_vertical"
+                    android:inputType="text"
                     android:padding="8dp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_controls" />
 
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_control_eff"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="10dp"
                     android:text="Control Effectiveness"
                     android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_11ssp"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/et_controls" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/et_control_eff"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/boundary"
                     android:drawableEnd="@drawable/ic_arrow"
+                    android:gravity="center_vertical"
                     android:hint="Select Controls Effectiveness"
                     android:padding="8dp"
                     android:textColorHint="@android:color/darker_gray"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_control_eff" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_action_plan"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="10dp"
                     android:text="Action Plan:"
                     android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_12ssp"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/et_control_eff" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_action_plan"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/boundary"
+                    android:gravity="center_vertical"
                     android:imeOptions="actionNext"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:padding="8dp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_action_plan" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_reported_by"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="10dp"
                     android:text="Reported By:"
                     android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_12ssp"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/et_action_plan" />
 
-                <EditText
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_reported_by"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/boundary"
+                    android:gravity="center_vertical"
                     android:imeOptions="actionDone"
+                    android:lines="1"
                     android:maxLines="1"
                     android:padding="8dp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_reported_by" />
 
-                <TextView
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_signature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="Signature"
                     android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_12ssp"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="@id/tv_report_desc"
                     app:layout_constraintTop_toBottomOf="@+id/et_reported_by" />
@@ -311,10 +341,10 @@
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/lay_signature"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="@dimen/_80sdp"
                     android:layout_margin="8dp"
+                    android:padding="2dp"
                     android:background="@drawable/boundary"
-                    android:padding="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_signature">
@@ -323,7 +353,9 @@
                         android:id="@+id/iv_signature"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
+                        android:contentDescription="@null"
                         android:scaleType="fitXY"
+                        android:background="@drawable/signature_background"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -333,14 +365,15 @@
 
             <Button
                 android:id="@+id/btn_email"
-                android:layout_width="100dp"
-                android:layout_height="35dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="30dp"
+                android:layout_width="@dimen/_95sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_25sdp"
                 android:background="@drawable/btn_round_corner"
+                android:gravity="center"
                 android:text="Email"
                 android:textColor="@color/colorWhite"
-                android:textSize="12sp"
+                android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/btn_save"
@@ -348,14 +381,15 @@
 
             <Button
                 android:id="@+id/btn_save"
-                android:layout_width="100dp"
-                android:layout_height="35dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="30dp"
+                android:layout_width="@dimen/_95sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_25sdp"
                 android:background="@drawable/btn_round_corner"
+                android:gravity="center"
                 android:text="Save"
                 android:textColor="@color/colorWhite"
-                android:textSize="12sp"
+                android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/btn_email"
                 app:layout_constraintRight_toRightOf="parent"
