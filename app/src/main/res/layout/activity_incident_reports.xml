@@ -110,7 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="12dp"
-                    android:text="Affected Person Details:"
+                    android:text="Occurrence Date :"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     android:textSize="@dimen/_12ssp"
@@ -151,28 +151,28 @@
                     android:id="@+id/rg_ceased"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintLeft_toLeftOf="@+id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_ceased">
 
                     <RadioButton
-                        android:fontFamily="@string/helvetica_neue_medium"
                         android:id="@+id/rb_ceased_yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
-                        android:text="@string/yes" />
+                        android:fontFamily="@string/helvetica_neue_medium"
+                        android:text="@string/yes"
+                        android:textSize="@dimen/_11ssp" />
 
                     <RadioButton
-                        android:fontFamily="@string/helvetica_neue_medium"
                         android:id="@+id/rb_ceased_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_11ssp"
                         android:buttonTint="@color/colorPrimary"
-                        android:text="@string/no" />
+                        android:fontFamily="@string/helvetica_neue_medium"
+                        android:text="@string/no"
+                        android:textSize="@dimen/_11ssp" />
 
                 </RadioGroup>
 
@@ -519,6 +519,7 @@
                     android:background="@drawable/boundary"
                     android:hint="enter Mobile number"
                     android:padding="8dp"
+                    android:inputType="phone"
                     android:textSize="@dimen/_11ssp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray"
@@ -628,7 +629,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_workplace" />
 
-                <com.grandgroup.views.CustomTextView
+                <com.grandgroup.views.CustomEditText
                     android:id="@+id/et_addres"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1221,14 +1222,13 @@
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_damage_adv" />
 
-                <com.grandgroup.views.CustomEditText
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/et_damage_veh"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
                     android:gravity="top"
-                    android:hint="enter vehicle damage"
                     android:lines="3"
                     android:inputType="text"
                     android:maxLines="3"
@@ -1312,7 +1312,6 @@
                     app:layout_constraintLeft_toLeftOf="@id/et_affected"
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/tv_name" />
-
 
                 <com.grandgroup.views.CustomTextView
                     android:id="@+id/tv_first_aid"
@@ -1413,7 +1412,6 @@
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_aid_name" />
 
-
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/lay_signature"
                     android:layout_width="0dp"
@@ -1421,7 +1419,7 @@
                     android:layout_margin="8dp"
                     android:background="@drawable/boundary"
                     android:lines="3"
-                    android:padding="8dp"
+                    android:padding="2dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_signature">
@@ -1432,6 +1430,7 @@
                         android:layout_height="0dp"
                         android:contentDescription="@null"
                         android:scaleType="fitXY"
+                        android:background="@drawable/signature_background"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -1484,14 +1483,13 @@
                     app:layout_constraintRight_toRightOf="@+id/et_affected"
                     app:layout_constraintTop_toBottomOf="@+id/et_injury_detail" />
 
-                <com.grandgroup.views.CustomEditText
+                <com.grandgroup.views.CustomTextView
                     android:id="@+id/et_med_center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/boundary"
                     android:gravity="top"
-                    android:hint="enter medical center"
                     android:lines="3"
                     android:maxLines="3"
                     android:padding="8dp"
@@ -1671,7 +1669,7 @@
                     android:layout_margin="8dp"
                     android:background="@drawable/boundary"
                     android:lines="3"
-                    android:padding="8dp"
+                    android:padding="2dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_amb_per_sign">
@@ -1681,6 +1679,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:scaleType="fitXY"
+                        android:background="@drawable/signature_background"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"

@@ -48,8 +48,8 @@ public class DashBoardActivity extends AppCompatActivity {
         mContext = DashBoardActivity.this;
         ButterKnife.bind(mContext);
 
-        if (!AppPrefrence.init(mContext).getBoolean(AppConstant.HAS_SITES))
-            getSitesFormParse();
+        // if (!AppPrefrence.init(mContext).getBoolean(AppConstant.HAS_SITES))
+        getSitesFormParse();
     }
 
     private void getSitesFormParse() {
@@ -157,4 +157,3 @@ public class DashBoardActivity extends AppCompatActivity {
         mContext.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 }
-

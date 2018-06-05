@@ -61,7 +61,7 @@ public class IncidentModel implements Serializable {
     private String ambulance_who = "";
     private String cease_date = "";
     private String first_aid_name = "";
-    private String person_phone_address = "";
+    private String person_home_address = "";
     private String action_taken = "";
     private String incident_desc = "";
     private String person_workplace_name = "";
@@ -561,12 +561,12 @@ public class IncidentModel implements Serializable {
         this.first_aid_name = first_aid_name;
     }
 
-    public String getPerson_phone_address() {
-        return person_phone_address;
+    public String getPerson_home_address() {
+        return person_home_address;
     }
 
-    public void setPerson_phone_address(String person_phone_address) {
-        this.person_phone_address = person_phone_address;
+    public void setPerson_home_address(String person_home_address) {
+        this.person_home_address = person_home_address;
     }
 
     public String getAction_taken() {

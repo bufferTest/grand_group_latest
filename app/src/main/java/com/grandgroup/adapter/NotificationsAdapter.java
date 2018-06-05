@@ -1,6 +1,7 @@
 package com.grandgroup.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -36,6 +37,11 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
     @Override
     public void onBindViewHolder(@NonNull NotificationsAdapter.CustomHolder holder, int position) {
         holder.tvTime.setVisibility(View.VISIBLE);
+        Typeface typeFace = Typeface.createFromAsset(context.getAssets(),"fonts/HelveticaNeueIt.ttf" );
+        holder.tvTime.setTypeface(typeFace);
+
+        Typeface typeFac1 = Typeface.createFromAsset(context.getAssets(),"fonts/HelveticaNeue Light.ttf" );
+        holder.tvText.setTypeface(typeFac1);
         holder.tvText.setText(dayList.get(position).getMessage());
         holder.tvTime.setText(dayList.get(position).getTime());
     }

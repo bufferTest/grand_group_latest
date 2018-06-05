@@ -177,12 +177,12 @@ public class UserProfileActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (requestCode == 1) {
+            if (requestCode == CAMERA_REQUEST) {
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
                 int nh = (int) (photo.getHeight() * (512.0 / photo.getWidth()));
                 scaled = Bitmap.createScaledBitmap(photo, 512, nh, true);
                 ivUserPic.setImageBitmap(scaled);
-            } else if (requestCode == 2) {
+            } else if (requestCode == GALLERY_REQUEST) {
                 Uri selectedImage = data.getData();
                 String[] filePath = {MediaStore.Images.Media.DATA};
                 Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
@@ -206,8 +206,9 @@ public class UserProfileActivity extends BaseActivity {
         parseUser.put(getString(R.string.userLastName), userLastName);
         parseUser.put(getString(R.string.userEmail), userEmail);
         if (scaled != null) {
+            Bitmap scaledProfilePic = Bitmap.createScaledBitmap(scaled, 320, 320, false);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            scaled.compress(Bitmap.CompressFormat.PNG, 70, stream);
+            scaledProfilePic.compress(Bitmap.CompressFormat.PNG, 70, stream);
             byte[] image = stream.toByteArray();
             ParseFile file = new ParseFile("ile.png", image);
             parseUser.put(getString(R.string.profilePic), file);

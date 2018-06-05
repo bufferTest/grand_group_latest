@@ -19,6 +19,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -92,6 +93,7 @@ public class NotificationsActivity extends BaseActivity {
     private void setAdapter() {
         try {
             if (notificationsList.size() > 0) {
+                Collections.reverse(notificationsList);
                 NotificationsAdapter adapter = new NotificationsAdapter(mContext, notificationsList);
                 rv_notifications.setHasFixedSize(true);
                 rv_notifications.setAdapter(adapter);

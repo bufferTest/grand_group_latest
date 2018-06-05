@@ -1,21 +1,28 @@
 package com.grandgroup.activities;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ShareCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -27,13 +34,15 @@ import com.grandgroup.utills.CallProgressWheel;
 import com.grandgroup.utills.CommonUtils;
 import com.grandgroup.utills.PermissionUtils;
 import com.grandgroup.views.CustomDateDialog;
-import com.grandgroup.views.CustomEditText;
-import com.grandgroup.views.CustomTextView;
 import com.grandgroup.views.CustomTimeDialog;
+import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
+import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,19 +59,19 @@ import static com.grandgroup.utills.AppConstant.WRITE_PERMISSIONS_REQUEST;
 
 public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.tv_title)
-    CustomTextView tvTitle;
+    TextView tvTitle;
     @BindView(R.id.btn_email)
     Button btnEmail;
     @BindView(R.id.btn_save)
     Button btnSave;
     @BindView(R.id.et_affected)
-    CustomEditText etAffected;
+    EditText etAffected;
     @BindView(R.id.rb_contractor)
     RadioButton rbContractor;
     @BindView(R.id.rg_type)
     RadioGroup rgType;
     @BindView(R.id.tv_occurence_value)
-    CustomTextView tvOccurenceValue;
+    TextView tvOccurenceValue;
     @BindView(R.id.rb_ceased_yes)
     RadioButton rbCeasedYes;
     @BindView(R.id.rb_ceased_no)
@@ -70,11 +79,11 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_ceased)
     RadioGroup rgCeased;
     @BindView(R.id.tv_ceased_time_value)
-    CustomTextView tvCeasedTimeValue;
+    TextView tvCeasedTimeValue;
     @BindView(R.id.tv_report_time_value)
-    CustomTextView tvReportTimeValue;
+    TextView tvReportTimeValue;
     @BindView(R.id.tv_occurence_date)
-    CustomTextView tvOccurenceDate;
+    TextView tvOccurenceDate;
     @BindView(R.id.rb_occ_yes)
     RadioButton rbOccYes;
     @BindView(R.id.rb_occ_no)
@@ -82,9 +91,9 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_occurence)
     RadioGroup rgOccurence;
     @BindView(R.id.et_firstname)
-    CustomEditText etFirstname;
+    EditText etFirstname;
     @BindView(R.id.et_surname)
-    CustomEditText etSurname;
+    EditText etSurname;
     @BindView(R.id.rb_male)
     RadioButton rbMale;
     @BindView(R.id.rb_female)
@@ -92,25 +101,23 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_gender)
     RadioGroup rgGender;
     @BindView(R.id.et_home_address)
-    CustomEditText etHomeAddress;
+    EditText etHomeAddress;
     @BindView(R.id.et_state)
-    CustomEditText etState;
+    EditText etState;
     @BindView(R.id.et_postcode)
-    CustomEditText etPostcode;
+    EditText etPostcode;
     @BindView(R.id.et_home_phone)
-    CustomEditText etHomePhone;
+    EditText etHomePhone;
     @BindView(R.id.et_mobile_no)
-    CustomEditText etMobileNo;
+    EditText etMobileNo;
     @BindView(R.id.et_birthday)
-    CustomTextView etBirthday;
+    TextView etBirthday;
     @BindView(R.id.et_occupation)
-    CustomEditText etOccupation;
+    TextView etOccupation;
     @BindView(R.id.et_workplace)
-    CustomEditText etWorkplace;
-    @BindView(R.id.et_addres)
-    CustomTextView etAddres;
+    TextView etWorkplace;
     @BindView(R.id.et_incident)
-    CustomEditText etIncident;
+    TextView etIncident;
     @BindView(R.id.rb_miss)
     RadioButton rbMiss;
     @BindView(R.id.rb_incident)
@@ -124,25 +131,27 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_event_class)
     RadioGroup rgEventClass;
     @BindView(R.id.et_brief)
-    CustomEditText etBrief;
+    EditText etBrief;
     @BindView(R.id.et_description)
-    CustomEditText etDescription;
+    EditText etDescription;
     @BindView(R.id.et_action)
-    CustomEditText etAction;
+    EditText etAction;
+    @BindView(R.id.et_addres)
+    EditText etPersonAddress;
     @BindView(R.id.et_injury)
-    CustomEditText etInjury;
+    EditText etInjury;
     @BindView(R.id.et_illness)
-    CustomEditText etIllness;
+    EditText etIllness;
     @BindView(R.id.et_bodily)
-    CustomEditText etBodily;
+    EditText etBodily;
     @BindView(R.id.et_mark)
-    CustomEditText etMark;
+    EditText etMark;
     @BindView(R.id.et_mechanism)
-    CustomEditText etMechanism;
+    EditText etMechanism;
     @BindView(R.id.et_others)
-    CustomEditText etOthers;
+    EditText etOthers;
     @BindView(R.id.et_observe)
-    CustomEditText etObserve;
+    EditText etObserve;
     @BindView(R.id.rb_third_yes)
     RadioButton rbThirdYes;
     @BindView(R.id.rb_third_no)
@@ -150,7 +159,7 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_third_party)
     RadioGroup rgThirdParty;
     @BindView(R.id.et_third_report)
-    CustomEditText etThirdReport;
+    EditText etThirdReport;
     @BindView(R.id.rb_damage_yes)
     RadioButton rbDamageYes;
     @BindView(R.id.rb_damage_no)
@@ -158,9 +167,9 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_prop_damage)
     RadioGroup rgPropDamage;
     @BindView(R.id.et_damage_adv)
-    CustomEditText etDamageAdv;
+    EditText etDamageAdv;
     @BindView(R.id.et_damage_veh)
-    CustomEditText etDamageVeh;
+    TextView etDamageVeh;
     @BindView(R.id.rb_attend_yes)
     RadioButton rbAttendYes;
     @BindView(R.id.rb_attend_no)
@@ -168,7 +177,7 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_attend_affe)
     RadioGroup rgAttendAffe;
     @BindView(R.id.et_name)
-    CustomEditText etName;
+    EditText etName;
     @BindView(R.id.rb_aid_yes)
     RadioButton rbAidYes;
     @BindView(R.id.rb_aid_no)
@@ -176,15 +185,15 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_first_aid)
     RadioGroup rgFirstAid;
     @BindView(R.id.et_aid_name)
-    CustomEditText etAidName;
+    EditText etAidName;
     @BindView(R.id.iv_image)
     ImageView ivImage;
     @BindView(R.id.et_injury_detail)
-    CustomEditText etInjuryDetail;
+    EditText etInjuryDetail;
     @BindView(R.id.et_med_center)
-    CustomEditText etMedCenter;
+    TextView etMedCenter;
     @BindView(R.id.et_date_atten)
-    CustomTextView etDateAtten;
+    TextView etDateAtten;
     @BindView(R.id.rb_amb_yes)
     RadioButton rbAmbYes;
     @BindView(R.id.rb_amb_no)
@@ -192,13 +201,13 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_ambulance)
     RadioGroup rgAmbulance;
     @BindView(R.id.et_amb_req)
-    CustomEditText etAmbReq;
+    EditText etAmbReq;
     @BindView(R.id.et_amb_per_name)
-    CustomEditText etAmbPerName;
+    EditText etAmbPerName;
     @BindView(R.id.iv_amb_per_sign)
     ImageView ivAmbPerSign;
     @BindView(R.id.et_amb_date)
-    CustomTextView etAmbDate;
+    TextView etAmbDate;
     @BindView(R.id.rb_weather_yes)
     RadioButton rbWeatherYes;
     @BindView(R.id.rb_weather_no)
@@ -206,7 +215,7 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_weather)
     RadioGroup rgWeather;
     @BindView(R.id.et_weather_cond)
-    CustomEditText etWeatherCond;
+    EditText etWeatherCond;
     @BindView(R.id.rb_drug_yes)
     RadioButton rbDrugYes;
     @BindView(R.id.rb_drug_no)
@@ -214,11 +223,11 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_drug_affect)
     RadioGroup rgDrugAffect;
     @BindView(R.id.et_footwear)
-    CustomEditText etFootwear;
+    EditText etFootwear;
     @BindView(R.id.et_eyewear)
-    CustomEditText etEyewear;
+    EditText etEyewear;
     @BindView(R.id.et_carrying)
-    CustomEditText etCarrying;
+    EditText etCarrying;
     @BindView(R.id.rb_cctv_yes)
     RadioButton rbCctvYes;
     @BindView(R.id.rb_cctv_no)
@@ -244,7 +253,7 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_wet_weather)
     RadioGroup rgWetWeather;
     @BindView(R.id.et_comment)
-    CustomEditText etComment;
+    EditText etComment;
     @BindView(R.id.rb_crunches)
     RadioButton rbCrunches;
     @BindView(R.id.rb_stick)
@@ -258,18 +267,13 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_incident_specs)
     RadioGroup rgIncidentSpecs;
     @BindView(R.id.et_notes)
-    CustomEditText etNotes;
+    EditText etNotes;
     @BindView(R.id.lay_screenshot)
     ConstraintLayout layScreenshot;
-    @BindView(R.id.rb_warning_yes)
-    RadioButton rbWarningYes;
-    @BindView(R.id.rb_warning_no)
-    RadioButton rbWarningNo;
-    @BindView(R.id.rg_warning_sign)
-    RadioGroup rgWarningSign;
     private IncidentModel incidentReportObject;
     private AppCompatActivity mContext;
     private Bitmap signatureBitmap, ambPerSign;
+    ParseObject incidentObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -293,15 +297,6 @@ public class IncidentReportsActivity extends BaseActivity {
                     break;
                 case "2":
                     rbCeasedNo.setChecked(true);
-                    break;
-            }
-
-            switch (incidentReportObject.getWarning_sign_option()) {
-                case "1":
-                    rbWarningYes.setChecked(true);
-                    break;
-                case "2":
-                    rbWarningNo.setChecked(true);
                     break;
             }
             switch (incidentReportObject.getIncedent_option()) {
@@ -483,7 +478,7 @@ public class IncidentReportsActivity extends BaseActivity {
             tvReportTimeValue.setText(incidentReportObject.getReported_date());
             etFirstname.setText(incidentReportObject.getPerson_first_name());
             etSurname.setText(incidentReportObject.getPerson_sur_name());
-            etHomeAddress.setText(incidentReportObject.getPerson_phone_address());
+            etHomeAddress.setText(incidentReportObject.getPerson_home_address());
             etState.setText(incidentReportObject.getPerson_state());
             etPostcode.setText(incidentReportObject.getPerson_post_code());
             etHomePhone.setText(incidentReportObject.getPerson_home_phone());
@@ -491,7 +486,7 @@ public class IncidentReportsActivity extends BaseActivity {
             etBirthday.setText(incidentReportObject.getPerson_birth_date());
             etOccupation.setText(incidentReportObject.getPerson_occupation());
             etWorkplace.setText(incidentReportObject.getPerson_workplace_name());
-            etAddres.setText(incidentReportObject.getPerson_address());
+            etPersonAddress.setText(incidentReportObject.getPerson_address());
             etIncident.setText(incidentReportObject.getIncedent_location());
             etBrief.setText(incidentReportObject.getIncident_desc());
             etDescription.setText(incidentReportObject.getEvent_desc_desc());
@@ -524,9 +519,6 @@ public class IncidentReportsActivity extends BaseActivity {
             etNotes.setText(incidentReportObject.getWitness_statement());
             setsignatures(incidentReportObject.getFirst_aid_signature(), ivImage);
             setsignatures(incidentReportObject.getIncident_report_person_signature(), ivAmbPerSign);
-        } else {
-            btnEmail.setVisibility(View.VISIBLE);
-            btnSave.setVisibility(View.VISIBLE);
         }
     }
 
@@ -534,7 +526,6 @@ public class IncidentReportsActivity extends BaseActivity {
         Glide.with(mContext).load(imgUrl)
                 .apply(new RequestOptions()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .error(R.drawable.default_user)
                         .dontAnimate()
                         .centerCrop()
                         .dontTransform()).into(signatureView);
@@ -787,11 +778,10 @@ public class IncidentReportsActivity extends BaseActivity {
                 }
                 break;
             case R.id.btn_save:
-                /*if (PermissionUtils.requestPermission(mContext, SAVE_PERMISSIONS_REQUEST, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    Uri uri = CommonUtils.getInstance().createPdf(layScreenshot, "Incident_Report_Form");
-                    Toast.makeText(mContext, "Form Saved Successfully", Toast.LENGTH_SHORT).show();
-                }*/
-                saveDataOnParse();
+                if (getIntent().getSerializableExtra("incidentModel") == null)
+                    new AsyncTaskRunner().execute();
+                else
+                    updateIncidentReport();
                 break;
 
             case R.id.iv_image:
@@ -804,6 +794,42 @@ public class IncidentReportsActivity extends BaseActivity {
                 mContext.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 break;
         }
+    }
+
+    private void showAlert(final int selection) {
+       /* final AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(mContext, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(mContext);
+        }
+        builder.setTitle("Error")
+                .setMessage("Please select Occurrence Date")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(selection == 0)
+                        rbCeasedNo.setChecked(true);
+                        else if(selection == 1)
+                            rbOccNo.setChecked(true);
+                       dialog.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();*/
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+        alertDialog.setTitle("Error");
+        alertDialog.setMessage("Please select Occurrence Date");
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(final DialogInterface dialog, int which) {
+                if(selection == 0)
+                    rbCeasedNo.setChecked(true);
+                else if(selection == 1)
+                    rbOccNo.setChecked(true);
+                dialog.dismiss();
+            }
+        });
+        alertDialog.show();
     }
 
 
@@ -843,368 +869,673 @@ public class IncidentReportsActivity extends BaseActivity {
 
     private void createSendForm() {
         CallProgressWheel.showLoadingDialog(mContext);
-        Uri uri = CommonUtils.getInstance().createPdf(layScreenshot, "Incident_Report_Form");
+        new Thread() {
+            public void run() {
+                Uri uri = CommonUtils.getInstance().createPdf(layScreenshot, "Incident_Report_Form");
 
-        ShareCompat.IntentBuilder.from(mContext)
-                .setType("message/rfc822")
-                .setSubject("Incident Report Form")
-                .setText("Incident Report Form")
-                .setStream(uri)
-                .setChooserTitle("Share Form")
-                .startChooser();
+                ShareCompat.IntentBuilder.from(mContext)
+                        .setType("message/rfc822")
+                        .setSubject("Incident Report Form")
+                        .setText("Incident Report Form")
+                        .setStream(uri)
+                        .setChooserTitle("Share Form")
+                        .startChooser();
+            }
+        }.start();
+
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
         CallProgressWheel.dismissLoadingDialog();
     }
 
-    private void saveDataOnParse() {
-        CallProgressWheel.showLoadingDialog(mContext);
-        ParseObject object = new ParseObject("IncidentReport");
-
-        /*String weatheroption = null;
-        switch (rgWeather.getCheckedRadioButtonId()) {
-            case R.id.rb_weather_yes:
-                weatheroption = "1";
-                break;
-            case R.id.rb_weather_no:
-                weatheroption = "2";
-                break;
-        }
-        object.put("weather_option", weatheroption);
-
-        String typeOption = null;
-        switch (rgType.getCheckedRadioButtonId()) {
-            case R.id.rb_contractor:
-                typeOption = "1";
-                break;
-            case R.id.rb_member:
-                typeOption = "2";
-                break;
-        }
-        object.put("incident_option", typeOption);
-
-        object.put("occourance_date", tvOccurenceDate.getText().toString());
-        object.put("incident_location", etIncident.getText().toString());
-        object.put("person_post_code", etPostcode.getText().toString());
-        object.put("injury_type", etInjury.getText().toString());
-        object.put("third_party_detail", etThirdReport.getText().toString());
-
-        String ceaseOption = null;
-        switch (rgCeased.getCheckedRadioButtonId()) {
+    @OnClick({R.id.rb_ceased_yes,R.id.rb_ceased_no,R.id.rb_occ_yes, R.id.rb_occ_no})
+    public void onRadioButtonClicked(RadioButton radioButton) {
+        boolean checked = radioButton.isChecked();
+        switch (radioButton.getId()) {
             case R.id.rb_ceased_yes:
-                ceaseOption = "1";
+                if (checked) {
+                    if(!tvOccurenceValue.getText().toString().equalsIgnoreCase("")){
+                        tvCeasedTimeValue.setText(tvOccurenceValue.getText().toString());
+                    }
+                    else{
+                        showAlert(0);
+                    }
+                }
                 break;
             case R.id.rb_ceased_no:
-                ceaseOption = "2";
+                if (checked)
+                    tvCeasedTimeValue.setText("");
                 break;
-        }
-        object.put("cease_option", ceaseOption);
-        object.put("medical_center", etMedCenter.getText().toString());
-        object.put("weather_conditions", etWeatherCond.getText().toString());
-//        object.put("breakdown_agency", tvOccurenceDate.getText().toString());
-        object.put("person_sur_name", etSurname.getText().toString());
-        object.put("person_first_name", etFirstname.getText().toString());
 
-        String sameOcc = null;
-        switch (rgOccurence.getCheckedRadioButtonId()) {
             case R.id.rb_occ_yes:
-                sameOcc = "1";
+                if (checked) {
+                    if(!tvOccurenceValue.getText().toString().equalsIgnoreCase("")){
+                        tvReportTimeValue.setText(tvOccurenceValue.getText().toString());
+                    }
+                    else{
+                        showAlert(1);
+                    }
+                }
                 break;
+
             case R.id.rb_occ_no:
-                sameOcc = "2";
+                if (checked)
+                    tvCeasedTimeValue.setText("");
                 break;
+
         }
-        object.put("same_occourance", sameOcc);
-
-        String thirdOption = null;
-        switch (rgThirdParty.getCheckedRadioButtonId()) {
-            case R.id.rb_third_yes:
-                thirdOption = "1";
-                break;
-            case R.id.rb_third_no:
-                thirdOption = "2";
-                break;
-        }
-
-        object.put("third_party_option", thirdOption);
-
-        String firstAidOption = null;
-        switch (rgFirstAid.getCheckedRadioButtonId()) {
-            case R.id.rb_aid_yes:
-                firstAidOption = "1";
-                break;
-            case R.id.rb_aid_no:
-                firstAidOption = "1";
-                break;
-        }
-        object.put("first_aid_option", firstAidOption);
-        object.put("person_state", etState.getText().toString());
-
-        String genderOption = null;
-        switch (rgGender.getCheckedRadioButtonId()) {
-            case R.id.rb_male:
-                genderOption = "1";
-                break;
-            case R.id.rb_female:
-                genderOption = "2";
-                break;
-        }
-
-        object.put("person_gender_option", genderOption);
-        object.put("eyewear_type", etEyewear.getText().toString());
-        object.put("witness_statement", etNotes.getText().toString());
-
-        String drugOption = null;
-        switch (rgDrugAffect.getCheckedRadioButtonId()) {
-            case R.id.rb_drug_yes:
-                drugOption = "1";
-                break;
-            case R.id.rb_drug_no:
-                drugOption = "2";
-                break;
-        }
-
-        object.put("person_drug_option", drugOption);
-        object.put("other_mechanism", etOthers.getText().toString());
-        object.put("person_address", etAddres.getText().toString());
-        object.put("damage_type", etDamageAdv.getText().toString());
-        object.put("date_attended", etDateAtten.getText().toString());
-        object.put("additional_comments", etComment.getText().toString());
-        object.put("footwear_type", etFootwear.getText().toString());
-        object.put("incident_report_date", etAmbDate.getText().toString());
-        object.put("vehicle_damage_detail", etDamageVeh.getText().toString());
-        object.put("affected_person_detail", etAffected.getText().toString());
-        object.put("attendee_name", etName.getText().toString());
-        object.put("injury_mechanism", etMechanism.getText().toString());
-
-        String cctvOption = null;
-        switch (rgCctv.getCheckedRadioButtonId()) {
-            case R.id.rb_cctv_yes:
-                cctvOption = "1";
-                break;
-            case R.id.rb_cctv_no:
-                cctvOption = "2";
-                break;
-        }
-        object.put("cctv_option", cctvOption);
-
-//        object.put("other_breakdown_agency", tvOccurenceDate.getText().toString());
-        object.put("body_location", etBodily.getText().toString());
-        object.put("carrying_type", etCarrying.getText().toString());
-        object.put("incident_report_person", etAmbPerName.getText().toString());
-//        object.put("warning_sign_option", tvOccurenceDate.getText().toString());
-
-        String affectedPersonOption = null;
-        switch (rgIncidentSpecs.getCheckedRadioButtonId()) {
-            case R.id.rb_crunches:
-                affectedPersonOption = "1";
-                break;
-            case R.id.rb_stick:
-                affectedPersonOption = "2";
-                break;
-            case R.id.rb_frame:
-                affectedPersonOption = "3";
-                break;
-            case R.id.rb_wheelchair:
-                affectedPersonOption = "4";
-                break;
-            case R.id.rb_motorised:
-                affectedPersonOption = "5";
-                break;
-        }
-        object.put("affected_person_option", affectedPersonOption);
-        object.put("person_occupation", etOccupation.getText().toString());
-        object.put("injury_mark", etMark.getText().toString());
-
-        String ambAttendOption = null;
-        switch (rgAmbulance.getCheckedRadioButtonId()) {
-            case R.id.rb_amb_yes:
-                ambAttendOption = "1";
-                break;
-            case R.id.rb_amb_no:
-                ambAttendOption = "2";
-                break;
-        }
-
-        object.put("ambulance_attend_option", ambAttendOption);
-        object.put("injury_illness", etInjuryDetail.getText().toString());
-        object.put("what_you_see", etObserve.getText().toString());
-        object.put("person_birth_date", etBirthday.getText().toString());
-
-        String wetWetherOption = null;
-        switch (rgWetWeather.getCheckedRadioButtonId()) {
-            case R.id.rb_wet_yes:
-                wetWetherOption = "1";
-                break;
-            case R.id.rb_wet_no:
-                wetWetherOption = "2";
-                break;
-        }
-
-        object.put("wet_weather_option", wetWetherOption);
-
-        String attendPersonOption = null;
-        switch (rgAttendAffe.getCheckedRadioButtonId()) {
-            case R.id.rb_attend_yes:
-                attendPersonOption = "1";
-                break;
-            case R.id.rb_attend_no:
-                attendPersonOption = "2";
-                break;
-        }
-
-
-
-        object.put("attended_person_option", attendPersonOption);
-        object.put("event_desc_desc", etDescription.getText().toString());
-        object.put("reported_date", tvReportTimeValue.getText().toString());
-        object.put("person_mobile_phone", etMobileNo.getText().toString());
-
-        String damageOption = null;
-        switch (rgPropDamage.getCheckedRadioButtonId()) {
-            case R.id.rb_damage_yes:
-                damageOption = "1";
-                break;
-            case R.id.rb_damage_no:
-                damageOption = "2";
-                break;
-        }
-
-        object.put("property_damage_option", damageOption);
-        object.put("ambulance_who", etAmbReq.getText().toString());
-        object.put("cease_date", tvCeasedTimeValue.getText().toString());
-        object.put("first_aid_name", etAidName.getText().toString());
-        object.put("action_taken", etAction.getText().toString());
-        object.put("incident_desc", etBrief.getText().toString());
-        object.put("person_workplace_name", etWorkplace.getText().toString());
-
-        String eventTypeOption = null;
-        switch (rgEventClass.getCheckedRadioButtonId()) {
-            case R.id.rb_miss:
-                eventTypeOption = "1";
-                break;
-            case R.id.rb_incident:
-                eventTypeOption = "2";
-                break;
-            case R.id.rb_hazard:
-                eventTypeOption = "3";
-                break;
-            case R.id.rb_contact:
-                eventTypeOption = "4";
-                break;
-            case R.id.rb_issue:
-                eventTypeOption = "5";
-                break;
-        }
-        object.put("event_type", eventTypeOption);
-
-        String photosOption = null;
-        switch (rgPhotos.getCheckedRadioButtonId()) {
-            case R.id.rb_photos_yes:
-                photosOption = "1";
-                break;
-            case R.id.rb_photos_no:
-                photosOption = "2";
-                break;
-        }
-
-        object.put("photo_option", photosOption);
-
-        String wandOption = null;
-        switch (rgWandReport.getCheckedRadioButtonId()) {
-            case R.id.rb_wand_yes:
-                wandOption = "1";
-                break;
-            case R.id.rb_wand_no:
-                wandOption = "2";
-                break;
-        }
-        object.put("web_report_option", wandOption);
-
-        String warning = null;
-        switch (rgWarningSign.getCheckedRadioButtonId()) {
-            case R.id.rb_warning_yes:
-                warning = "1";
-                break;
-            case R.id.rb_warning_no:
-                warning = "2";
-                break;
-        }
-        object.put("warning_sign_option", warning);*/
-
-        object.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                CallProgressWheel.dismissLoadingDialog();
+    }
+    private void updateIncidentReport(){
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("IncidentReport");
+        query.getInBackground(incidentReportObject.getOjectId(), new GetCallback<ParseObject>() {
+            public void done(ParseObject incidentReportObj, ParseException e) {
                 if (e == null) {
-                    Toast.makeText(getApplicationContext(), "Report form saved successfully!", Toast.LENGTH_LONG).show();
+                    String weatheroption = "0";
+                    switch (rgWeather.getCheckedRadioButtonId()) {
+                        case R.id.rb_weather_yes:
+                            weatheroption = "1";
+                            break;
+                        case R.id.rb_weather_no:
+                            weatheroption = "2";
+                            break;
+                    }
+                    incidentReportObj.put("weather_option", Integer.parseInt(weatheroption));
 
-                } else
-                    Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
+                    String typeOption = "0";
+                    switch (rgType.getCheckedRadioButtonId()) {
+                        case R.id.rb_contractor:
+                            typeOption = "1";
+                            break;
+                        case R.id.rb_member:
+                            typeOption = "2";
+                            break;
+                    }
+                    incidentReportObj.put("incident_option", Integer.parseInt(typeOption));
+                    incidentReportObj.put("occourance_date", tvOccurenceValue.getText().toString());
+                    incidentReportObj.put("incident_location", etIncident.getText().toString());
+                    incidentReportObj.put("person_post_code", etPostcode.getText().toString());
+                    incidentReportObj.put("injury_type", etInjury.getText().toString());
+                    incidentReportObj.put("third_party_detail", etThirdReport.getText().toString());
 
+                    String ceaseOption = "0";
+                    switch (rgCeased.getCheckedRadioButtonId()) {
+                        case R.id.rb_ceased_yes:
+                            ceaseOption = "1";
+                            break;
+                        case R.id.rb_ceased_no:
+                            ceaseOption = "2";
+                            break;
+                    }
+                    incidentReportObj.put("cease_option", Integer.parseInt(ceaseOption));
+                    incidentReportObj.put("medical_center", etMedCenter.getText().toString());
+                    incidentReportObj.put("weather_conditions", etWeatherCond.getText().toString());
+//        incidentReportObj.put("breakdown_agency", tvOccurenceDate.getText().toString());
+                    incidentReportObj.put("person_sur_name", etSurname.getText().toString());
+                    incidentReportObj.put("person_first_name", etFirstname.getText().toString());
+
+                    String sameOcc = "0";
+                    switch (rgOccurence.getCheckedRadioButtonId()) {
+                        case R.id.rb_occ_yes:
+                            sameOcc = "1";
+                            break;
+                        case R.id.rb_occ_no:
+                            sameOcc = "2";
+                            break;
+                    }
+                    incidentReportObj.put("same_occourance", Integer.parseInt(sameOcc));
+
+                    String thirdOption = "0";
+                    switch (rgThirdParty.getCheckedRadioButtonId()) {
+                        case R.id.rb_third_yes:
+                            thirdOption = "1";
+                            break;
+                        case R.id.rb_third_no:
+                            thirdOption = "2";
+                            break;
+                    }
+
+                    incidentReportObj.put("third_party_option", Integer.parseInt(thirdOption));
+
+                    String firstAidOption = null;
+                    switch (rgFirstAid.getCheckedRadioButtonId()) {
+                        case R.id.rb_aid_yes:
+                            firstAidOption = "1";
+                            break;
+                        case R.id.rb_aid_no:
+                            firstAidOption = "1";
+                            break;
+                    }
+                    incidentReportObj.put("first_aid_option", Integer.parseInt(firstAidOption));
+                    incidentReportObj.put("person_state", etState.getText().toString());
+
+                    String genderOption = "0";
+                    switch (rgGender.getCheckedRadioButtonId()) {
+                        case R.id.rb_male:
+                            genderOption = "1";
+                            break;
+                        case R.id.rb_female:
+                            genderOption = "2";
+                            break;
+                    }
+
+                    incidentReportObj.put("person_gender_option", Integer.parseInt(genderOption));
+                    incidentReportObj.put("eyewear_type", etEyewear.getText().toString());
+                    incidentReportObj.put("witness_statement", etNotes.getText().toString());
+
+                    String drugOption = "0";
+                    switch (rgDrugAffect.getCheckedRadioButtonId()) {
+                        case R.id.rb_drug_yes:
+                            drugOption = "1";
+                            break;
+                        case R.id.rb_drug_no:
+                            drugOption = "2";
+                            break;
+                    }
+
+                    incidentReportObj.put("person_drug_option", Integer.parseInt(drugOption));
+                    incidentReportObj.put("other_mechanism", etOthers.getText().toString());
+                    incidentReportObj.put("person_address", etPersonAddress.getText().toString());
+                    incidentReportObj.put("damage_type", etDamageAdv.getText().toString());
+                    incidentReportObj.put("date_attended", etDateAtten.getText().toString());
+                    incidentReportObj.put("additional_comments", etComment.getText().toString());
+                    incidentReportObj.put("footwear_type", etFootwear.getText().toString());
+                    incidentReportObj.put("incident_report_date", etAmbDate.getText().toString());
+                    incidentReportObj.put("vehicle_damage_detail", etDamageVeh.getText().toString());
+                    incidentReportObj.put("affected_person_detail", etAffected.getText().toString());
+                    incidentReportObj.put("attendee_name", etName.getText().toString());
+                    incidentReportObj.put("injury_mechanism", etMechanism.getText().toString());
+
+                    String cctvOption = "0";
+                    switch (rgCctv.getCheckedRadioButtonId()) {
+                        case R.id.rb_cctv_yes:
+                            cctvOption = "1";
+                            break;
+                        case R.id.rb_cctv_no:
+                            cctvOption = "2";
+                            break;
+                    }
+                    incidentReportObj.put("cctv_option", Integer.parseInt(cctvOption));
+
+//        incidentReportObj.put("other_breakdown_agency", tvOccurenceDate.getText().toString());
+                    incidentReportObj.put("body_location", etBodily.getText().toString());
+                    incidentReportObj.put("carrying_type", etCarrying.getText().toString());
+                    incidentReportObj.put("incident_report_person", etAmbPerName.getText().toString());
+//        incidentReportObj.put("warning_sign_option", tvOccurenceDate.getText().toString());
+
+                    String affectedPersonOption = "0";
+                    switch (rgIncidentSpecs.getCheckedRadioButtonId()) {
+                        case R.id.rb_crunches:
+                            affectedPersonOption = "1";
+                            break;
+                        case R.id.rb_stick:
+                            affectedPersonOption = "2";
+                            break;
+                        case R.id.rb_frame:
+                            affectedPersonOption = "3";
+                            break;
+                        case R.id.rb_wheelchair:
+                            affectedPersonOption = "4";
+                            break;
+                        case R.id.rb_motorised:
+                            affectedPersonOption = "5";
+                            break;
+                    }
+                    incidentReportObj.put("affected_person_option", Integer.parseInt(affectedPersonOption));
+                    incidentReportObj.put("person_occupation", etOccupation.getText().toString());
+                    incidentReportObj.put("injury_mark", etMark.getText().toString());
+
+                    String ambAttendOption = null;
+                    switch (rgAmbulance.getCheckedRadioButtonId()) {
+                        case R.id.rb_amb_yes:
+                            ambAttendOption = "1";
+                            break;
+                        case R.id.rb_amb_no:
+                            ambAttendOption = "2";
+                            break;
+                    }
+
+                    incidentReportObj.put("ambulance_attend_option", Integer.parseInt(ambAttendOption));
+                    incidentReportObj.put("injury_illness", etInjuryDetail.getText().toString());
+                    incidentReportObj.put("what_you_see", etObserve.getText().toString());
+                    incidentReportObj.put("person_birth_date", etBirthday.getText().toString());
+
+                    String wetWetherOption = null;
+                    switch (rgWetWeather.getCheckedRadioButtonId()) {
+                        case R.id.rb_wet_yes:
+                            wetWetherOption = "1";
+                            break;
+                        case R.id.rb_wet_no:
+                            wetWetherOption = "2";
+                            break;
+                    }
+
+                    incidentReportObj.put("wet_weather_option", Integer.parseInt(wetWetherOption));
+
+                    String attendPersonOption = null;
+                    switch (rgAttendAffe.getCheckedRadioButtonId()) {
+                        case R.id.rb_attend_yes:
+                            attendPersonOption = "1";
+                            break;
+                        case R.id.rb_attend_no:
+                            attendPersonOption = "2";
+                            break;
+                    }
+
+                    incidentReportObj.put("attended_person_option", Integer.parseInt(attendPersonOption));
+                    incidentReportObj.put("event_desc_desc", etDescription.getText().toString());
+                    incidentReportObj.put("reported_date", tvReportTimeValue.getText().toString());
+                    incidentReportObj.put("person_mobile_phone", etMobileNo.getText().toString());
+
+                    String damageOption = null;
+                    switch (rgPropDamage.getCheckedRadioButtonId()) {
+                        case R.id.rb_damage_yes:
+                            damageOption = "1";
+                            break;
+                        case R.id.rb_damage_no:
+                            damageOption = "2";
+                            break;
+                    }
+
+                    incidentReportObj.put("property_damage_option", Integer.parseInt(damageOption));
+                    incidentReportObj.put("ambulance_who", etAmbReq.getText().toString());
+                    incidentReportObj.put("cease_date", tvCeasedTimeValue.getText().toString());
+                    incidentReportObj.put("first_aid_name", etAidName.getText().toString());
+                    incidentReportObj.put("action_taken", etAction.getText().toString());
+                    incidentReportObj.put("incident_desc", etBrief.getText().toString());
+                    incidentReportObj.put("person_workplace_name", etWorkplace.getText().toString());
+                    incidentReportObj.put("person_home_address", etHomeAddress.getText().toString());
+                    incidentReportObj.put("person_home_phone", etHomePhone.getText().toString());
+                    incidentReportObj.put("injury_illness_detail", etInjuryDetail.getText().toString());
+
+                    String eventTypeOption = "0";
+                    switch (rgEventClass.getCheckedRadioButtonId()) {
+                        case R.id.rb_miss:
+                            eventTypeOption = "1";
+                            break;
+                        case R.id.rb_incident:
+                            eventTypeOption = "2";
+                            break;
+                        case R.id.rb_hazard:
+                            eventTypeOption = "3";
+                            break;
+                        case R.id.rb_contact:
+                            eventTypeOption = "4";
+                            break;
+                        case R.id.rb_issue:
+                            eventTypeOption = "5";
+                            break;
+                    }
+                    incidentReportObj.put("event_type", Integer.parseInt(eventTypeOption));
+
+                    String photosOption = "0";
+                    switch (rgPhotos.getCheckedRadioButtonId()) {
+                        case R.id.rb_photos_yes:
+                            photosOption = "1";
+                            break;
+                        case R.id.rb_photos_no:
+                            photosOption = "2";
+                            break;
+                    }
+
+                    incidentReportObj.put("photo_option", Integer.parseInt(photosOption));
+
+                    String wandOption = "0";
+                    switch (rgWandReport.getCheckedRadioButtonId()) {
+                        case R.id.rb_wand_yes:
+                            wandOption = "1";
+                            break;
+                        case R.id.rb_wand_no:
+                            wandOption = "2";
+                            break;
+                    }
+                    incidentReportObj.put("web_report_option", Integer.parseInt(wandOption));
+
+
+                    if (signatureBitmap != null) {
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        signatureBitmap.compress(Bitmap.CompressFormat.PNG, 70, stream);
+                        byte[] image = stream.toByteArray();
+                        ParseFile file = new ParseFile("ature.png", image);
+                        incidentReportObj.put("incident_report_person_signature", file);
+                    }
+
+                    if (ambPerSign != null) {
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        ambPerSign.compress(Bitmap.CompressFormat.PNG, 70, stream);
+                        byte[] image = stream.toByteArray();
+                        ParseFile file = new ParseFile("ature.png", image);
+                        incidentReportObj.put("first_aid_signature", file);
+                    }
+                    incidentReportObj.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            CallProgressWheel.dismissLoadingDialog();
+                            if (e == null)
+                                Toast.makeText(getApplicationContext(), "Report form updated successfully!", Toast.LENGTH_LONG).show();
+                            else
+                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+
+                    });
+                }
+                else {
+                    CallProgressWheel.dismissLoadingDialog();
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+
+                }
             }
         });
     }
+    private class AsyncTaskRunner extends AsyncTask<Void, Void, Void> {
+        ParseObject object = new ParseObject("IncidentReport");
 
-    private void getData() {
-        rgType.getCheckedRadioButtonId();
-        tvOccurenceValue.getText().toString();
-        rgCeased.getCheckedRadioButtonId();
-        tvCeasedTimeValue.getText().toString();
-        tvReportTimeValue.getText().toString();
-        rgOccurence.getCheckedRadioButtonId();
-        etFirstname.getText().toString();
-        etSurname.getText().toString();
-        rgGender.getCheckedRadioButtonId();
-        etHomeAddress.getText().toString();
-        etState.getText().toString();
-        etPostcode.getText().toString();
-        etHomePhone.getText().toString();
-        etMobileNo.getText().toString();
-        etBirthday.getText().toString();
-        etOccupation.getText().toString();
-        etWorkplace.getText().toString();
-        etAddres.getText().toString();
-        etIncident.getText().toString();
-        rgEventClass.getCheckedRadioButtonId();
-        etBrief.getText().toString();
-        etDescription.getText().toString();
-        etAction.getText().toString();
-        etInjury.getText().toString();
-        etIllness.getText().toString();
-        etBodily.getText().toString();
-        etMark.getText().toString();
-        etMechanism.getText().toString();
-        etOthers.getText().toString();
-        etObserve.getText().toString();
-        rgThirdParty.getCheckedRadioButtonId();
-        etThirdReport.getText().toString();
-        rgPropDamage.getCheckedRadioButtonId();
-        etDamageAdv.getText().toString();
-        etDamageVeh.getText().toString();
-        rgAttendAffe.getCheckedRadioButtonId();
-        etName.getText().toString();
-        rgFirstAid.getCheckedRadioButtonId();
-        etAidName.getText().toString();
-        etInjuryDetail.getText().toString();
-        etMedCenter.getText().toString();
-        etDateAtten.getText().toString();
-        rgAmbulance.getCheckedRadioButtonId();
-        etAmbReq.getText().toString();
-        etAmbPerName.getText().toString();
-        etAmbDate.getText().toString();
-        rgWeather.getCheckedRadioButtonId();
-        etWeatherCond.getText().toString();
-        rgDrugAffect.getCheckedRadioButtonId();
-        etFootwear.getText().toString();
-        etEyewear.getText().toString();
-        etCarrying.getText().toString();
-        rgCctv.getCheckedRadioButtonId();
-        rgPhotos.getCheckedRadioButtonId();
-        rgWandReport.getCheckedRadioButtonId();
-        rgWetWeather.getCheckedRadioButtonId();
-        etComment.getText().toString();
-        rgIncidentSpecs.getCheckedRadioButtonId();
-        etNotes.getText().toString();
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            object.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    CallProgressWheel.dismissLoadingDialog();
+                    if (e == null) {
+                        Toast.makeText(getApplicationContext(), "Report form saved successfully!", Toast.LENGTH_LONG).show();
+
+                    } else
+                        Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
+
+                }
+            });
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            object = new ParseObject("IncidentReport");
+            String weatheroption = "0";
+            switch (rgWeather.getCheckedRadioButtonId()) {
+                case R.id.rb_weather_yes:
+                    weatheroption = "1";
+                    break;
+                case R.id.rb_weather_no:
+                    weatheroption = "2";
+                    break;
+            }
+            object.put("weather_option", Integer.parseInt(weatheroption));
+
+            String typeOption = "0";
+            switch (rgType.getCheckedRadioButtonId()) {
+                case R.id.rb_contractor:
+                    typeOption = "1";
+                    break;
+                case R.id.rb_member:
+                    typeOption = "2";
+                    break;
+            }
+            object.put("incident_option", Integer.parseInt(typeOption));
+            object.put("occourance_date", tvOccurenceValue.getText().toString());
+            object.put("incident_location", etIncident.getText().toString());
+            object.put("person_post_code", etPostcode.getText().toString());
+            object.put("injury_type", etInjury.getText().toString());
+            object.put("third_party_detail", etThirdReport.getText().toString());
+
+            String ceaseOption = "0";
+            switch (rgCeased.getCheckedRadioButtonId()) {
+                case R.id.rb_ceased_yes:
+                    ceaseOption = "1";
+                    break;
+                case R.id.rb_ceased_no:
+                    ceaseOption = "2";
+                    break;
+            }
+            object.put("cease_option", Integer.parseInt(ceaseOption));
+            object.put("medical_center", etMedCenter.getText().toString());
+            object.put("weather_conditions", etWeatherCond.getText().toString());
+//        object.put("breakdown_agency", tvOccurenceDate.getText().toString());
+            object.put("person_sur_name", etSurname.getText().toString());
+            object.put("person_first_name", etFirstname.getText().toString());
+
+            String sameOcc = "0";
+            switch (rgOccurence.getCheckedRadioButtonId()) {
+                case R.id.rb_occ_yes:
+                    sameOcc = "1";
+                    break;
+                case R.id.rb_occ_no:
+                    sameOcc = "2";
+                    break;
+            }
+            object.put("same_occourance", Integer.parseInt(sameOcc));
+
+            String thirdOption = "0";
+            switch (rgThirdParty.getCheckedRadioButtonId()) {
+                case R.id.rb_third_yes:
+                    thirdOption = "1";
+                    break;
+                case R.id.rb_third_no:
+                    thirdOption = "2";
+                    break;
+            }
+
+            object.put("third_party_option", Integer.parseInt(thirdOption));
+
+            String firstAidOption = null;
+            switch (rgFirstAid.getCheckedRadioButtonId()) {
+                case R.id.rb_aid_yes:
+                    firstAidOption = "1";
+                    break;
+                case R.id.rb_aid_no:
+                    firstAidOption = "1";
+                    break;
+            }
+            object.put("first_aid_option", Integer.parseInt(firstAidOption));
+            object.put("person_state", etState.getText().toString());
+
+            String genderOption = "0";
+            switch (rgGender.getCheckedRadioButtonId()) {
+                case R.id.rb_male:
+                    genderOption = "1";
+                    break;
+                case R.id.rb_female:
+                    genderOption = "2";
+                    break;
+            }
+
+            object.put("person_gender_option", Integer.parseInt(genderOption));
+            object.put("eyewear_type", etEyewear.getText().toString());
+            object.put("witness_statement", etNotes.getText().toString());
+
+            String drugOption = "0";
+            switch (rgDrugAffect.getCheckedRadioButtonId()) {
+                case R.id.rb_drug_yes:
+                    drugOption = "1";
+                    break;
+                case R.id.rb_drug_no:
+                    drugOption = "2";
+                    break;
+            }
+
+            object.put("person_drug_option", Integer.parseInt(drugOption));
+            object.put("other_mechanism", etOthers.getText().toString());
+            object.put("person_address", etPersonAddress.getText().toString());
+            object.put("damage_type", etDamageAdv.getText().toString());
+            object.put("date_attended", etDateAtten.getText().toString());
+            object.put("additional_comments", etComment.getText().toString());
+            object.put("footwear_type", etFootwear.getText().toString());
+            object.put("incident_report_date", etAmbDate.getText().toString());
+            object.put("vehicle_damage_detail", etDamageVeh.getText().toString());
+            object.put("affected_person_detail", etAffected.getText().toString());
+            object.put("attendee_name", etName.getText().toString());
+            object.put("injury_mechanism", etMechanism.getText().toString());
+
+            String cctvOption = "0";
+            switch (rgCctv.getCheckedRadioButtonId()) {
+                case R.id.rb_cctv_yes:
+                    cctvOption = "1";
+                    break;
+                case R.id.rb_cctv_no:
+                    cctvOption = "2";
+                    break;
+            }
+            object.put("cctv_option", Integer.parseInt(cctvOption));
+
+//        object.put("other_breakdown_agency", tvOccurenceDate.getText().toString());
+            object.put("body_location", etBodily.getText().toString());
+            object.put("carrying_type", etCarrying.getText().toString());
+            object.put("incident_report_person", etAmbPerName.getText().toString());
+//        object.put("warning_sign_option", tvOccurenceDate.getText().toString());
+
+            String affectedPersonOption = "0";
+            switch (rgIncidentSpecs.getCheckedRadioButtonId()) {
+                case R.id.rb_crunches:
+                    affectedPersonOption = "1";
+                    break;
+                case R.id.rb_stick:
+                    affectedPersonOption = "2";
+                    break;
+                case R.id.rb_frame:
+                    affectedPersonOption = "3";
+                    break;
+                case R.id.rb_wheelchair:
+                    affectedPersonOption = "4";
+                    break;
+                case R.id.rb_motorised:
+                    affectedPersonOption = "5";
+                    break;
+            }
+            object.put("affected_person_option", Integer.parseInt(affectedPersonOption));
+            object.put("person_occupation", etOccupation.getText().toString());
+            object.put("injury_mark", etMark.getText().toString());
+
+            String ambAttendOption = null;
+            switch (rgAmbulance.getCheckedRadioButtonId()) {
+                case R.id.rb_amb_yes:
+                    ambAttendOption = "1";
+                    break;
+                case R.id.rb_amb_no:
+                    ambAttendOption = "2";
+                    break;
+            }
+
+            object.put("ambulance_attend_option", Integer.parseInt(ambAttendOption));
+            object.put("injury_illness", etInjuryDetail.getText().toString());
+            object.put("what_you_see", etObserve.getText().toString());
+            object.put("person_birth_date", etBirthday.getText().toString());
+
+            String wetWetherOption = null;
+            switch (rgWetWeather.getCheckedRadioButtonId()) {
+                case R.id.rb_wet_yes:
+                    wetWetherOption = "1";
+                    break;
+                case R.id.rb_wet_no:
+                    wetWetherOption = "2";
+                    break;
+            }
+
+            object.put("wet_weather_option", Integer.parseInt(wetWetherOption));
+
+            String attendPersonOption = null;
+            switch (rgAttendAffe.getCheckedRadioButtonId()) {
+                case R.id.rb_attend_yes:
+                    attendPersonOption = "1";
+                    break;
+                case R.id.rb_attend_no:
+                    attendPersonOption = "2";
+                    break;
+            }
+
+            object.put("attended_person_option", Integer.parseInt(attendPersonOption));
+            object.put("event_desc_desc", etDescription.getText().toString());
+            object.put("reported_date", tvReportTimeValue.getText().toString());
+            object.put("person_mobile_phone", etMobileNo.getText().toString());
+
+            String damageOption = null;
+            switch (rgPropDamage.getCheckedRadioButtonId()) {
+                case R.id.rb_damage_yes:
+                    damageOption = "1";
+                    break;
+                case R.id.rb_damage_no:
+                    damageOption = "2";
+                    break;
+            }
+
+            object.put("property_damage_option", Integer.parseInt(damageOption));
+            object.put("ambulance_who", etAmbReq.getText().toString());
+            object.put("cease_date", tvCeasedTimeValue.getText().toString());
+            object.put("first_aid_name", etAidName.getText().toString());
+            object.put("action_taken", etAction.getText().toString());
+            object.put("incident_desc", etBrief.getText().toString());
+            object.put("person_workplace_name", etWorkplace.getText().toString());
+            object.put("person_home_address", etHomeAddress.getText().toString());
+            object.put("person_home_phone", etHomePhone.getText().toString());
+            object.put("injury_illness_detail", etInjuryDetail.getText().toString());
+
+            String eventTypeOption = "0";
+            switch (rgEventClass.getCheckedRadioButtonId()) {
+                case R.id.rb_miss:
+                    eventTypeOption = "1";
+                    break;
+                case R.id.rb_incident:
+                    eventTypeOption = "2";
+                    break;
+                case R.id.rb_hazard:
+                    eventTypeOption = "3";
+                    break;
+                case R.id.rb_contact:
+                    eventTypeOption = "4";
+                    break;
+                case R.id.rb_issue:
+                    eventTypeOption = "5";
+                    break;
+            }
+            object.put("event_type", Integer.parseInt(eventTypeOption));
+
+            String photosOption = "0";
+            switch (rgPhotos.getCheckedRadioButtonId()) {
+                case R.id.rb_photos_yes:
+                    photosOption = "1";
+                    break;
+                case R.id.rb_photos_no:
+                    photosOption = "2";
+                    break;
+            }
+
+            object.put("photo_option", Integer.parseInt(photosOption));
+
+            String wandOption = "0";
+            switch (rgWandReport.getCheckedRadioButtonId()) {
+                case R.id.rb_wand_yes:
+                    wandOption = "1";
+                    break;
+                case R.id.rb_wand_no:
+                    wandOption = "2";
+                    break;
+            }
+            object.put("web_report_option", Integer.parseInt(wandOption));
 
 
+            if (signatureBitmap != null) {
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                signatureBitmap.compress(Bitmap.CompressFormat.PNG, 70, stream);
+                byte[] image = stream.toByteArray();
+                ParseFile file = new ParseFile("ature.png", image);
+                object.put("incident_report_person_signature", file);
+            }
+
+            if (ambPerSign != null) {
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                ambPerSign.compress(Bitmap.CompressFormat.PNG, 70, stream);
+                byte[] image = stream.toByteArray();
+                ParseFile file = new ParseFile("ature.png", image);
+                object.put("first_aid_signature", file);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            CallProgressWheel.showLoadingDialog(mContext);
+        }
     }
 }

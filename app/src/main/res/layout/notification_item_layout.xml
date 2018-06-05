@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
+    <com.grandgroup.views.CustomTextView
         android:id="@+id/tv_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:gravity="bottom"
         android:textSize="@dimen/_10ssp"
-        MGC:fonttextview="@string/helvetica_neue_italic"
+        android:fontFamily="@string/helvetica_neue_italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_text" />
 
