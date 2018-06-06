@@ -151,7 +151,7 @@ public class ShiftStructure extends BaseActivity {
         }
 
         SimpleDateFormat month = new SimpleDateFormat("MMMM", Locale.US);
-        SimpleDateFormat year = new SimpleDateFormat("YYYY", Locale.US);
+        SimpleDateFormat year = new SimpleDateFormat("yyyy", Locale.US);
         String month_names = month.format(cal.getTime());
         String year_name = year.format(cal.getTime());
         StringBuilder stringBuilder = new StringBuilder(month_names);
