@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/lay_events"
+    android:id="@+id/lay_shift"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingEnd="@dimen/_3sdp">
 
-    <TextView
+    <com.grandgroup.views.CustomTextView
         android:id="@+id/tv_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -20,11 +21,12 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <com.grandgroup.views.CustomTextView
         android:id="@+id/tv_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="@dimen/_9ssp"
+        android:gravity="start"
         android:textIsSelectable="false"
         android:layout_marginLeft="@dimen/_7sdp"
         android:layout_marginRight="@dimen/_7sdp"
@@ -51,4 +53,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/view_line"
         android:src="@drawable/ic_forward_light"
         app:layout_constraintEnd_toEndOf="parent"/>
+
 </android.support.constraint.ConstraintLayout>

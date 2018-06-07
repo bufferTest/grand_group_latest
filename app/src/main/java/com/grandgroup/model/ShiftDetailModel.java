@@ -1,8 +1,9 @@
 package com.grandgroup.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ShiftDetailModel {
+public class ShiftDetailModel implements Serializable{
     private String shift_end_date_str = "";
     private String shift_user = "";
     private String shift_assigned_by_id = "";

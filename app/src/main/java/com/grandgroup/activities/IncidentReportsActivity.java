@@ -273,7 +273,6 @@ public class IncidentReportsActivity extends BaseActivity {
     private IncidentModel incidentReportObject;
     private AppCompatActivity mContext;
     private Bitmap signatureBitmap, ambPerSign;
-    ParseObject incidentObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

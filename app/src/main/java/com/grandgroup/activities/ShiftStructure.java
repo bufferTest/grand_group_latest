@@ -1,5 +1,6 @@
 package com.grandgroup.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -68,9 +69,7 @@ public class ShiftStructure extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        setUpWeekNames();
-        setupcalender();
-        fetchShifts();
+
     }
 
     private void setInitialData() {
@@ -82,6 +81,10 @@ public class ShiftStructure extends BaseActivity {
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
         date = cal.get(Calendar.DAY_OF_MONTH);
+
+        setUpWeekNames();
+        setupcalender();
+        fetchShifts();
     }
 
     @OnClick({R.id.btn_back, R.id.iv_previous, R.id.iv_forward})
@@ -262,7 +265,43 @@ public class ShiftStructure extends BaseActivity {
             if (selectedDateShiftsList.size() > 0) {
                 tv_no_events.setVisibility(View.GONE);
                 rv_shifts.setVisibility(View.VISIBLE);
-                ShiftStructureAdapter adapter = new ShiftStructureAdapter(mContext, selectedDateShiftsList);
+                ShiftStructureAdapter adapter = new ShiftStructureAdapter(mContext, selectedDateShiftsList, new ShiftStructureAdapter.ItemClickListener() {
+                    @Override
+                    public void onClick(int position) {
+                        Intent intent = new Intent(mContext, ShiftDetailActivity.class);
+                        intent.putExtra("shiftObj",selectedDateShiftsList.get(position));
+                        startActivity(intent);
+                        mContext.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                    }
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 rv_shifts.setHasFixedSize(true);
                 rv_shifts.setAdapter(adapter);
                 LinearLayoutManager llm = new LinearLayoutManager(this);
