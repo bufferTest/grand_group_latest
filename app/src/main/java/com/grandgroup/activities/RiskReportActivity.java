@@ -17,9 +17,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -46,6 +45,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,52 +74,18 @@ public class RiskReportActivity extends AppCompatActivity {
     CustomTextView et_control_eff;
     @BindView(R.id.lay_screenshot)
     ConstraintLayout lay_screenshot;
-    @BindView(R.id.btn_add)
-    Button btnAdd;
-    @BindView(R.id.my_toolbar)
-    RelativeLayout myToolbar;
-    @BindView(R.id.tv_report_desc_title)
-    CustomTextView tvReportDescTitle;
     @BindView(R.id.tv_report_desc)
     CustomEditText tvReportDesc;
-    @BindView(R.id.tv_report_date_time_title)
-    CustomTextView tvReportDateTimeTitle;
-    @BindView(R.id.tv_location)
-    CustomTextView tvLocation;
     @BindView(R.id.et_location)
     CustomEditText etLocation;
-    @BindView(R.id.tv_photo)
-    CustomTextView tvPhoto;
-    @BindView(R.id.lay_photo)
-    ConstraintLayout layPhoto;
-    @BindView(R.id.tv_likelihood)
-    CustomTextView tvLikelihood;
-    @BindView(R.id.tv_consequence)
-    CustomTextView tvConsequence;
-    @BindView(R.id.tv_controls)
-    CustomTextView tvControls;
     @BindView(R.id.et_controls)
     CustomEditText etControls;
-    @BindView(R.id.tv_control_eff)
-    CustomTextView tvControlEff;
-    @BindView(R.id.tv_action_plan)
-    CustomTextView tvActionPlan;
     @BindView(R.id.et_action_plan)
     CustomEditText etActionPlan;
-    @BindView(R.id.tv_reported_by)
-    CustomTextView tvReportedBy;
     @BindView(R.id.et_reported_by)
     CustomEditText etReportedBy;
-    @BindView(R.id.tv_signature)
-    CustomTextView tvSignature;
     @BindView(R.id.iv_signature)
     ImageView ivSignature;
-    @BindView(R.id.lay_signature)
-    ConstraintLayout laySignature;
-    @BindView(R.id.btn_email)
-    Button btnEmail;
-    @BindView(R.id.btn_save)
-    Button btnSave;
     private RiskReportModel riskReportObjectModel;
     private Bitmap signBitmap = null, photoOfHazardBitmap;
     private AppCompatActivity mContext;
@@ -136,6 +102,9 @@ public class RiskReportActivity extends AppCompatActivity {
         mContext = RiskReportActivity.this;
         ButterKnife.bind(mContext);
         tvTitle.setText("Risk / Hazard Report");
+        etActionPlan.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+        etReportedBy.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
         //Like Array
         likeArray = new ArrayList<>();
         likeArray.add("Rare");
@@ -158,6 +127,7 @@ public class RiskReportActivity extends AppCompatActivity {
         controlEffectivenessArray.add("Fair");
         controlEffectivenessArray.add("Good");
         controlEffectivenessArray.add("Effective");
+
         if (getIntent().getSerializableExtra("riskReportObject") != null) {
             riskReportObjectModel = (RiskReportModel) getIntent().getSerializableExtra("riskReportObject");
             tvReportDesc.setText(riskReportObjectModel.getRisk_description());
@@ -210,8 +180,8 @@ public class RiskReportActivity extends AppCompatActivity {
                                 dayOfMonth = (date < 10) ? "0" + date : "" + date;
                                 selectedDate = monthOfYear + " " + dayOfMonth + ", " + year + " " + TwelveHourTime;
                                 Log.e("day", selectedDate);
-                                DateFormat originalFormat = new SimpleDateFormat("MM dd, yyyy hh:mm a");
-                                DateFormat targetFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a");
+                                DateFormat originalFormat = new SimpleDateFormat("MM dd, yyyy hh:mm a", Locale.US);
+                                DateFormat targetFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US);
                                 try {
                                     Date date1 = originalFormat.parse(selectedDate);
                                     formattedDate = targetFormat.format(date1);
@@ -376,7 +346,7 @@ public class RiskReportActivity extends AppCompatActivity {
     }
 
 
-    private void updateReport(){
+    private void updateReport() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("RiskReport");
         query.getInBackground(riskReportObjectModel.getObjectId(), new GetCallback<ParseObject>() {
             public void done(ParseObject riskReportobject, ParseException e) {
@@ -437,6 +407,12 @@ public class RiskReportActivity extends AppCompatActivity {
 
     private class AsyncTaskRunner extends AsyncTask<Void, Void, Void> {
         ParseObject riskReportObject = new ParseObject("RiskReport");
+
+        @Override
+        protected void onPreExecute() {
+            CallProgressWheel.showLoadingDialog(mContext);
+        }
+
         @Override
         protected void onPostExecute(Void aVoid) {
             riskReportObject.saveInBackground(new SaveCallback() {
@@ -490,12 +466,6 @@ public class RiskReportActivity extends AppCompatActivity {
 
             return null;
         }
-
-        @Override
-        protected void onPreExecute() {
-            CallProgressWheel.showLoadingDialog(mContext);
-        }
-
     }
 
 }
