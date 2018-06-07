@@ -7,9 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ShareCompat;
@@ -777,7 +775,7 @@ public class IncidentReportsActivity extends BaseActivity {
                 }
                 break;
             case R.id.btn_save:
-                if(validatefields()){
+                if (validatefields()) {
                     if (getIntent().getSerializableExtra("incidentModel") == null)
                         new AsyncTaskRunner().execute();
                     else
@@ -844,12 +842,28 @@ public class IncidentReportsActivity extends BaseActivity {
                 etEyewear.getText().toString().trim().length() == 0 &&
                 etCarrying.getText().toString().trim().length() == 0 &&
                 etComment.getText().toString().trim().length() == 0 &&
-                etNotes.getText().toString().trim().length() == 0
-                ){
-            Toast.makeText(mContext,"All fields are mandatory",Toast.LENGTH_SHORT).show();
+                etNotes.getText().toString().trim().length() == 0 &&
+                rgWeather.getCheckedRadioButtonId() == -1 &&
+                rgType.getCheckedRadioButtonId() == -1 &&
+                rgCeased.getCheckedRadioButtonId() == -1 &&
+                rgOccurence.getCheckedRadioButtonId() == -1 &&
+                rgThirdParty.getCheckedRadioButtonId() == -1 &&
+                rgFirstAid.getCheckedRadioButtonId() == -1 &&
+                rgGender.getCheckedRadioButtonId() == -1 &&
+                rgDrugAffect.getCheckedRadioButtonId() == -1 &&
+                rgCctv.getCheckedRadioButtonId() == -1 &&
+                rgIncidentSpecs.getCheckedRadioButtonId() == -1 &&
+                rgAmbulance.getCheckedRadioButtonId() == -1 &&
+                rgWetWeather.getCheckedRadioButtonId() == -1 &&
+                rgAttendAffe.getCheckedRadioButtonId() == -1 &&
+                rgPropDamage.getCheckedRadioButtonId() == -1 &&
+                rgEventClass.getCheckedRadioButtonId() == -1 &&
+                rgPhotos.getCheckedRadioButtonId() == -1 &&
+                rgWandReport.getCheckedRadioButtonId() == -1
+                ) {
+            Toast.makeText(mContext, "All fields are mandatory", Toast.LENGTH_SHORT).show();
             return false;
-        }
-      else{
+        } else {
             return true;
         }
     }
@@ -880,16 +894,15 @@ public class IncidentReportsActivity extends BaseActivity {
         alertDialog.setMessage("Please select Occurrence Date");
         alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(final DialogInterface dialog, int which) {
-                if(selection == 0)
+                if (selection == 0)
                     rbCeasedNo.setChecked(true);
-                else if(selection == 1)
+                else if (selection == 1)
                     rbOccNo.setChecked(true);
                 dialog.dismiss();
             }
         });
         alertDialog.show();
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -940,8 +953,6 @@ public class IncidentReportsActivity extends BaseActivity {
                         .startChooser();
             }
         }.start();
-
-
     }
 
     @Override
@@ -950,16 +961,15 @@ public class IncidentReportsActivity extends BaseActivity {
         CallProgressWheel.dismissLoadingDialog();
     }
 
-    @OnClick({R.id.rb_ceased_yes,R.id.rb_ceased_no,R.id.rb_occ_yes, R.id.rb_occ_no})
+    @OnClick({R.id.rb_ceased_yes, R.id.rb_ceased_no, R.id.rb_occ_yes, R.id.rb_occ_no})
     public void onRadioButtonClicked(RadioButton radioButton) {
         boolean checked = radioButton.isChecked();
         switch (radioButton.getId()) {
             case R.id.rb_ceased_yes:
                 if (checked) {
-                    if(!tvOccurenceValue.getText().toString().equalsIgnoreCase("")){
+                    if (!tvOccurenceValue.getText().toString().equalsIgnoreCase("")) {
                         tvCeasedTimeValue.setText(tvOccurenceValue.getText().toString());
-                    }
-                    else{
+                    } else {
                         showAlert(0);
                     }
                 }
@@ -971,10 +981,9 @@ public class IncidentReportsActivity extends BaseActivity {
 
             case R.id.rb_occ_yes:
                 if (checked) {
-                    if(!tvOccurenceValue.getText().toString().equalsIgnoreCase("")){
+                    if (!tvOccurenceValue.getText().toString().equalsIgnoreCase("")) {
                         tvReportTimeValue.setText(tvOccurenceValue.getText().toString());
-                    }
-                    else{
+                    } else {
                         showAlert(1);
                     }
                 }
@@ -987,7 +996,8 @@ public class IncidentReportsActivity extends BaseActivity {
 
         }
     }
-    private void updateIncidentReport(){
+
+    private void updateIncidentReport() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("IncidentReport");
         query.getInBackground(incidentReportObject.getOjectId(), new GetCallback<ParseObject>() {
             public void done(ParseObject incidentReportObj, ParseException e) {
@@ -1279,8 +1289,7 @@ public class IncidentReportsActivity extends BaseActivity {
                         }
 
                     });
-                }
-                else {
+                } else {
                     CallProgressWheel.dismissLoadingDialog();
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 
@@ -1288,6 +1297,7 @@ public class IncidentReportsActivity extends BaseActivity {
             }
         });
     }
+
     private class AsyncTaskRunner extends AsyncTask<Void, Void, Void> {
         ParseObject object = new ParseObject("IncidentReport");
 
