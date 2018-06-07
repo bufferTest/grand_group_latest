@@ -58,13 +58,13 @@ public class EditTaskActivity extends AppCompatActivity {
                 mContext.overridePendingTransition(R.anim.slide_right_out, R.anim.slide_right_in);
                 break;
             case R.id.tv_event_date:
-                CustomDateDialog.getInstance().DatePicker(mContext, new CustomDateDialog.DateDialogListener() {
+               /* CustomDateDialog.getInstance().DatePicker(mContext, new CustomDateDialog.DateDialogListener() {
                     @Override
                     public void onOkayClick(int date, int month, int year) {
                         String formattedDate = String.valueOf(new StringBuilder().append(GrandGroupHelper.getMonth(month)).append(" ").append(date).append(", ").append(year));
                         tvEventDate.setText(formattedDate);
                     }
-                });
+                });*/
                 break;
             case R.id.btn_save:
                 eventsModel.setEvent_title(etEventName.getText().toString());
