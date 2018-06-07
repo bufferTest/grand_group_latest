@@ -777,10 +777,13 @@ public class IncidentReportsActivity extends BaseActivity {
                 }
                 break;
             case R.id.btn_save:
-                if (getIntent().getSerializableExtra("incidentModel") == null)
-                    new AsyncTaskRunner().execute();
-                else
-                    updateIncidentReport();
+                if(validatefields()){
+                    if (getIntent().getSerializableExtra("incidentModel") == null)
+                        new AsyncTaskRunner().execute();
+                    else
+                        updateIncidentReport();
+                }
+
                 break;
 
             case R.id.iv_image:
@@ -792,6 +795,62 @@ public class IncidentReportsActivity extends BaseActivity {
                 startActivityForResult(new Intent(mContext, SignatureActivity.class), SIGNATRUE_REQUEST_AMB);
                 mContext.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 break;
+        }
+    }
+
+    private boolean validatefields() {
+        if (etAffected.getText().toString().trim().length() == 0 &&
+                tvOccurenceValue.getText().toString().trim().length() == 0 &&
+                tvCeasedTimeValue.getText().toString().trim().length() == 0 &&
+                tvReportTimeValue.getText().toString().trim().length() == 0 &&
+                etFirstname.getText().toString().trim().length() == 0 &&
+                etSurname.getText().toString().trim().length() == 0 &&
+                etHomeAddress.getText().toString().trim().length() == 0 &&
+                etState.getText().toString().trim().length() == 0 &&
+                etPostcode.getText().toString().trim().length() == 0 &&
+                etHomePhone.getText().toString().trim().length() == 0 &&
+                etMobileNo.getText().toString().trim().length() == 0 &&
+                etBirthday.getText().toString().trim().length() == 0 &&
+                etOccupation.getText().toString().trim().length() == 0 &&
+                etWorkplace.getText().toString().trim().length() == 0 &&
+                etPersonAddress.getText().toString().trim().length() == 0 &&
+                etIncident.getText().toString().trim().length() == 0 &&
+                etBrief.getText().toString().trim().length() == 0 &&
+                etDescription.getText().toString().trim().length() == 0 &&
+                etAction.getText().toString().trim().length() == 0 &&
+                etInjury.getText().toString().trim().length() == 0 &&
+                etIllness.getText().toString().trim().length() == 0 &&
+                etBodily.getText().toString().trim().length() == 0 &&
+                etMark.getText().toString().trim().length() == 0 &&
+                etMechanism.getText().toString().trim().length() == 0 &&
+                etOthers.getText().toString().trim().length() == 0 &&
+                etObserve.getText().toString().trim().length() == 0 &&
+                etThirdReport.getText().toString().trim().length() == 0 &&
+                etDamageAdv.getText().toString().trim().length() == 0 &&
+                etDamageVeh.getText().toString().trim().length() == 0 &&
+                etName.getText().toString().trim().length() == 0 &&
+                etAidName.getText().toString().trim().length() == 0 &&
+                etInjuryDetail.getText().toString().trim().length() == 0 &&
+                etMedCenter.getText().toString().trim().length() == 0 &&
+                etDateAtten.getText().toString().trim().length() == 0 &&
+                etAmbReq.getText().toString().trim().length() == 0 &&
+                etAmbPerName.getText().toString().trim().length() == 0 &&
+                etAmbDate.getText().toString().trim().length() == 0 &&
+                etDateAtten.getText().toString().trim().length() == 0 &&
+                etAmbReq.getText().toString().trim().length() == 0 &&
+                etDateAtten.getText().toString().trim().length() == 0 &&
+                etWeatherCond.getText().toString().trim().length() == 0 &&
+                etFootwear.getText().toString().trim().length() == 0 &&
+                etEyewear.getText().toString().trim().length() == 0 &&
+                etCarrying.getText().toString().trim().length() == 0 &&
+                etComment.getText().toString().trim().length() == 0 &&
+                etNotes.getText().toString().trim().length() == 0
+                ){
+            Toast.makeText(mContext,"All fields are mandatory",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+      else{
+            return true;
         }
     }
 
