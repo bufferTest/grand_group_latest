@@ -13,6 +13,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,8 @@ import com.grandgroup.utills.CallProgressWheel;
 import com.grandgroup.utills.CommonUtils;
 import com.grandgroup.utills.PermissionUtils;
 import com.grandgroup.views.CustomDateDialog;
+import com.grandgroup.views.CustomEditText;
+import com.grandgroup.views.CustomTextView;
 import com.grandgroup.views.CustomTimeDialog;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -43,6 +46,7 @@ import com.parse.SaveCallback;
 import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -57,19 +61,19 @@ import static com.grandgroup.utills.AppConstant.WRITE_PERMISSIONS_REQUEST;
 
 public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.tv_title)
-    TextView tvTitle;
+    CustomTextView tvTitle;
     @BindView(R.id.btn_email)
     Button btnEmail;
     @BindView(R.id.btn_save)
     Button btnSave;
     @BindView(R.id.et_affected)
-    EditText etAffected;
+    CustomEditText etAffected;
     @BindView(R.id.rb_contractor)
     RadioButton rbContractor;
     @BindView(R.id.rg_type)
     RadioGroup rgType;
     @BindView(R.id.tv_occurence_value)
-    TextView tvOccurenceValue;
+    CustomTextView tvOccurenceValue;
     @BindView(R.id.rb_ceased_yes)
     RadioButton rbCeasedYes;
     @BindView(R.id.rb_ceased_no)
@@ -77,11 +81,11 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_ceased)
     RadioGroup rgCeased;
     @BindView(R.id.tv_ceased_time_value)
-    TextView tvCeasedTimeValue;
+    CustomTextView tvCeasedTimeValue;
     @BindView(R.id.tv_report_time_value)
-    TextView tvReportTimeValue;
+    CustomTextView tvReportTimeValue;
     @BindView(R.id.tv_occurence_date)
-    TextView tvOccurenceDate;
+    CustomTextView tvOccurenceDate;
     @BindView(R.id.rb_occ_yes)
     RadioButton rbOccYes;
     @BindView(R.id.rb_occ_no)
@@ -89,9 +93,9 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_occurence)
     RadioGroup rgOccurence;
     @BindView(R.id.et_firstname)
-    EditText etFirstname;
+    CustomEditText etFirstname;
     @BindView(R.id.et_surname)
-    EditText etSurname;
+    CustomEditText etSurname;
     @BindView(R.id.rb_male)
     RadioButton rbMale;
     @BindView(R.id.rb_female)
@@ -99,23 +103,23 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_gender)
     RadioGroup rgGender;
     @BindView(R.id.et_home_address)
-    EditText etHomeAddress;
+    CustomEditText etHomeAddress;
     @BindView(R.id.et_state)
-    EditText etState;
+    CustomEditText etState;
     @BindView(R.id.et_postcode)
-    EditText etPostcode;
+    CustomEditText etPostcode;
     @BindView(R.id.et_home_phone)
-    EditText etHomePhone;
+    CustomEditText etHomePhone;
     @BindView(R.id.et_mobile_no)
-    EditText etMobileNo;
+    CustomEditText etMobileNo;
     @BindView(R.id.et_birthday)
-    TextView etBirthday;
+    CustomTextView etBirthday;
     @BindView(R.id.et_occupation)
-    TextView etOccupation;
+    CustomEditText etOccupation;
     @BindView(R.id.et_workplace)
-    TextView etWorkplace;
+    CustomEditText etWorkplace;
     @BindView(R.id.et_incident)
-    TextView etIncident;
+    CustomEditText etIncident;
     @BindView(R.id.rb_miss)
     RadioButton rbMiss;
     @BindView(R.id.rb_incident)
@@ -129,27 +133,29 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_event_class)
     RadioGroup rgEventClass;
     @BindView(R.id.et_brief)
-    EditText etBrief;
+    CustomEditText etBrief;
     @BindView(R.id.et_description)
-    EditText etDescription;
+    CustomEditText etDescription;
     @BindView(R.id.et_action)
-    EditText etAction;
+    CustomEditText etAction;
     @BindView(R.id.et_addres)
-    EditText etPersonAddress;
+    CustomEditText etPersonAddress;
     @BindView(R.id.et_injury)
-    EditText etInjury;
+    CustomTextView etInjury;
+    @BindView(R.id.et_breakdown_others)
+    CustomEditText etBreakdownOther;
     @BindView(R.id.et_illness)
-    EditText etIllness;
+    CustomTextView etIllness;
     @BindView(R.id.et_bodily)
-    EditText etBodily;
+    CustomEditText etBodily;
     @BindView(R.id.et_mark)
-    EditText etMark;
+    CustomEditText etMark;
     @BindView(R.id.et_mechanism)
-    EditText etMechanism;
+    CustomTextView etMechanism;
     @BindView(R.id.et_others)
-    EditText etOthers;
+    CustomEditText etOthers;
     @BindView(R.id.et_observe)
-    EditText etObserve;
+    CustomEditText etObserve;
     @BindView(R.id.rb_third_yes)
     RadioButton rbThirdYes;
     @BindView(R.id.rb_third_no)
@@ -157,7 +163,7 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_third_party)
     RadioGroup rgThirdParty;
     @BindView(R.id.et_third_report)
-    EditText etThirdReport;
+    CustomEditText etThirdReport;
     @BindView(R.id.rb_damage_yes)
     RadioButton rbDamageYes;
     @BindView(R.id.rb_damage_no)
@@ -165,9 +171,11 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_prop_damage)
     RadioGroup rgPropDamage;
     @BindView(R.id.et_damage_adv)
-    EditText etDamageAdv;
+    CustomEditText etDamageAdv;
     @BindView(R.id.et_damage_veh)
-    TextView etDamageVeh;
+    CustomTextView etDamageVeh;
+    @BindView(R.id.et_breakdown)
+    CustomTextView etBreakdown;
     @BindView(R.id.rb_attend_yes)
     RadioButton rbAttendYes;
     @BindView(R.id.rb_attend_no)
@@ -183,11 +191,11 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_first_aid)
     RadioGroup rgFirstAid;
     @BindView(R.id.et_aid_name)
-    EditText etAidName;
+    CustomEditText etAidName;
     @BindView(R.id.iv_image)
     ImageView ivImage;
     @BindView(R.id.et_injury_detail)
-    EditText etInjuryDetail;
+    CustomEditText etInjuryDetail;
     @BindView(R.id.et_med_center)
     TextView etMedCenter;
     @BindView(R.id.et_date_atten)
@@ -199,9 +207,9 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_ambulance)
     RadioGroup rgAmbulance;
     @BindView(R.id.et_amb_req)
-    EditText etAmbReq;
+    CustomEditText etAmbReq;
     @BindView(R.id.et_amb_per_name)
-    EditText etAmbPerName;
+    CustomEditText etAmbPerName;
     @BindView(R.id.iv_amb_per_sign)
     ImageView ivAmbPerSign;
     @BindView(R.id.et_amb_date)
@@ -213,7 +221,7 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_weather)
     RadioGroup rgWeather;
     @BindView(R.id.et_weather_cond)
-    EditText etWeatherCond;
+    CustomEditText etWeatherCond;
     @BindView(R.id.rb_drug_yes)
     RadioButton rbDrugYes;
     @BindView(R.id.rb_drug_no)
@@ -221,11 +229,11 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_drug_affect)
     RadioGroup rgDrugAffect;
     @BindView(R.id.et_footwear)
-    EditText etFootwear;
+    CustomEditText etFootwear;
     @BindView(R.id.et_eyewear)
-    EditText etEyewear;
+    CustomEditText etEyewear;
     @BindView(R.id.et_carrying)
-    EditText etCarrying;
+    CustomEditText etCarrying;
     @BindView(R.id.rb_cctv_yes)
     RadioButton rbCctvYes;
     @BindView(R.id.rb_cctv_no)
@@ -251,7 +259,7 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_wet_weather)
     RadioGroup rgWetWeather;
     @BindView(R.id.et_comment)
-    EditText etComment;
+    CustomEditText etComment;
     @BindView(R.id.rb_crunches)
     RadioButton rbCrunches;
     @BindView(R.id.rb_stick)
@@ -265,18 +273,28 @@ public class IncidentReportsActivity extends BaseActivity {
     @BindView(R.id.rg_incident_specs)
     RadioGroup rgIncidentSpecs;
     @BindView(R.id.et_notes)
-    EditText etNotes;
+    CustomEditText etNotes;
     @BindView(R.id.lay_screenshot)
     ConstraintLayout layScreenshot;
     private IncidentModel incidentReportObject;
     private AppCompatActivity mContext;
     private Bitmap signatureBitmap, ambPerSign;
+    private ArrayList<String> itemsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incident_reports);
         setInitialData();
+        etMobileNo.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+        itemsList = new ArrayList<>();
+        itemsList.add("Option1");
+        itemsList.add("Option2");
+        itemsList.add("Option3");
+        itemsList.add("Option4");
+        itemsList.add("Option5");
+        itemsList.add("Option6");
+
     }
 
     private void setInitialData() {
@@ -514,6 +532,8 @@ public class IncidentReportsActivity extends BaseActivity {
             setsignatures(incidentReportObject.getFirst_aid_signature(), ivImage);
             setsignatures(incidentReportObject.getIncident_report_person_signature(), ivAmbPerSign);
             etNotes.setText(incidentReportObject.getWitness_statement());
+            etBreakdown.setText(incidentReportObject.getBreakdown_agency());
+            etBreakdownOther.setText(incidentReportObject.getOther_breakdown_agency());
             setsignatures(incidentReportObject.getFirst_aid_signature(), ivImage);
             setsignatures(incidentReportObject.getIncident_report_person_signature(), ivAmbPerSign);
         }
@@ -542,7 +562,7 @@ public class IncidentReportsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.btn_back, R.id.btn_add, R.id.rg_type, R.id.rg_ceased, R.id.rg_occurence, R.id.rg_gender, R.id.rg_third_party, R.id.rg_prop_damage, R.id.rg_attend_affe, R.id.rg_first_aid, R.id.lay_signature, R.id.lay_amb_per_sign, R.id.rg_cctv, R.id.rg_wand_report, R.id.rg_wet_weather, R.id.rg_incident_specs, R.id.lay_screenshot,
+    @OnClick({R.id.btn_back, R.id.et_injury, R.id.et_illness, R.id.et_mechanism, R.id.rg_ceased, R.id.rg_occurence, R.id.et_breakdown, R.id.rg_third_party, R.id.rg_prop_damage, R.id.rg_attend_affe, R.id.rg_first_aid, R.id.lay_signature, R.id.lay_amb_per_sign, R.id.rg_cctv, R.id.rg_wand_report, R.id.rg_wet_weather, R.id.rg_incident_specs, R.id.lay_screenshot,
             R.id.tv_occurence_value, R.id.et_amb_date, R.id.tv_ceased_time_value, R.id.tv_report_time_value, R.id.et_birthday, R.id.et_date_atten, R.id.btn_email, R.id.btn_save, R.id.iv_image, R.id.iv_amb_per_sign})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -550,9 +570,30 @@ public class IncidentReportsActivity extends BaseActivity {
                 finish();
                 mContext.overridePendingTransition(R.anim.slide_right_out, R.anim.slide_right_in);
                 break;
-            case R.id.btn_add:
+
+            case R.id.et_injury:
+                CommonUtils.getInstance().selectDialog(mContext, itemsList, "Select Option", new CommonUtils.OnClickItem() {
+                    @Override
+                    public void OnClickItem(String Item) {
+                        etInjury.setText(Item);
+                    }
+                });
                 break;
-            case R.id.rg_type:
+            case R.id.et_illness:
+                CommonUtils.getInstance().selectDialog(mContext, itemsList, "Select Option", new CommonUtils.OnClickItem() {
+                    @Override
+                    public void OnClickItem(String Item) {
+                        etIllness.setText(Item);
+                    }
+                });
+                break;
+            case R.id.et_mechanism:
+                CommonUtils.getInstance().selectDialog(mContext, itemsList, "Select Option", new CommonUtils.OnClickItem() {
+                    @Override
+                    public void OnClickItem(String Item) {
+                        etMechanism.setText(Item);
+                    }
+                });
                 break;
             case R.id.rg_ceased:
                 break;
@@ -569,7 +610,13 @@ public class IncidentReportsActivity extends BaseActivity {
                     }
                 });
                 break;
-            case R.id.rg_gender:
+            case R.id.et_breakdown:
+                CommonUtils.getInstance().selectDialog(mContext, itemsList, "Select Option", new CommonUtils.OnClickItem() {
+                    @Override
+                    public void OnClickItem(String Item) {
+                        etBreakdown.setText(Item);
+                    }
+                });
                 break;
             case R.id.rg_third_party:
                 break;
@@ -606,8 +653,8 @@ public class IncidentReportsActivity extends BaseActivity {
                                 dayOfMonth = (date < 10) ? "0" + date : "" + date;
                                 selectedDate = monthOfYear + " " + dayOfMonth + ", " + year + " " + TwelveHourTime;
                                 Log.e("day", selectedDate);
-                                DateFormat originalFormat = new SimpleDateFormat("MM dd, yyyy hh:mm a");
-                                DateFormat targetFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a");
+                                DateFormat originalFormat = new SimpleDateFormat("MM dd, yyyy hh:mm a", Locale.US);
+                                DateFormat targetFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US);
                                 try {
                                     Date date1 = originalFormat.parse(selectedDate);
                                     formattedDate = targetFormat.format(date1);
@@ -828,6 +875,8 @@ public class IncidentReportsActivity extends BaseActivity {
                 etDamageVeh.getText().toString().trim().length() == 0 &&
                 etName.getText().toString().trim().length() == 0 &&
                 etAidName.getText().toString().trim().length() == 0 &&
+                etBreakdown.getText().toString().trim().length() == 0 &&
+                etBreakdownOther.getText().toString().trim().length() == 0 &&
                 etInjuryDetail.getText().toString().trim().length() == 0 &&
                 etMedCenter.getText().toString().trim().length() == 0 &&
                 etDateAtten.getText().toString().trim().length() == 0 &&
@@ -1041,7 +1090,7 @@ public class IncidentReportsActivity extends BaseActivity {
                     incidentReportObj.put("cease_option", Integer.parseInt(ceaseOption));
                     incidentReportObj.put("medical_center", etMedCenter.getText().toString());
                     incidentReportObj.put("weather_conditions", etWeatherCond.getText().toString());
-//        incidentReportObj.put("breakdown_agency", tvOccurenceDate.getText().toString());
+                    incidentReportObj.put("other_breakdown_agency", etBreakdownOther.getText().toString());
                     incidentReportObj.put("person_sur_name", etSurname.getText().toString());
                     incidentReportObj.put("person_first_name", etFirstname.getText().toString());
 
@@ -1128,7 +1177,7 @@ public class IncidentReportsActivity extends BaseActivity {
                     }
                     incidentReportObj.put("cctv_option", Integer.parseInt(cctvOption));
 
-//        incidentReportObj.put("other_breakdown_agency", tvOccurenceDate.getText().toString());
+                    incidentReportObj.put("breakdown_agency", etBreakdown.getText().toString());
                     incidentReportObj.put("body_location", etBodily.getText().toString());
                     incidentReportObj.put("carrying_type", etCarrying.getText().toString());
                     incidentReportObj.put("incident_report_person", etAmbPerName.getText().toString());

@@ -206,7 +206,7 @@ public class UserProfileActivity extends BaseActivity {
         parseUser.put(getString(R.string.userLastName), userLastName);
         parseUser.put(getString(R.string.userEmail), userEmail);
         if (scaled != null) {
-            Bitmap scaledProfilePic = Bitmap.createScaledBitmap(scaled, 320, 320, false);
+            Bitmap scaledProfilePic = Bitmap.createScaledBitmap(scaled, 210, 210, false);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             scaledProfilePic.compress(Bitmap.CompressFormat.PNG, 70, stream);
             byte[] image = stream.toByteArray();
