@@ -158,7 +158,7 @@ public class ReportActivity extends BaseActivity implements AdapterView.OnItemSe
                             incidentModel.setCease_option(incidentReportObject.get("cease_option").toString());
                             incidentModel.setMedical_center(incidentReportObject.get("medical_center").toString());
                             incidentModel.setWeather_conditions(incidentReportObject.get("weather_conditions").toString());
- //                           incidentModel.setBreakdown_agency(incidentReportObject.get("breakdown_agency").toString());
+                            incidentModel.setBreakdown_agency(incidentReportObject.get("breakdown_agency").toString());
                             incidentModel.setPerson_sur_name(incidentReportObject.get("person_sur_name").toString());
                             incidentModel.setPerson_first_name(incidentReportObject.get("person_first_name").toString());
                             incidentModel.setSame_occourance(incidentReportObject.get("same_occourance").toString());
@@ -181,11 +181,11 @@ public class ReportActivity extends BaseActivity implements AdapterView.OnItemSe
                             incidentModel.setAttendee_name(incidentReportObject.get("attendee_name").toString());
                             incidentModel.setInjury_machanism(incidentReportObject.get("injury_mechanism").toString());
                             incidentModel.setCctv_option(incidentReportObject.get("cctv_option").toString());
-//                            incidentModel.setOther_breakdown_agency(incidentReportObject.get("other_breakdown_agency").toString());
+                            incidentModel.setOther_breakdown_agency(incidentReportObject.get("other_breakdown_agency").toString());
                             incidentModel.setBody_location(incidentReportObject.get("body_location").toString());
                             incidentModel.setCarring_type(incidentReportObject.get("carrying_type").toString());
                             incidentModel.setIncident_report_person(incidentReportObject.get("incident_report_person").toString());
-//                            incidentModel.setWarning_sign_option(incidentReportObject.get("warning_sign_option").toString());
+                            incidentModel.setWarning_sign_option(incidentReportObject.get("warning_sign_option").toString());
                             incidentModel.setAffected_person_option(incidentReportObject.get("affected_person_option").toString());
                             incidentModel.setPerson_occupation(incidentReportObject.get("person_occupation").toString());
                             incidentModel.setInjury_mark(incidentReportObject.get("injury_mark").toString());

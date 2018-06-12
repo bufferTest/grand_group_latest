@@ -229,10 +229,13 @@ public class RiskReportActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.btn_save:
-                if (getIntent().getSerializableExtra("riskReportObject") == null)
-                    new AsyncTaskRunner().execute();
+                if (validatefields()) {
+                    if (getIntent().getSerializableExtra("riskReportObject") == null)
+                        new AsyncTaskRunner().execute();
+                    else
+                        updateReport();
+                }
                 else
-                    updateReport();
                 break;
             case R.id.iv_signature:
                 startActivityForResult(new Intent(mContext, SignatureActivity.class), SIGNATRUE_REQUEST);
@@ -345,7 +348,6 @@ public class RiskReportActivity extends AppCompatActivity {
         CallProgressWheel.dismissLoadingDialog();
     }
 
-
     private void updateReport() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("RiskReport");
         query.getInBackground(riskReportObjectModel.getObjectId(), new GetCallback<ParseObject>() {
@@ -391,7 +393,7 @@ public class RiskReportActivity extends AppCompatActivity {
                         public void done(ParseException e) {
                             CallProgressWheel.dismissLoadingDialog();
                             if (e == null)
-                                Toast.makeText(getApplicationContext(), "Report form saved successfully!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Report form updated successfully!", Toast.LENGTH_LONG).show();
                             else
                                 Toast.makeText(getApplicationContext(), "Please, Try Again", Toast.LENGTH_LONG).show();
                         }
@@ -403,6 +405,23 @@ public class RiskReportActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private boolean validatefields() {
+        if (tvSelectedLikelihood.getText().toString().trim().length() == 0 &&
+                etActionPlan.getText().toString().trim().length() == 0 &&
+                etLocation.getText().toString().trim().length() == 0 &&
+                tvReportDesc.getText().toString().trim().length() == 0 &&
+                et_control_eff.getText().toString().trim().length() == 0 &&
+                etControls.getText().toString().trim().length() == 0 &&
+                etReportedBy.getText().toString().trim().length() == 0 &&
+                tv_select_consq.getText().toString().trim().length() == 0 &&
+                tv_event_date.getText().toString().trim().length() == 0) {
+            Toast.makeText(mContext, "All fields are mandatory", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
     }
 
     private class AsyncTaskRunner extends AsyncTask<Void, Void, Void> {

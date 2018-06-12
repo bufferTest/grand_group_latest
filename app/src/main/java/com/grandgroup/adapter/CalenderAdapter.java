@@ -61,7 +61,6 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.Custom
                 holder.lay_day.setBackground(null);
             }
 
-
             if (getEventsList(position).size() > 0)
                 holder.saved_event_imageView.setVisibility(View.VISIBLE);
             else
@@ -90,7 +89,6 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.Custom
                 .append(arrayList.get(position).getValue().toString())
                 .append(", ").append(calendar.get(Calendar.YEAR)));
         ArrayList<EventsModel> eventsList = new ArrayList<>(SQLiteQueries.getInstance(mContext).getEvents(formattedDate));
-        Log.e(formattedDate, String.valueOf(eventsList.size()));
         return eventsList;
     }
 

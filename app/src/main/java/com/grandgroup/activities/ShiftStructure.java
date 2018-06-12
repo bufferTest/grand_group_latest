@@ -83,7 +83,6 @@ public class ShiftStructure extends BaseActivity {
         date = cal.get(Calendar.DAY_OF_MONTH);
 
         setUpWeekNames();
-        setupcalender();
         fetchShifts();
     }
 
@@ -195,7 +194,7 @@ public class ShiftStructure extends BaseActivity {
         }
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 7);
         calenderRecyclerView.setLayoutManager(gridLayoutManager);
-        ShiftCalenderAdapter calenderAdpter = new ShiftCalenderAdapter(mContext, arrayList, cal, new CalenderDayClick() {
+        ShiftCalenderAdapter calenderAdpter = new ShiftCalenderAdapter(mContext, arrayList, cal,allShiftsList, new CalenderDayClick() {
             @Override
             public void onDayClick(Integer position) {
                 year = cal.get(Calendar.YEAR);
@@ -231,8 +230,9 @@ public class ShiftStructure extends BaseActivity {
                                 shiftDetailModel.setShift_name(p.getString(getString(R.string.shiftName)));
                                 allShiftsList.add(shiftDetailModel);
                             }
-
+                            setupcalender();
                             setAdapter();
+
                         }
 
                     } else {
@@ -275,31 +275,6 @@ public class ShiftStructure extends BaseActivity {
                     }
 
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                 rv_shifts.setHasFixedSize(true);
