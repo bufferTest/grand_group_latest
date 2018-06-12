@@ -103,7 +103,7 @@ public class ShiftCalenderAdapter extends RecyclerView.Adapter<ShiftCalenderAdap
             e.printStackTrace();
         }
     }
-    public  Date addDay(Date date) {
+    private Date addDay(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.add(Calendar.DAY_OF_YEAR, 1);

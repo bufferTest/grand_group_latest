@@ -1673,7 +1673,6 @@ public class IncidentReportsActivity extends BaseActivity {
             }
             object.put("web_report_option", Integer.parseInt(wandOption));
 
-
             if (signatureBitmap != null) {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 signatureBitmap.compress(Bitmap.CompressFormat.PNG, 70, stream);
