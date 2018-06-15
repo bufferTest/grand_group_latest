@@ -6,6 +6,7 @@ import android.content.Context;
 import com.buddy.sdk.Buddy;
 import com.facebook.stetho.Stetho;
 import com.grandgroup.utills.TypefaceUtil;
+import com.onesignal.OneSignal;
 import com.parse.Parse;
 
 /**
@@ -27,6 +28,11 @@ public class MyApplication extends Application {
         Stetho.initializeWithDefaults(this);
         TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/HelveticaNeue Light.ttf");
 
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
     }
 
     public static Context getAppContext() {

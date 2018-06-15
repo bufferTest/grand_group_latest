@@ -10,6 +10,12 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
+        manifestPlaceholders = [
+                onesignal_app_id: "94b80f02-feb3-49d5-afe2-f2744481b0c3",
+                // Project number pulled from dashboard, local value is ignored.
+                onesignal_google_project_number: 'REMOTE'
+        ]
     }
     buildTypes {
         release {
@@ -40,7 +46,8 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.0.5'
     implementation 'com.intuit.ssp:ssp-android:1.0.5'
     implementation 'com.facebook.stetho:stetho:1.5.0'
-
+    //one Signal sdk for push notification
+    implementation 'com.onesignal:OneSignal:[3.9.1, 3.99.99]'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
