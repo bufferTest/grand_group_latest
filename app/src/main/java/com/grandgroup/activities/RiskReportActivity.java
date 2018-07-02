@@ -230,20 +230,21 @@ public class RiskReportActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.btn_save:
-               /* if (validatefields()) {
-                    if (getIntent().getSerializableExtra("riskReportObject") == null)
-                        new AsyncTaskRunner().execute();
-                    else
-                        updateReport();
-                }*/
-                String formString = GrandGroupHelper.grandGroupHelper(mContext).fetchHtmlFromAssets("risk.html");
-                String formatedString = formString.replace("$$likelihood$$",tvSelectedLikelihood.getText().toString()).replace("$$actionplan$$",etActionPlan.getText().toString())
-                        .replace("$$hazardlocation$$",etLocation.getText().toString()).replace("$$desc$$",tvReportDesc.getText().toString())
-                        .replace("$$controleffectiveness$$",et_control_eff.getText().toString()).replace("$$Controls$$",etControls.getText().toString())
-                        .replace("$$reportedby$$",etReportedBy.getText().toString()).replace("$$consequence$$",tv_select_consq.getText().toString())
-                        .replace("$$date$$",tv_event_date.getText().toString());
+                if (validatefields()) {
+                    if (getIntent().getSerializableExtra("riskReportObject") == null) {
+                        String formString = GrandGroupHelper.grandGroupHelper(mContext).fetchHtmlFromAssets("risk.html");
+                        String formatedString = formString.replace("$$likelihood$$", tvSelectedLikelihood.getText().toString()).replace("$$actionplan$$", etActionPlan.getText().toString())
+                                .replace("$$hazardlocation$$", etLocation.getText().toString()).replace("$$desc$$", tvReportDesc.getText().toString())
+                                .replace("$$controleffectiveness$$", et_control_eff.getText().toString()).replace("$$Controls$$", etControls.getText().toString())
+                                .replace("$$reportedby$$", etReportedBy.getText().toString()).replace("$$consequence$$", tv_select_consq.getText().toString())
+                                .replace("$$date$$", tv_event_date.getText().toString());
 //        <item>$$hazardphoto$$</item>
-                System.out.println("formatedString "+formatedString);
+                        System.out.println("formatedString " + formatedString);
+//                        new AsyncTaskRunner().execute();
+                    } else
+                        updateReport();
+                }
+
                 break;
             case R.id.iv_signature:
                 startActivityForResult(new Intent(mContext, SignatureActivity.class), SIGNATRUE_REQUEST);

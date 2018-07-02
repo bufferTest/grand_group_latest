@@ -31,6 +31,7 @@ import com.grandgroup.R;
 import com.grandgroup.model.IncidentModel;
 import com.grandgroup.utills.CallProgressWheel;
 import com.grandgroup.utills.CommonUtils;
+import com.grandgroup.utills.GrandGroupHelper;
 import com.grandgroup.utills.PermissionUtils;
 import com.grandgroup.views.CustomDateDialog;
 import com.grandgroup.views.CustomEditText;
@@ -841,8 +842,14 @@ public class IncidentReportsActivity extends BaseActivity {
                 break;
             case R.id.btn_save:
                 if (validatefields()) {
-                    if (getIntent().getSerializableExtra("incidentModel") == null)
-                        new AsyncTaskRunner().execute();
+                    if (getIntent().getSerializableExtra("incidentModel") == null) {
+                        String formString = GrandGroupHelper.grandGroupHelper(mContext).fetchHtmlFromAssets("risk.html");
+//                        String formatedString = formString.replace("$$likelihood$$", tvSelectedLikelihood.getText().toString()).replace("$$actionplan$$", etActionPlan.getText().toString())
+//                                .replace("$$hazardlocation$$", etLocation.getText().toString()).replace("$$desc$$", tvReportDesc.getText().toString());
+
+                     //   System.out.println("formatedString " + formatedString);
+                   //     new AsyncTaskRunner().execute();
+                    }
                     else
                         updateIncidentReport();
                 }
