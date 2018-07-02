@@ -148,7 +148,7 @@ public class GrandGroupHelper {
 
     }
 
-    public String fetchHtmlFromAssets(Context context, String filename) {
+    public String fetchHtmlFromAssets( String filename) {
 
 
         StringBuilder buf = new StringBuilder();

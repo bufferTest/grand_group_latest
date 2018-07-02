@@ -22,4 +22,19 @@
         <item>Good</item>
         <item>Effective</item>
     </string-array>
+
+    <string-array name="risk_values_replace_array">
+        <item>$$desc$$</item>
+        <item>$$date$$</item>
+        <item>$$hazardlocation$$</item>
+        <item>$$hazardphoto$$</item>
+        <item>$$likelihood$$</item>
+        <item>$$consequence$$</item>
+        <item>$$Controls$$</item>
+        <item>$$controleffectiveness$$</item>
+        <item>$$actionplan$$</item>
+        <item>$$reportedby$$</item>
+        <item>$$signature$$</item>
+    </string-array>
+
 </resources>

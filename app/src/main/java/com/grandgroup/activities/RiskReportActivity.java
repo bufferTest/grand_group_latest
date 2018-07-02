@@ -28,6 +28,7 @@ import com.grandgroup.R;
 import com.grandgroup.model.RiskReportModel;
 import com.grandgroup.utills.CallProgressWheel;
 import com.grandgroup.utills.CommonUtils;
+import com.grandgroup.utills.GrandGroupHelper;
 import com.grandgroup.utills.PermissionUtils;
 import com.grandgroup.views.CustomDateDialog;
 import com.grandgroup.views.CustomEditText;
@@ -229,13 +230,20 @@ public class RiskReportActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.btn_save:
-                if (validatefields()) {
+               /* if (validatefields()) {
                     if (getIntent().getSerializableExtra("riskReportObject") == null)
                         new AsyncTaskRunner().execute();
                     else
                         updateReport();
-                }
-                else
+                }*/
+                String formString = GrandGroupHelper.grandGroupHelper(mContext).fetchHtmlFromAssets("risk.html");
+                String formatedString = formString.replace("$$likelihood$$",tvSelectedLikelihood.getText().toString()).replace("$$actionplan$$",etActionPlan.getText().toString())
+                        .replace("$$hazardlocation$$",etLocation.getText().toString()).replace("$$desc$$",tvReportDesc.getText().toString())
+                        .replace("$$controleffectiveness$$",et_control_eff.getText().toString()).replace("$$Controls$$",etControls.getText().toString())
+                        .replace("$$reportedby$$",etReportedBy.getText().toString()).replace("$$consequence$$",tv_select_consq.getText().toString())
+                        .replace("$$date$$",tv_event_date.getText().toString());
+//        <item>$$hazardphoto$$</item>
+                System.out.println("formatedString "+formatedString);
                 break;
             case R.id.iv_signature:
                 startActivityForResult(new Intent(mContext, SignatureActivity.class), SIGNATRUE_REQUEST);
