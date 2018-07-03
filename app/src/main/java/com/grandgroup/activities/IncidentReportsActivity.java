@@ -1716,8 +1716,6 @@ public class IncidentReportsActivity extends BaseActivity {
 
 
 
-
-
         tvCeasedTimeValue.setText(incidentReportObject.getCease_date());tvReportTimeValue.setText(incidentReportObject.getReported_date());
         etFirstname.setText(incidentReportObject.getPerson_first_name());etSurname.setText(incidentReportObject.getPerson_sur_name());
         etHomeAddress.setText(incidentReportObject.getPerson_home_address());etState.setText(incidentReportObject.getPerson_state());
