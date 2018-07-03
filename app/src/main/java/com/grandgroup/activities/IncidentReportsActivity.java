@@ -944,26 +944,6 @@ public class IncidentReportsActivity extends BaseActivity {
     }
 
     private void showAlert(final int selection) {
-       /* final AlertDialog.Builder builder;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(mContext, android.R.style.Theme_Material_Dialog_Alert);
-        } else {
-            builder = new AlertDialog.Builder(mContext);
-        }
-        builder.setTitle("Error")
-                .setMessage("Please select Occurrence Date")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        if(selection == 0)
-                        rbCeasedNo.setChecked(true);
-                        else if(selection == 1)
-                            rbOccNo.setChecked(true);
-                       dialog.dismiss();
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();*/
-
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
         alertDialog.setTitle("Error");
         alertDialog.setMessage("Please select Occurrence Date");
@@ -1703,5 +1683,78 @@ public class IncidentReportsActivity extends BaseActivity {
         protected void onPreExecute() {
             CallProgressWheel.showLoadingDialog(mContext);
         }
+    }
+
+    private void convertAndUpdateString(){
+        String formString = GrandGroupHelper.grandGroupHelper(mContext).fetchHtmlFromAssets("incedent.html");
+        String formatedString = formString.replace("$$1_affectedpersondetails$$", tvSelectedLikelihood.getText().toString()).replace("$$2_type$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$3_occourancedate$$", tvSelectedLikelihood.getText().toString()).replace("$$4_ceasedworkdate$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$5_reporteddate$$", tvSelectedLikelihood.getText().toString()).replace("$$6_firstname$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$7_surname$$", tvSelectedLikelihood.getText().toString()).replace("$$8_gender$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$9_homeaddress$$", tvSelectedLikelihood.getText().toString()).replace("$$10_state$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$11_postcode$$", tvSelectedLikelihood.getText().toString()).replace("$$12_homephonenumber$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$13_mobilephonenumber$$", tvSelectedLikelihood.getText().toString()).replace("$$14_birthdate$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$15_occupation$$", tvSelectedLikelihood.getText().toString()).replace("$$16_workplacename$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$17_address$$", tvSelectedLikelihood.getText().toString()).replace("$$18_incidentlocation$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$19_locationofincidentcenter$$", tvSelectedLikelihood.getText().toString()).replace("$$20_eventclassification$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$21_descofincident$$", tvSelectedLikelihood.getText().toString()).replace("$$22_descofevent$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$23_immidiateactiontaken$$", tvSelectedLikelihood.getText().toString()).replace("$$24_injurytype$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$25_injuryconsequence$$", tvSelectedLikelihood.getText().toString()).replace("$$26_bodilylocation$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$27_locationonbody$$", tvSelectedLikelihood.getText().toString()).replace("$$28_mechanismofinjury$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$29_otherexplanation$$", tvSelectedLikelihood.getText().toString()).replace("$$30_breakdown$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$31_otherexplanation$$", tvSelectedLikelihood.getText().toString()).replace("$$32_whatdidyousee$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$33_wastherethirdparty$$", tvSelectedLikelihood.getText().toString()).replace("$$34_ifyesthirdparty$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$35_propertydamage$$", tvSelectedLikelihood.getText().toString()).replace("$$36typeofdamage$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$37_vehicledamage$$", tvSelectedLikelihood.getText().toString()).replace("$$38_attendedaffectedperson$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$39_name$$", tvSelectedLikelihood.getText().toString()).replace("$$40_firstaid$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$41_ifyes$$", tvSelectedLikelihood.getText().toString()).replace("$$42_signature$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$43_pleaseprovide_$$", tvSelectedLikelihood.getText().toString()).replace("$$44_dateattended$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$45_ambulanceattended$$", tvSelectedLikelihood.getText().toString()).replace("$$46_whorequested$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$47_personcompleting$$", tvSelectedLikelihood.getText().toString()).replace("$$48_signature$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$49_date$$", tvSelectedLikelihood.getText().toString()).replace("$$50_wasweather$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$51_weatherconditions$$", tvSelectedLikelihood.getText().toString()).replace("$$52_didthisperson$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$53_typeoffootwear$$", tvSelectedLikelihood.getText().toString()).replace("$$54_typeofeyewear$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$55_weretheycarrying$$", tvSelectedLikelihood.getText().toString()).replace("$$56_cctv$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$57_photos$$", tvSelectedLikelihood.getText().toString()).replace("$$58_wandreports$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$59_warningsign$$", tvSelectedLikelihood.getText().toString()).replace("$$60_wetweather$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$61_anyadditional$$", tvSelectedLikelihood.getText().toString()).replace("$$62_atthetimeofincident$$", tvSelectedLikelihood.getText().toString())
+                .replace("$$63_notes$$", tvSelectedLikelihood.getText().toString());
+
+
+
+
+
+        tvCeasedTimeValue.setText(incidentReportObject.getCease_date());tvReportTimeValue.setText(incidentReportObject.getReported_date());
+        etFirstname.setText(incidentReportObject.getPerson_first_name());etSurname.setText(incidentReportObject.getPerson_sur_name());
+        etHomeAddress.setText(incidentReportObject.getPerson_home_address());etState.setText(incidentReportObject.getPerson_state());
+        etPostcode.setText(incidentReportObject.getPerson_post_code());etHomePhone.setText(incidentReportObject.getPerson_home_phone());
+        etMobileNo.setText(incidentReportObject.getPerson_mobile_phone());etBirthday.setText(incidentReportObject.getPerson_birth_date());
+        etOccupation.setText(incidentReportObject.getPerson_occupation());etWorkplace.setText(incidentReportObject.getPerson_workplace_name());
+        etPersonAddress.setText(incidentReportObject.getPerson_address());etIncident.setText(incidentReportObject.getIncedent_location());
+        etBrief.setText(incidentReportObject.getIncident_desc());etDescription.setText(incidentReportObject.getEvent_desc_desc());
+        etAction.setText(incidentReportObject.getAction_taken());etInjury.setText(incidentReportObject.getInjury_type());
+        etIllness.setText(incidentReportObject.getInjury_illness());etBodily.setText(incidentReportObject.getBody_location());
+        etMark.setText(incidentReportObject.getInjury_mark());etMechanism.setText(incidentReportObject.getInjury_machanism());
+        etOthers.setText(incidentReportObject.getOther_mechanism());etObserve.setText(incidentReportObject.getWhat_you_see());
+        etThirdReport.setText(incidentReportObject.getThird_party_detail());etDamageAdv.setText(incidentReportObject.getDamage_type());
+        etDamageVeh.setText(incidentReportObject.getVehicle_damage_detail());etName.setText(incidentReportObject.getAttendee_name());
+        etAidName.setText(incidentReportObject.getFirst_aid_name());etInjuryDetail.setText(incidentReportObject.getInjury_illness_detail());
+        etMedCenter.setText(incidentReportObject.getMedical_center());etDateAtten.setText(incidentReportObject.getDate_attended());
+        etAmbReq.setText(incidentReportObject.getAmbulance_who());etAmbPerName.setText(incidentReportObject.getIncident_report_person());
+        etAmbDate.setText(incidentReportObject.getIncident_report_date());etWeatherCond.setText(incidentReportObject.getWeather_conditions());
+        etFootwear.setText(incidentReportObject.getFootwaer_type());etEyewear.setText(incidentReportObject.getEyewear_type());
+        etCarrying.setText(incidentReportObject.getCarring_type());etComment.setText(incidentReportObject.getAdditional_comments());
+        setsignatures(incidentReportObject.getFirst_aid_signature(), ivImage);setsignatures(incidentReportObject.getIncident_report_person_signature(), ivAmbPerSign);
+        etNotes.setText(incidentReportObject.getWitness_statement());etBreakdown.setText(incidentReportObject.getBreakdown_agency());
+        etBreakdownOther.setText(incidentReportObject.getOther_breakdown_agency());setsignatures(incidentReportObject.getFirst_aid_signature(), ivImage);
+        setsignatures(incidentReportObject.getIncident_report_person_signature(), ivAmbPerSign);
+
+
+
+
+
+
+
+        GrandGroupHelper.grandGroupHelper(mContext).generateDocFile(formatedString, "Risk Report.doc");
     }
 }

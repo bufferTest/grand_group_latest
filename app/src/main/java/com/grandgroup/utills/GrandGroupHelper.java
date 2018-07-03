@@ -7,12 +7,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 import android.util.Patterns;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -298,22 +301,37 @@ public class GrandGroupHelper {
         }
     }
 
-    public float getDistance() {
-        float distanceInMeters = 550;
-       /* Location loc1 = new Location("");
-        loc1.setLatitude(latitude);
-        loc1.setLongitude(longitude);
-        Location loc2 = new Location("");
-        if (!loc2.equals("")) {
-            loc2.setLatitude(Double.parseDouble(latLong[0]));
-            loc2.setLongitude(Double.parseDouble(latLong[1]));
-            float distanceInMeters = loc1.distanceTo(loc2);
-            // AppPrefrence.init(mContext).putString(AppConstant.LAT_LONG, latitude + "," + longitude);
-            if (distanceInMeters <= 500) {
+    public void generateDocFile(String htmlString, String fileName){
+        try
+        {
+            File root = new File(Environment.getExternalStorageDirectory()+File.separator+"GNG", "Report Files");
+            if (!root.exists())
+                root.mkdirs();
 
-            }
-        }*/
-        return distanceInMeters;
+            File gpxfile = new File(root, fileName);
+
+            FileWriter writer = new FileWriter(gpxfile,true);
+            writer.append(htmlString+"\n\n");
+            writer.flush();
+            writer.close();
+        }
+        catch(IOException e) { e.printStackTrace(); }
+    }
+
+    public void shareFile(Context context, String filePath) {
+
+        File f = new File(filePath);
+
+        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+        File fileWithinMyDir = new File(filePath);
+
+        if (fileWithinMyDir.exists()) {
+            intentShareFile.setType("text/*");
+            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + filePath));
+            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,  f.getName());
+            intentShareFile.putExtra(Intent.EXTRA_TEXT, f.getName());
+            context.startActivity(Intent.createChooser(intentShareFile, f.getName()));
+        }
     }
 
     public void copyFile(InputStream in, OutputStream out) throws IOException {
@@ -324,5 +342,7 @@ public class GrandGroupHelper {
 
         }
     }
+
+
 
 }

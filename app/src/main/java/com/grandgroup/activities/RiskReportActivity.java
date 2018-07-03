@@ -1,6 +1,7 @@
 package com.grandgroup.activities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -9,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -42,6 +44,7 @@ import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -227,21 +230,14 @@ public class RiskReportActivity extends AppCompatActivity {
             case R.id.btn_email:
                 if (PermissionUtils.requestPermission(mContext, WRITE_PERMISSIONS_REQUEST, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     createSendForm();
+
                 }
                 break;
             case R.id.btn_save:
                 if (validatefields()) {
-                    if (getIntent().getSerializableExtra("riskReportObject") == null) {
-                        String formString = GrandGroupHelper.grandGroupHelper(mContext).fetchHtmlFromAssets("risk.html");
-                        String formatedString = formString.replace("$$likelihood$$", tvSelectedLikelihood.getText().toString()).replace("$$actionplan$$", etActionPlan.getText().toString())
-                                .replace("$$hazardlocation$$", etLocation.getText().toString()).replace("$$desc$$", tvReportDesc.getText().toString())
-                                .replace("$$controleffectiveness$$", et_control_eff.getText().toString()).replace("$$Controls$$", etControls.getText().toString())
-                                .replace("$$reportedby$$", etReportedBy.getText().toString()).replace("$$consequence$$", tv_select_consq.getText().toString())
-                                .replace("$$date$$", tv_event_date.getText().toString());
-//        <item>$$hazardphoto$$</item>
-                        System.out.println("formatedString " + formatedString);
-//                        new AsyncTaskRunner().execute();
-                    } else
+                    if (getIntent().getSerializableExtra("riskReportObject") == null)
+                        new AsyncTaskRunner().execute();
+                     else
                         updateReport();
                 }
 
@@ -345,15 +341,23 @@ public class RiskReportActivity extends AppCompatActivity {
 
     private void createSendForm() {
         CallProgressWheel.showLoadingDialog(mContext);
-        Uri uri = CommonUtils.getInstance().createPdf(lay_screenshot, "Risk_Report_Form");
+        String formString = GrandGroupHelper.grandGroupHelper(mContext).fetchHtmlFromAssets("risk.html");
+        String formatedString = formString.replace("$$likelihood$$", tvSelectedLikelihood.getText().toString()).replace("$$actionplan$$", etActionPlan.getText().toString())
+                .replace("$$hazardlocation$$", etLocation.getText().toString()).replace("$$desc$$", tvReportDesc.getText().toString())
+                .replace("$$controleffectiveness$$", et_control_eff.getText().toString()).replace("$$controls$$", etControls.getText().toString())
+                .replace("$$reportedby$$", etReportedBy.getText().toString()).replace("$$consequence$$", tv_select_consq.getText().toString())
+                .replace("$$date$$", tv_event_date.getText().toString()).replace("$$hazardphoto$$",riskReportObjectModel.getRisk_file() )
+                .replace("$$signature$$",riskReportObjectModel.getSignature_file());
+        GrandGroupHelper.grandGroupHelper(mContext).generateDocFile(formatedString, "Risk Report.doc");
 
-        ShareCompat.IntentBuilder.from(mContext)
+      //  GrandGroupHelper.grandGroupHelper(mContext).shareFile(mContext, Environment.getExternalStorageDirectory()+ File.separator+"GNG", "Report Files/Risk Report.doc"),
+        /*ShareCompat.IntentBuilder.from(mContext)
                 .setType("message/rfc822")
                 .setSubject("Risk Report Form")
                 .setText("Risk Report Form.")
                 .setStream(uri)
                 .setChooserTitle("Share Form")
-                .startChooser();
+                .startChooser();*/
         CallProgressWheel.dismissLoadingDialog();
     }
 
