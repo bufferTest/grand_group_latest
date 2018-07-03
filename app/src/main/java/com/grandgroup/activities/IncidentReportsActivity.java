@@ -842,14 +842,8 @@ public class IncidentReportsActivity extends BaseActivity {
                 break;
             case R.id.btn_save:
                 if (validatefields()) {
-                    if (getIntent().getSerializableExtra("incidentModel") == null) {
-                        String formString = GrandGroupHelper.grandGroupHelper(mContext).fetchHtmlFromAssets("risk.html");
-//                        String formatedString = formString.replace("$$likelihood$$", tvSelectedLikelihood.getText().toString()).replace("$$actionplan$$", etActionPlan.getText().toString())
-//                                .replace("$$hazardlocation$$", etLocation.getText().toString()).replace("$$desc$$", tvReportDesc.getText().toString());
-
-                     //   System.out.println("formatedString " + formatedString);
-                   //     new AsyncTaskRunner().execute();
-                    }
+                    if (getIntent().getSerializableExtra("incidentModel") == null)
+                        new AsyncTaskRunner().execute();
                     else
                         updateIncidentReport();
                 }
