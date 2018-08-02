@@ -364,7 +364,7 @@
                         android:textSize="@dimen/_11ssp"
                         android:fontFamily="@string/helvetica_neue_medium"
                         android:buttonTint="@color/colorPrimary"
-                        android:text="@string/yes" />
+                        android:text="Male" />
 
                     <RadioButton
                         android:id="@+id/rb_female"
@@ -373,7 +373,7 @@
                         android:textSize="@dimen/_11ssp"
                         android:fontFamily="@string/helvetica_neue_medium"
                         android:buttonTint="@color/colorPrimary"
-                        android:text="@string/no" />
+                        android:text="Female" />
 
                 </RadioGroup>
 
@@ -1794,7 +1794,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Was wear a factor?"
+                    android:text="Was weather a factor?"
                     android:textSize="@dimen/_12ssp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"

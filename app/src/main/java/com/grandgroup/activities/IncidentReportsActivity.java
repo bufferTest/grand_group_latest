@@ -553,8 +553,6 @@ public class IncidentReportsActivity extends BaseActivity {
             etNotes.setText(incidentReportObject.getWitness_statement());
             etBreakdown.setText(incidentReportObject.getBreakdown_agency());
             etBreakdownOther.setText(incidentReportObject.getOther_breakdown_agency());
-            setsignatures(incidentReportObject.getFirst_aid_signature(), ivImage);
-            setsignatures(incidentReportObject.getIncident_report_person_signature(), ivAmbPerSign);
         }
     }
 
@@ -837,7 +835,7 @@ public class IncidentReportsActivity extends BaseActivity {
 
             case R.id.btn_email:
                 if (PermissionUtils.requestPermission(mContext, WRITE_PERMISSIONS_REQUEST, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    createSendForm();
+                    convertAndUpdateString();
                 }
                 break;
             case R.id.btn_save:
@@ -1311,8 +1309,6 @@ public class IncidentReportsActivity extends BaseActivity {
                     incidentReportObj.put("warning_sign_option", Integer.parseInt(warningSignOption));
 
 
-
-
                     String wandOption = "0";
                     switch (rgWandReport.getCheckedRadioButtonId()) {
                         case R.id.rb_wand_yes:
@@ -1679,59 +1675,169 @@ public class IncidentReportsActivity extends BaseActivity {
         }
     }
 
-    private void convertAndUpdateString(){
-        String formString = GrandGroupHelper.grandGroupHelper(mContext).fetchHtmlFromAssets("incedent.html");
+    private void convertAndUpdateString() {
+        CallProgressWheel.showLoadingDialog(mContext);
+        String wetWeathetOption = "", genderOption = "", eventClassification = "", thirdOption = "", propertyDamageOption = "",
+                drugOption = "", cctvOption = "", photoAvailable = "", typeOption = "", affectedPersonOption = "",
+                attendedPersonOption = "", wandReportOption = "", ambulanceAttenoption = "", weatherFactorOption ="";
 
-        String formatedString = formString.replace("$$1_affectedpersondetails$$", tvSelectedLikelihood.getText().toString()).replace("$$2_type$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$3_occourancedate$$", tvSelectedLikelihood.getText().toString()).replace("$$4_ceasedworkdate$$", incidentReportObject.getCease_date())
-                .replace("$$5_reporteddate$$", tvSelectedLikelihood.getText().toString()).replace("$$6_firstname$$", incidentReportObject.getPerson_first_name())
-                .replace("$$7_surname$$", incidentReportObject.getPerson_sur_name().replace("$$8_gender$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$9_homeaddress$$", incidentReportObject.getPerson_home_address()).replace("$$10_state$$", incidentReportObject.getPerson_state())
-                .replace("$$11_postcode$$", incidentReportObject.getPerson_post_code()).replace("$$12_homephonenumber$$", incidentReportObject.getPerson_home_phone())
-                .replace("$$13_mobilephonenumber$$", incidentReportObject.getPerson_mobile_phone()).replace("$$14_birthdate$$", incidentReportObject.getPerson_birth_date())
-                .replace("$$15_occupation$$", incidentReportObject.getPerson_occupation()).replace("$$16_workplacename$$", incidentReportObject.getPerson_workplace_name())
-                .replace("$$17_address$$", incidentReportObject.getPerson_address()).replace("$$18_incidentlocation$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$19_locationofincidentcenter$$", incidentReportObject.getIncedent_location()).replace("$$20_eventclassification$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$21_descofincident$$", incidentReportObject.getIncident_desc()).replace("$$22_descofevent$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$23_immidiateactiontaken$$", incidentReportObject.getAction_taken()).replace("$$24_injurytype$$", incidentReportObject.getInjury_type())
-                .replace("$$25_injuryconsequence$$", tvSelectedLikelihood.getText().toString()).replace("$$26_bodilylocation$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$27_locationonbody$$", incidentReportObject.getBody_location()).replace("$$28_mechanismofinjury$$", incidentReportObject.getInjury_machanism())
-                .replace("$$29_otherexplanation$$", tvSelectedLikelihood.getText().toString()).replace("$$30_breakdown$$", incidentReportObject.getBreakdown_agency())
-                .replace("$$31_otherexplanation$$", tvSelectedLikelihood.getText().toString()).replace("$$32_whatdidyousee$$", incidentReportObject.getWhat_you_see())
-                .replace("$$33_wastherethirdparty$$", tvSelectedLikelihood.getText().toString()).replace("$$34_ifyesthirdparty$$", incidentReportObject.getThird_party_detail())
-                .replace("$$35_propertydamage$$", tvSelectedLikelihood.getText().toString()).replace("$$36typeofdamage$$", incidentReportObject.getDamage_type())
-                .replace("$$37_vehicledamage$$", incidentReportObject.getVehicle_damage_detail()).replace("$$38_attendedaffectedperson$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$39_name$$", incidentReportObject.getAttendee_name()).replace("$$40_firstaid$$", incidentReportObject.getFirst_aid_name())
-                .replace("$$41_ifyes$$", tvSelectedLikelihood.getText().toString()).replace("$$42_signature$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$43_pleaseprovide_$$", tvSelectedLikelihood.getText().toString()).replace("$$44_dateattended$$", incidentReportObject.getDate_attended())
-                .replace("$$45_ambulanceattended$$", incidentReportObject.getAmbulance_attend_option()).replace("$$46_whorequested$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$47_personcompleting$$", tvSelectedLikelihood.getText().toString()).replace("$$48_signature$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$49_date$$", tvSelectedLikelihood.getText().toString()).replace("$$50_wasweather$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$51_weatherconditions$$", incidentReportObject.getWeather_conditions()).replace("$$52_didthisperson$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$53_typeoffootwear$$", incidentReportObject.getFootwaer_type()).replace("$$54_typeofeyewear$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$55_weretheycarrying$$", tvSelectedLikelihood.getText().toString()).replace("$$56_cctv$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$57_photos$$", tvSelectedLikelihood.getText().toString()).replace("$$58_wandreports$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$59_warningsign$$", tvSelectedLikelihood.getText().toString()).replace("$$60_wetweather$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$61_anyadditional$$", incidentReportObject.getAdditional_comments()).replace("$$62_atthetimeofincident$$", tvSelectedLikelihood.getText().toString())
-                .replace("$$63_notes$$", incidentReportObject.getWitness_statement()));
+        if (incidentReportObject.getWet_weather_option().equalsIgnoreCase("1"))
+            wetWeathetOption = "Yes";
+        else
+            wetWeathetOption = "No";
 
-        ;incidentReportObject.getReported_date();
-        ;incidentReportObject.getEvent_desc_desc();
-        ;;
-        incidentReportObject.getInjury_illness();;
-        incidentReportObject.getInjury_mark();;
-        incidentReportObject.getOther_mechanism();;
-        ;;
-        ;incidentReportObject.getInjury_illness_detail();
-        incidentReportObject.getMedical_center();;
-        incidentReportObject.getAmbulance_who();incidentReportObject.getIncident_report_person();
-        incidentReportObject.getIncident_report_date();;
-        ;incidentReportObject.getEyewear_type();
-        incidentReportObject.getCarring_type();;
-        incidentReportObject.getFirst_aid_signature();incidentReportObject.getIncident_report_person_signature();
-        incidentReportObject.getOther_breakdown_agency();incidentReportObject.getFirst_aid_signature();
-        incidentReportObject.getIncident_report_person_signature();
+        if (incidentReportObject.getPerson_gender_option().equalsIgnoreCase("1"))
+            genderOption = "Male";
+        else
+            genderOption = "Female";
 
-        GrandGroupHelper.grandGroupHelper(mContext).generateDocFile(formatedString, "Risk Report.doc");
+        if (incidentReportObject.getEvent_type().equalsIgnoreCase("1"))
+            eventClassification = "Near Miss";
+        else if (incidentReportObject.getEvent_type().equalsIgnoreCase("2"))
+            eventClassification = "Incident";
+        else if (incidentReportObject.getEvent_type().equalsIgnoreCase("3"))
+            eventClassification = "Hazard";
+        else if (incidentReportObject.getEvent_type().equalsIgnoreCase("4"))
+            eventClassification = "Community Contact";
+        else if (incidentReportObject.getEvent_type().equalsIgnoreCase("5"))
+            eventClassification = "HSE Document / Contact Issue";
+
+        if (incidentReportObject.getThird_party_option().equalsIgnoreCase("1"))
+            thirdOption = "Yes";
+        else
+            thirdOption = "No";
+
+        if (incidentReportObject.getProperty_damage_option().equalsIgnoreCase("1"))
+            propertyDamageOption = "Yes";
+        else
+            propertyDamageOption = "No";
+
+        if (incidentReportObject.getPerson_drug_option().equalsIgnoreCase("1"))
+            drugOption = "Yes";
+        else
+            drugOption = "No";
+
+        if (incidentReportObject.getCctv_option().equalsIgnoreCase("1"))
+            cctvOption = "Yes";
+        else
+            cctvOption = "No";
+
+        if (incidentReportObject.getPhotos_available().equalsIgnoreCase("1"))
+            photoAvailable = "Yes";
+        else
+            photoAvailable = "No";
+
+        if (incidentReportObject.getIncedent_option().equalsIgnoreCase("1"))
+            typeOption = "Contractor/Service Provider";
+        else
+            typeOption = "Member of the Public/Visitor";
+
+        if (incidentReportObject.getAttended_person_option().equalsIgnoreCase("1"))
+            attendedPersonOption = "Yes";
+        else
+            attendedPersonOption = "No";
+        if (incidentReportObject.getAffected_person_option().equalsIgnoreCase("1"))
+            affectedPersonOption = "Using Crutches";
+        else if (incidentReportObject.getAffected_person_option().equalsIgnoreCase("2"))
+            affectedPersonOption = "Using a walking stick";
+        else if (incidentReportObject.getAffected_person_option().equalsIgnoreCase("3"))
+            affectedPersonOption = "Using a walking frame";
+        else if (incidentReportObject.getAffected_person_option().equalsIgnoreCase("4"))
+            affectedPersonOption = "Using a wheelchair";
+        else if (incidentReportObject.getAffected_person_option().equalsIgnoreCase("5"))
+            affectedPersonOption = "Using a motorised wheelchair/scooter";
+
+        if (incidentReportObject.getWandOption().equalsIgnoreCase("1"))
+            wandReportOption = "Yes";
+        else
+            wandReportOption = "No";
+
+        if (incidentReportObject.getAmbulance_attend_option().equalsIgnoreCase("1"))
+            ambulanceAttenoption = "Yes";
+        else
+            ambulanceAttenoption = "No";
+
+        if (incidentReportObject.getWeather_option().equalsIgnoreCase("1"))
+            weatherFactorOption = "Yes";
+        else
+            weatherFactorOption = "No";
+
+
+        String formString = GrandGroupHelper.grandGroupHelper(mContext).fetchHtmlFromAssets("incident.html");
+        String formatedString = formString
+                .replace("$$4_ceasedworkdate$$", incidentReportObject.getCease_date())
+                .replace("$$6_firstname$$", incidentReportObject.getPerson_first_name())
+                .replace("$$7_surname$$", incidentReportObject.getPerson_sur_name())
+                .replace("$$10_state$$", incidentReportObject.getPerson_state())
+                .replace("$$1_affectedpersondetails$$", incidentReportObject.getEffected_person_detail())
+                .replace("$$22_descofevent$$", incidentReportObject.getEvent_desc_desc())
+                .replace("$$5_reporteddate$$", incidentReportObject.getReported_date())
+                .replace("$$3_occourancedate$$", incidentReportObject.getOccourance_date())
+                .replace("$$29_otherexplanation$$", incidentReportObject.getOther_mechanism())
+                .replace("$$31_otherexplanation$$", incidentReportObject.getOther_breakdown_agency())
+                .replace("$$46_whorequested$$", incidentReportObject.getAmbulance_who())
+                .replace("$$54_typeofeyewear$$", incidentReportObject.getEyewear_type())
+                .replace("$$59_warningsign$$", incidentReportObject.getIncident_report_person_signature())
+                .replace("$$48_signature$$", incidentReportObject.getFirst_aid_signature())
+                .replace("$$58_wandreports$$",wandReportOption )
+                .replace("$$60_wetweather$$", wetWeathetOption)
+                .replace("$$2_type$$", typeOption)
+                .replace("$$8_gender$$", genderOption)
+                .replace("$$18_incidentlocation$$", incidentReportObject.getIncedent_location())
+                .replace("$$26_bodilylocation$$", incidentReportObject.getBody_location())
+                .replace("$$20_eventclassification$$", eventClassification)
+                .replace("$$33_wastherethirdparty$$", thirdOption)
+                .replace("$$35_propertydamage$$", propertyDamageOption)
+                .replace("$$43_pleaseprovide_$$", incidentReportObject.getInjury_illness_detail())
+                .replace("$$25_injuryconsequence$$", incidentReportObject.getInjury_illness())
+                .replace("$$47_personcompleting$$", incidentReportObject.getIncident_report_person())
+                .replace("$$52_didthisperson$$", drugOption)
+                .replace("$$56_cctv$$", cctvOption)
+                .replace("$$57_photos$$", photoAvailable)
+                .replace("$$55_weretheycarrying$$", incidentReportObject.getCarring_type())
+                .replace("$$62_atthetimeofincident$$", affectedPersonOption)
+                .replace("$$38_attendedaffectedperson$$", attendedPersonOption)
+                .replace("$$42_signature$$", incidentReportObject.getFirst_aid_signature())
+                .replace("$$9_homeaddress$$", incidentReportObject.getPerson_home_address())
+                .replace("$$11_postcode$$", incidentReportObject.getPerson_post_code())
+                .replace("$$12_homephonenumber$$", incidentReportObject.getPerson_home_phone())
+                .replace("$$13_mobilephonenumber$$", incidentReportObject.getPerson_mobile_phone())
+                .replace("$$14_birthdate$$", incidentReportObject.getPerson_birth_date())
+                .replace("$$15_occupation$$", incidentReportObject.getPerson_occupation())
+                .replace("$$16_workplacename$$", incidentReportObject.getPerson_workplace_name())
+                .replace("$$17_address$$", incidentReportObject.getPerson_address())
+                .replace("$$21_descofincident$$", incidentReportObject.getIncident_desc())
+                .replace("$$23_immidiateactiontaken$$", incidentReportObject.getAction_taken())
+                .replace("$$24_injurytype$$", incidentReportObject.getInjury_type())
+                .replace("$$27_locationonbody$$", incidentReportObject.getBody_location())
+                .replace("$$28_mechanismofinjury$$", incidentReportObject.getInjury_machanism())
+                .replace("$$30_breakdown$$", incidentReportObject.getBreakdown_agency())
+                .replace("$$32_whatdidyousee$$", incidentReportObject.getWhat_you_see())
+                .replace("$$34_ifyesthirdparty$$", incidentReportObject.getThird_party_detail())
+                .replace("$$36typeofdamage$$", incidentReportObject.getDamage_type())
+                .replace("$$37_vehicledamage$$", incidentReportObject.getVehicle_damage_detail())
+                .replace("$$39_name$$", incidentReportObject.getAttendee_name())
+                .replace("$$40_firstaid$$", incidentReportObject.getFirst_aid_name())
+                .replace("$$44_dateattended$$", incidentReportObject.getDate_attended())
+                .replace("$$45_ambulanceattended$$", ambulanceAttenoption)
+                .replace("$$51_weatherconditions$$", incidentReportObject.getWeather_conditions())
+                .replace("$$53_typeoffootwear$$", incidentReportObject.getFootwaer_type())
+                .replace("$$61_anyadditional$$", incidentReportObject.getAdditional_comments())
+                .replace("$$63_notes$$", incidentReportObject.getWitness_statement())
+                .replace("$$41_ifyes$$", incidentReportObject.getFirst_aid_name())
+                .replace("$$49_date$$", incidentReportObject.getIncident_report_date())
+                .replace("$$271_where_injury_mark$$",incidentReportObject.getInjury_mark())
+                .replace("$$431_medical_center_$$",incidentReportObject.getMedical_center())
+                .replace("$$50_wasweather$$", weatherFactorOption);
+
+        Uri uri = GrandGroupHelper.grandGroupHelper(mContext).generateDocFile(formatedString, "Incident Report.doc");
+        ShareCompat.IntentBuilder.from(mContext)
+                .setType("message/rfc822")
+                .setSubject("Incident Report Form")
+                .setText("Incident Report Form.")
+                .setStream(uri)
+                .setChooserTitle("Share Form")
+                .startChooser();
+        CallProgressWheel.dismissLoadingDialog();
     }
 }

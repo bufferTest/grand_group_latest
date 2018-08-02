@@ -348,16 +348,14 @@ public class RiskReportActivity extends AppCompatActivity {
                 .replace("$$reportedby$$", etReportedBy.getText().toString()).replace("$$consequence$$", tv_select_consq.getText().toString())
                 .replace("$$date$$", tv_event_date.getText().toString()).replace("$$hazardphoto$$",riskReportObjectModel.getRisk_file() )
                 .replace("$$signature$$",riskReportObjectModel.getSignature_file());
-        GrandGroupHelper.grandGroupHelper(mContext).generateDocFile(formatedString, "Risk Report.doc");
-
-      //  GrandGroupHelper.grandGroupHelper(mContext).shareFile(mContext, Environment.getExternalStorageDirectory()+ File.separator+"GNG", "Report Files/Risk Report.doc"),
-        /*ShareCompat.IntentBuilder.from(mContext)
+       Uri uri = GrandGroupHelper.grandGroupHelper(mContext).generateDocFile(formatedString, "Risk Report.doc");
+        ShareCompat.IntentBuilder.from(mContext)
                 .setType("message/rfc822")
                 .setSubject("Risk Report Form")
                 .setText("Risk Report Form.")
                 .setStream(uri)
                 .setChooserTitle("Share Form")
-                .startChooser();*/
+                .startChooser();
         CallProgressWheel.dismissLoadingDialog();
     }
 

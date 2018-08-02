@@ -301,21 +301,22 @@ public class GrandGroupHelper {
         }
     }
 
-    public void generateDocFile(String htmlString, String fileName){
-        try
-        {
+    public Uri generateDocFile(String htmlString, String fileName){
+
             File root = new File(Environment.getExternalStorageDirectory()+File.separator+"GNG", "Report Files");
             if (!root.exists())
                 root.mkdirs();
 
             File gpxfile = new File(root, fileName);
-
+        try
+        {
             FileWriter writer = new FileWriter(gpxfile,true);
             writer.append(htmlString+"\n\n");
             writer.flush();
             writer.close();
         }
         catch(IOException e) { e.printStackTrace(); }
+        return Uri.fromFile(gpxfile);
     }
 
     public void shareFile(Context context, String filePath) {
